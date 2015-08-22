@@ -19,7 +19,7 @@ public class ObraVO {
 	
     public var presupuestoEstimado:Number = 0;
     public var contrato:String = '';
-    public var status:String = 'true';
+    public var status:String = '';
     private var _fechaInicio:String = '';
     private var _fechaTermina:String = '';
     public var idEntidad:String = '';

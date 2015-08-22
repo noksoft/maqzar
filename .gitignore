@@ -1,0 +1,17 @@
+*.class
+.project/
+.settings/
+.idea/
+.metadata/
+bin-debug
+trunk
+build
+Servers
+*.swf
+back/RemoteSystemsTempFiles/.project
+
+front/AsignacionObra/AsignacionObra.iml
+
+front/AsignacionObra/bin-debug/AsignacionObra.html
+
+front/AsignacionObra/bin-debug/AsignacionObra.swf

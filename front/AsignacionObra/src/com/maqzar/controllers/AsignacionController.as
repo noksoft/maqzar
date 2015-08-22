@@ -107,8 +107,7 @@ package com.maqzar.controllers {
 				trace(e.message);	
 			}
 		}
-		
-		
+
 		[EventHandler(event="AsignacionEvent.ASIGNACION_GET_EQUIPOS_ASIGNADOS", properties="equiposAsignadosObraVO")]
 		public function findAllEquiposAsignados(equiposAsignadosObraVO:EquiposAsignadosObraVO):void
 		{
@@ -266,7 +265,7 @@ package com.maqzar.controllers {
 		
 		private function addEquipoResult(e:ResultEvent):void
 		{
-			// TODO Auto Generated method stub
+
 			try
 			{
 				if(e.result != null)
