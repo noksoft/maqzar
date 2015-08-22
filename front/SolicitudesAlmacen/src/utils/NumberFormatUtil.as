@@ -31,5 +31,20 @@ package utils
 			
 			return "0";
 		}
+		
+		/**
+		 * Remove the character from NumberFormatt
+		 */
+		public static function removeCharacter(value:String):String{
+			var temp:String = value;
+			if(temp != ""){
+				var _indexA:Number = temp.search(",");
+				while(_indexA > -1){
+					temp = temp.replace(",","");
+					_indexA = temp.search(",");
+				}
+			}
+			return temp;
+		}
 	}
 }

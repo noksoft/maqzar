@@ -37,11 +37,15 @@ package controller
 		
 		[PostConstruct]
 		public function post_construct():void{
-			executeServiceCall(solicitudService.getEmpleados(new EmpleadoVO()), getEmpleadosResult, getEmpleadosFault);
+			getEmpleados();
 			getArticulos(new ArticuloVO());
 			getSolicitudes();
 			getFallasEquipo();
 			getProveedores();
+		}
+		
+		private function getEmpleados():void{
+			executeServiceCall(solicitudService.getEmpleados(new EmpleadoVO()), getEmpleadosResult, getEmpleadosFault);
 		}
 		
 		private function getFallasEquipo():void{

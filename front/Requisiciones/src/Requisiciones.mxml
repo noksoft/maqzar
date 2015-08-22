@@ -7,6 +7,10 @@
 			   creationPolicy="all"
 			   xmlns:swiz="http://swiz.swizframework.org" xmlns:bean="bean.*">
 	<fx:Style source="assets/style.css"/>
+	<!--
+	username: zaragozar83@gmail.com
+	password: gn9tP8Ee8fB9
+	-->
 	<fx:Declarations>
 		<swiz:Swiz>
 			<swiz:beanProviders>

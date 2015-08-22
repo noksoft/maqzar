@@ -1,16 +1,9 @@
 package service
 {
 	import constants.NOKConstants;
-	
 	import model.ArticuloVO;
-	import model.CategoriaVO;
 	import model.EmpleadoVO;
-	import model.FallaVO;
-	import model.MarcaVO;
 	import model.RequisicionVO;
-	import model.SubCategoriaVO;
-	import model.SubMarcaVO;
-	
 	import mx.rpc.AsyncToken;
 	import mx.rpc.remoting.mxml.RemoteObject;
 
@@ -54,34 +47,9 @@ package service
 			return requisicionRemote.deleteRequisicion(vo);
 		}
 		
-		/*******************	FALLA			**************************/
-		public function getFallas(vo:FallaVO):AsyncToken{
-			return fallaRemote.catFalla(vo);
-		}
-		
 		/*******************	ARTICULOS		**************************/
 		public function getArticulos(vo:ArticuloVO):AsyncToken{
 			return articulosRemote.getArticulosByTipocategoria(vo);
-		}
-		
-		/******************		CATEGORIA		*************************/
-		public function getCategorias(vo:CategoriaVO):AsyncToken{
-			return categoriasRemote.catCategoria(vo);
-		}
-		
-		/******************		SUBCATEGORIA	************************/
-		public function getSubcategorias(vo:SubCategoriaVO):AsyncToken{
-			return categoriasRemote.catSubcategoria(vo);
-		}
-		
-		/******************		MARCAS			************************/
-		public function getMarcas(vo:MarcaVO):AsyncToken{
-			return articulosRemote.catMarca(vo);
-		}
-		
-		/*****************		SUBMARCA		*************************/
-		public function getSubmarcas(vo:SubMarcaVO):AsyncToken{
-			return articulosRemote.catSubmarca(vo);
 		}
 		
 		/*****************		EMPLEADOS		************************/
