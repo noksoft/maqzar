@@ -20,6 +20,6 @@ package model
 		public var entidad:String = "";
 		public var nombreComercial:String = "";
 		public var estatus:Boolean = true;
-		public var filterEstatusProveedor:String = "";
+		public var filterEstatusProveedor:String = "true";
 	}
 }

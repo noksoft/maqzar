@@ -4,14 +4,9 @@ package controller
 	
 	import model.ArticuloVO;
 	import model.EmpleadoVO;
-	import model.FallaVO;
-	import model.MarcaVO;
 	import model.RequisicionDetalleDTO;
 	import model.RequisicionModel;
 	import model.RequisicionVO;
-	import model.SubCategoriaVO;
-	import model.SubMarcaVO;
-	
 	import mx.collections.ArrayCollection;
 	import mx.controls.Alert;
 	import mx.rpc.Fault;
@@ -25,6 +20,7 @@ package controller
 	public class RequisicionController extends AbstractController
 	{
 		[Inject]
+		[Bindable]
 		public var requisicionModel:RequisicionModel;
 		private var requisicionService:RequisicionService = new RequisicionService();
 		private var eventRequisicion:RequisicionEvent;
@@ -40,37 +36,9 @@ package controller
 			executeServiceCall(requisicionService.getEmpleados(new EmpleadoVO()), getEmpleadosResult, getEmpleadosFault);
 			getArticulos(new ArticuloVO());
 			//Cargamos la infrmcacón de las subcategorias
-			var subCategoria:SubCategoriaVO = new SubCategoriaVO();
-			subCategoria.idCategoria = '13';
-			executeServiceCall(requisicionService.getSubcategorias(subCategoria), getSubcategoriaHandler, getSubcategoriaFault);
-		}
-		
-		public function getFallasResult(e:ResultEvent):void{
-			try{
-				if(e.result != null){
-					requisicionModel.acFallas = e.result as ArrayCollection;
-				}
-			}catch(error:Error){
-				trace(error.message);		
-			}
-		}
-		
-		public function getFallasFault(e:FaultEvent):void{
-			trace(e.fault.message);	
-		}
-		
-		private function getSubcategoriaHandler(e:ResultEvent):void{
-			try{
-				if(e.result != null){
-					requisicionModel.listSubCategorias = e.result as ArrayCollection;
-				}
-			}catch(e:Error){
-				trace(e.message);	
-			}
-		}
-		
-		private function getSubcategoriaFault(e:FaultEvent):void{
-			trace(e.fault.message);
+			//var subCategoria:SubCategoriaVO = new SubCategoriaVO();
+			//subCategoria.idCategoria = '13';
+			//executeServiceCall(requisicionService.getSubcategorias(subCategoria), getSubcategoriaHandler, getSubcategoriaFault);
 		}
 		
 		private function getEmpleadosResult (e:ResultEvent):void{
@@ -108,44 +76,6 @@ package controller
 			trace(e.fault.message);
 		}
 		
-		[EventHandler(event="RequisicionEvent.EVENT_FIND_MARCAS", properties="marcaVO")]
-		public function findMarcas(marcaVO:MarcaVO):void{
-			executeServiceCall(requisicionService.getMarcas(marcaVO), getMarcasHandler, getMarcasFault);
-		}
-		
-		public function getMarcasHandler(e:ResultEvent):void{
-			try{
-				if(e.result != null){
-					requisicionModel.listMarcas = e.result as ArrayCollection;
-				}
-			}catch(error:Error){
-				trace(error.message);
-			}
-		}
-		
-		public function getMarcasFault(e:FaultEvent):void{
-			trace(e.fault.message);
-		}
-		
-		[EventHandler(event="RequisicionEvent.EVENT_FIND_SUBMARCA", properties="submarca")]
-		public function getSubmarcas(submarca:SubMarcaVO):void{
-			executeServiceCall(requisicionService.getSubmarcas(submarca), getSubmarcasHandler, getSubmarcasFault);
-		}
-		
-		public function getSubmarcasHandler(e:ResultEvent):void{
-			try{
-				if(e.result != null){
-					requisicionModel.listSubMarcas = e.result as ArrayCollection;
-				}
-			}catch(error:Error){
-				trace(error.message);
-			}
-		}
-		
-		public function getSubmarcasFault(e:FaultEvent):void{
-			trace(e.fault.message);
-		}
-		
 		[EventHandler(event="RequisicionEvent.EVENT_FIND_REQUISICIONES", properties="requisicionVO")]
 		public function findAllRequisiciones(requisicionVO:RequisicionVO):void{
 			executeServiceCall(requisicionService.findAll(requisicionVO), findAllResult, findAllFault);
@@ -171,7 +101,6 @@ package controller
 		
 		[EventHandler(event="RequisicionEvent.EVENT_UPDATE_REQUISICION")]
 		public function updateRequisicion():void{
-			trace(requisicionModel.requisicionSelected);
 			executeServiceCall(requisicionService.update(requisicionModel.requisicionSelected), updateResult, updateFault);
 		}
 		
@@ -189,7 +118,6 @@ package controller
 		
 		[EventHandler(event="RequisicionEvent.EVENT_SAVE_REQUISICION")]
 		public function saveRequisicion():void{
-			trace(requisicionModel.requisicionSelected);
 			executeServiceCall(requisicionService.save(requisicionModel.requisicionSelected), saveResult, saveFault);
 		}
 		
