@@ -1,39 +1,192 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
-			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" xmlns:swiz="http://swiz.swizframework.org" xmlns:bean="com.maqzar.bean.*" xmlns:views="com.maqzar.views.*">
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   height="536" minWidth="955" minHeight="600"
+			   xmlns:swiz="http://swiz.swizframework.org"
+			   xmlns:bean="com.maqzar.bean.*"
+			   creationComplete="initcreationCompleteHandler(event)" xmlns:components="com.hillelcoren.components.*">
+
 
 	<s:layout>
 		<s:VerticalLayout verticalAlign="middle" horizontalAlign="center"/>
 	</s:layout>
 	<fx:Style source="assets/style.css"/>
 
+	<fx:Script>
+		<![CDATA[
+		import com.maqzar.constant.NOKConstants;
+		import com.maqzar.dtos.EquipoVO;
+		import com.maqzar.dtos.SubFallaDTO;
+
+		import mx.collections.ArrayCollection;
+		import mx.events.FlexEvent;
+		import mx.rpc.events.FaultEvent;
+		import mx.rpc.events.ResultEvent;
+
+		[Bindable]
+		public var acSubFallas:ArrayCollection;
+		[Bindable]
+		public var acEquipo:ArrayCollection;
+		[Bindable]
+		public var acDiagnostico:ArrayCollection;
+		[Bindable]
+		protected var itemSelected:SubFallaDTO = new SubFallaDTO();
+
+		public function getDiagnosticoEquiporesult(event:ResultEvent):void{
+
+		}
+
+		private function diagnosticoFault(event:FaultEvent):void {
+			trace (event.message);
+			
+		}
+
+		private function insertDiagnosticoEquiporesult(event:ResultEvent):void {
+			
+		}
+
+		private function updateDiagnosticoEquiporesult(event:ResultEvent):void {
+			
+		}
+
+		private function deleteDiagnosticoEquiporesult(event:ResultEvent):void {
+
+		}
+
+		//inicializacion
+		protected function initcreationCompleteHandler(event:FlexEvent):void {
+			var infoEquipo:EquipoVO = new EquipoVO();
+			var fallaEquipo:SubFallaDTO = new SubFallaDTO();
+		}
+
+		protected function infoEquipoResult(event:ResultEvent):void {
+			acEquipo = event.result as ArrayCollection;
+		}
+
+
+
+		]]>
+	</fx:Script>
+
 	<fx:Declarations>
 		<swiz:Swiz>
 			<swiz:beanProviders>
 				<bean:Beans/>
 			</swiz:beanProviders>
-			
 			<swiz:config>
 				<swiz:SwizConfig 
 					eventPackages="com.maqzar.events.*" 
 					viewPackages="com.maqzar.views.*"/>
 			</swiz:config>
 		</swiz:Swiz>
+
+		<s:RemoteObject id = "roDiagnostico" destination = "equipoBusiness" endpoint="{NOKConstants.SERVICE_URL}"
+						 fault="diagnosticoFault(event)">
+			
+			<s:method name = "insertDiagnosticoEquipo" result = "insertDiagnosticoEquiporesult(event)"/>
+			<s:method name = "updateDiagnosticoEquipo" result = "updateDiagnosticoEquiporesult(event)"/>
+			<s:method name = "deleteDiagnosticoEquipo" result = "deleteDiagnosticoEquiporesult(event)"/>
+		</s:RemoteObject>
+
+		<s:RemoteObject id = "roEquipo" destination = "equipoBusiness" endpoint = "{NOKConstants.SERVICE_URL}"
+				fault="diagnosticoFault(event)">
+			<s:method name="infoEquipo" result="infoEquipoResult(event)"/>
+		</s:RemoteObject>
+
+		<s:RemoteObject id="roFalla" destination="fallabusiness" endpoint ="{NOKConstants.SERVICE_URL}"
+						fault="diagnosticoFault(event)">
+
+		</s:RemoteObject>
 		
 	</fx:Declarations>
 	<s:ButtonBar
-		width="100%"
-		textAlign="center"
-		dataProvider="{viewDiagnostico}">
-		
+			width="100%"
+			textAlign="center"
+			dataProvider="{viewDiagnostico}">
 	</s:ButtonBar>
-	<mx:ViewStack id="viewDiagnostico" width="100%" height="100%">
+	<mx:ViewStack id="viewDiagnostico" width="100%">
 		<s:NavigatorContent
-			width="100%" height="100%"
-			label="Diagnostico Princial">
-			<views:DiagnosticoPrincipal
-				width="100%" height="100%"/>
+				width="100%"
+				label="Diagnostico Princial">
 		</s:NavigatorContent>
 	</mx:ViewStack>
+
+		<s:Group x="0" y="0" width="100%" height="100%">
+			<s:layout>
+				<s:HorizontalLayout/>
+			</s:layout>
+			<s:Panel width="100%" height="100%" title="Lista de Diagnósticos">
+				<s:DataGrid x="0" y="0" width="100%" height="100%" requestedRowCount="4">
+					<s:columns>
+						<s:ArrayList>
+							<s:GridColumn dataField="dataField1" headerText="FOLIO" width="50"></s:GridColumn>
+							<s:GridColumn dataField="dataField1" headerText="MTE"></s:GridColumn>
+							<s:GridColumn dataField="dataField2" headerText="Fecha de diagnostico"></s:GridColumn>
+							<s:GridColumn dataField="dataField3" headerText="Estatus"></s:GridColumn>
+							<s:GridColumn dataField="dataField3" headerText="Reporta"></s:GridColumn>
+						</s:ArrayList>
+					</s:columns>
+				</s:DataGrid>
+			</s:Panel>
+			<s:Panel width="100%" height="100%" title="Registro de Diagnóstico">
+				<s:layout>
+					<s:VerticalLayout/>
+				</s:layout>
+				<s:HGroup width="100%" verticalAlign="middle">
+					<s:Label text="Equipo" width="120" textAlign="right"/>
+					<components:AutoComplete id="autoEquipo" width="100%" dataProvider="{acEquipo}"
+							labelField="nombre"/>
+				</s:HGroup>
+				<s:HGroup width="100%" verticalAlign="middle">
+					<s:Label text="Fecha de diagnostico" width="120" textAlign="right"/>
+					<mx:DateField id="fechaDiagnostico" yearNavigationEnabled="true" formatString="YYYY-MM-DD"/>
+
+				</s:HGroup>
+				<s:HGroup width="100%" verticalAlign="middle">
+					<s:Label text="Estatus" width="120" textAlign="right"/>
+					<s:RadioButton id="rbFalla" label="FALLA"/>
+					<s:RadioButton id="rbCorrecto" label="CORRECTO"/>
+					<s:RadioButton id="rbIncompleto" label="INCOMPLETO"/>
+					<s:RadioButton id="rbCompleto" label="COMPLETO"/>
+				</s:HGroup>
+				<s:HGroup width="100%" verticalAlign="middle" horizontalAlign="right">
+					<s:Button label="Nuevo Diagnostico"/>
+					<s:Button label="Ingresar" styleName="primaryButton"/>
+				</s:HGroup>
+
+				<mx:HRule width="100%"/>
+				<s:HGroup width="100%" verticalAlign="middle">
+					<s:Label text="Subcategoria" width="120" textAlign="right"/>
+					<components:AutoComplete id="autoSubCategoria" width="100%" dataProvider="{acSubFallas}"
+											 labelField="subfalla"/>
+				</s:HGroup>
+				<s:HGroup width="100%" verticalAlign="middle">
+					<s:Label text="Estatus" width="120" textAlign="right"/>
+					<s:RadioButton id="rbFallaDetalle" label="FALLA"/>
+					<s:RadioButton id="rbCorrectoDetalle" label="CORRECTO"/>
+				</s:HGroup>
+
+				<s:HGroup width="100%" verticalAlign="middle">
+					<s:Label text="Comentario" width="120" textAlign="right"/>
+					<s:TextArea width="100%"  height="100" />
+				</s:HGroup>
+				<s:HGroup width="100%" verticalAlign="middle" horizontalAlign="right">
+					<s:Button label="Agregar al diagnóstico" styleName="primaryButton"/>
+				</s:HGroup>
+
+				<s:DataGrid width="100%" height="100%" requestedRowCount="4">
+					<s:columns>
+						<s:ArrayList>
+							<s:GridColumn dataField="dataField1" headerText="Tipo" width="50"></s:GridColumn>
+							<s:GridColumn dataField="dataField1" headerText="Categoria"></s:GridColumn>
+							<s:GridColumn dataField="dataField2" headerText="Subcategoria"></s:GridColumn>
+							<s:GridColumn dataField="dataField3" headerText="Estatus"></s:GridColumn>
+							<s:GridColumn dataField="dataField3" headerText="Comentario"></s:GridColumn>
+							<s:GridColumn dataField="dataField3" headerText="Reporta"></s:GridColumn>
+						</s:ArrayList>
+					</s:columns>
+				</s:DataGrid>
+			</s:Panel>
+		</s:Group>
 </s:Application>
