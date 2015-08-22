@@ -55,7 +55,6 @@ package com.maqzar.services {
 		
 		public function findAllEmpleados(empleado:EmpleadoDisponibleVO):AsyncToken
 		{
-			// TODO Auto Generated method stub
 			return asignacionRemote.infoEmpleadoDisponible(empleado);
 		}
 		
@@ -66,37 +65,31 @@ package com.maqzar.services {
 		
 		public function findAllEquiposAsignados(equiposAsignadosObraVO:EquiposAsignadosObraVO):AsyncToken
 		{
-			// TODO Auto Generated method stub
 			return asignacionRemote.infoEquiposAsignadosObra(equiposAsignadosObraVO);
 		}
 		
 		public function findaAllEmpleadosAsignados(empleadosAsignados:EmpleadoAsignadoVO):AsyncToken
 		{
-			// TODO Auto Generated method stub
 			return asignacionRemote.infoEmpleadosAsignadosObra(empleadosAsignados);
 		}
 		
 		public function cambiaEstatusEquipo(equipo:EquiposAsignadosObraVO):AsyncToken
 		{
-			// TODO Auto Generated method stub
 			return asignacionRemote.cambiaEstatusEquipo(equipo);
 		}
 		
 		public function cambiaEstatusEmpleado(empleado:EmpleadoAsignadoVO):AsyncToken
 		{
-			// TODO Auto Generated method stub
 			return asignacionRemote.cambiaEstatusEmpleado(empleado);
 		}
 		
 		public function addEmpleado(empleadosAsignados:EmpleadoAsignadoVO):AsyncToken
 		{
-			// TODO Auto Generated method stub
 			return asignacionRemote.addEmpleado(empleadosAsignados);
 		}
 		
 		public function addEquipo(equiposDisponibles:EquiposAsignadosObraVO):AsyncToken
 		{
-			// TODO Auto Generated method stub
 			return asignacionRemote.addEquipo(equiposDisponibles);
 		}
 	}

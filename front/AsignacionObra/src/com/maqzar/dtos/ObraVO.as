@@ -29,11 +29,9 @@ public class ObraVO {
     public var descripcion:String = '';
 	public var tipoJornada:String = '';
 	private var formatoFecha:DateFormatter = new DateFormatter();
-	
+
     public function ObraVO() {
 		formatoFecha.formatString = "YYYY-MM-DD";
-		
-		
     }
 
 	public function get fechaTermina():String

@@ -1,5 +1,5 @@
 /**
- * Created by Usuario on 09/05/2015.
+ * Created by Carlos Zaragoza on 09/05/2015.
  */
 package com.maqzar.controllers {
 	import com.maqzar.dtos.AsignacionVO;
@@ -69,7 +69,6 @@ package com.maqzar.controllers {
 		
 		private function findAllEmpleadosResult(e:ResultEvent):void
 		{
-			// TODO Auto Generated method stub
 			try
 			{
 				if(e.result != null)
@@ -140,7 +139,6 @@ package com.maqzar.controllers {
 		
 		private function findaAllEmpleadosAsignadosResult(e:ResultEvent):void
 		{
-			// TODO Auto Generated method stub
 			try
 			{
 				if(e.result != null)
@@ -165,7 +163,6 @@ package com.maqzar.controllers {
 		
 		private function cambiaEstatusEquipoResult(e:ResultEvent):void
 		{
-			// TODO Auto Generated method stub
 			try
 			{
 				if(e.result != null)
@@ -200,7 +197,6 @@ package com.maqzar.controllers {
 		
 		private function cambiaEstatusEmpleadoResult(e:ResultEvent):void
 		{
-			// TODO Auto Generated method stub
 			try
 			{
 				if(e.result != null)
@@ -212,6 +208,9 @@ package com.maqzar.controllers {
 						//Alert.show("Se actualizó","NOK");
 						dispatcher.dispatchEvent(new AsignacionEvent(AsignacionEvent.ASIGNACION_REFRESCA_GRID_DESDE_COMBO));
 						//disparamos la consulta!
+						var empleadosDisponiblesEvent:AsignacionEvent = new AsignacionEvent(AsignacionEvent.ASIGNACION_GET_EMPLEADOS_DISPONIBLES);
+						empleadosDisponiblesEvent.empleadosDisponibles = new EmpleadoDisponibleVO();
+						dispatcher.dispatchEvent(empleadosDisponiblesEvent);
 						
 					}
 					
@@ -242,6 +241,11 @@ package com.maqzar.controllers {
 				{
 					if(e.result == true){
 						dispatcher.dispatchEvent(new AsignacionEvent(AsignacionEvent.ASIGNACION_REFRESCA_GRID_DESDE_COMBO));
+						// Begin Asigna lista de refresh de personal disponible.
+						var empleadosDisponiblesEvent:AsignacionEvent = new AsignacionEvent(AsignacionEvent.ASIGNACION_GET_EMPLEADOS_DISPONIBLES);
+						empleadosDisponiblesEvent.empleadosDisponibles = new EmpleadoDisponibleVO();
+						dispatcher.dispatchEvent(empleadosDisponiblesEvent);
+						// End Asigna
 					}else
 					{
 						Alert.show("No puedes agregar el registro", "NOK");
@@ -263,9 +267,7 @@ package com.maqzar.controllers {
 			executeServiceCall(asignacionService.addEquipo(equiposAsignadosObraVO),addEquipoResult, asignacionFail);
 		}
 		
-		private function addEquipoResult(e:ResultEvent):void
-		{
-
+		private function addEquipoResult(e:ResultEvent):void {
 			try
 			{
 				if(e.result != null)
@@ -276,8 +278,6 @@ package com.maqzar.controllers {
 					{
 						Alert.show("No puedes agregar el registro", "NOK");
 					}
-					
-					
 				}else{
 					Alert.show("No se cargaron los datos","NOK")
 				}
@@ -287,6 +287,5 @@ package com.maqzar.controllers {
 				trace(error.message);	
 			}
 		}
-		
 	}
 }

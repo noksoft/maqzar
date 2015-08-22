@@ -1,5 +1,5 @@
 /**
- * Created by Usuario on 09/05/2015.
+ * Created by Carlos Zaragoza on 09/05/2015.
  */
 package com.maqzar.constant {
 [Bindable]
