@@ -16,11 +16,13 @@
 	<fx:Script>
 		<![CDATA[
 		import com.maqzar.constant.NOKConstants;
+		import com.maqzar.dtos.DiagnosticoDTO;
 		import com.maqzar.dtos.EquipoVO;
 		import com.maqzar.dtos.SubFallaDTO;
 
 		import mx.collections.ArrayCollection;
 		import mx.events.FlexEvent;
+		import mx.events.ItemClickEvent;
 		import mx.rpc.events.FaultEvent;
 		import mx.rpc.events.ResultEvent;
 
@@ -31,7 +33,7 @@
 		[Bindable]
 		public var acDiagnostico:ArrayCollection;
 		[Bindable]
-		protected var itemSelected:SubFallaDTO = new SubFallaDTO();
+		protected var itemSelected:DiagnosticoDTO = new DiagnosticoDTO();
 
 		public function getDiagnosticoEquiporesult(event:ResultEvent):void{
 
@@ -39,32 +41,95 @@
 
 		private function diagnosticoFault(event:FaultEvent):void {
 			trace (event.message);
-			
-		}
 
-		private function insertDiagnosticoEquiporesult(event:ResultEvent):void {
-			
-		}
-
-		private function updateDiagnosticoEquiporesult(event:ResultEvent):void {
-			
-		}
-
-		private function deleteDiagnosticoEquiporesult(event:ResultEvent):void {
-
-		}
-
-		//inicializacion
-		protected function initcreationCompleteHandler(event:FlexEvent):void {
-			var infoEquipo:EquipoVO = new EquipoVO();
-			var fallaEquipo:SubFallaDTO = new SubFallaDTO();
 		}
 
 		protected function infoEquipoResult(event:ResultEvent):void {
 			acEquipo = event.result as ArrayCollection;
 		}
 
+		private function infoFallaResult(event:ResultEvent):void {
+			acSubFallas = event.result as ArrayCollection;
 
+		}
+
+		private function roInfoDiagnosticoResult(event:ResultEvent):void {
+			acDiagnostico = event.result as ArrayCollection;
+
+		}
+
+		private function estatusReg_itemClickHandler(event:ItemClickEvent):void {
+			trace("event.currentTarget.selectedValue: " + event.currentTarget.selectedValue);
+		}
+
+
+		<!-- Funcion para insertar el diagnostico-->
+		private function insertDiagnosticoEquiporesult(event:ResultEvent):void {
+
+		}
+		<!-- Funcion para actualizar el diagnostico-->
+		private function updateDiagnosticoEquiporesult(event:ResultEvent):void {
+
+		}
+		<!-- Funcion para eliminar el diagnostico-->
+		private function deleteDiagnosticoEquiporesult(event:ResultEvent):void {
+
+		}
+
+		private function insertarDiagnostico():void{
+			itemSelected.id_equipo = DiagnosticoDTO(autoEquipo.selectedItem).id_equipo;
+			if(fechaDiagnostico.selectedDate != null){
+				var temDate:Date = fechaDiagnostico.selectedDate;
+				if(temDate != null){
+					fechaDiagnostico.errorString = "";
+
+				}
+			}
+
+		}
+
+		protected function selectedDiagnosticoEquipo(event:MouseEvent):void{
+			itemSelected = event.currentTarget.selectedItem as DiagnosticoDTO;
+
+			<!--case para el radiobutton de estatus diagnostico-->
+			switch (itemSelected.estatus){
+				case 0:
+					estatusRegbtngroup.selectedValue = "Falla"
+					break;
+				case 1:
+					estatusRegbtngroup.selectedValue = "Correcto"
+					break;
+				case 2:
+					estatusRegbtngroup.selectedValue = "Completo"
+					break;
+				case 3:
+					estatusRegbtngroup.selectedValue = "Incompleto"
+					break;
+				default:
+					break;
+
+			}
+			<!--case para el radiobutton de estatus subcategoria-->
+			switch (itemSelected.estatus){
+				case 0:
+					subcatbtngroup.selectedValue = "Falla"
+					break;
+				case 1:
+					subcatbtngroup.selectedValue = "Correcto"
+					break;
+				default:
+					break;
+			}
+		}
+
+		//inicializacion
+		protected function initcreationCompleteHandler(event:FlexEvent):void {
+			var infoEquipo:EquipoVO = new EquipoVO();
+			var fallaEquipo:SubFallaDTO = new SubFallaDTO();
+			infoEquipo.numeroeconomico = '';
+			fallaEquipo.idFalla = '';
+			infoEquipo.numeroeconomico = '';
+		}
 
 		]]>
 	</fx:Script>
@@ -80,7 +145,7 @@
 					viewPackages="com.maqzar.views.*"/>
 			</swiz:config>
 		</swiz:Swiz>
-
+		<!--Objeto remoto para la alta del diagnostico -->
 		<s:RemoteObject id = "roDiagnostico" destination = "equipoBusiness" endpoint="{NOKConstants.SERVICE_URL}"
 						 fault="diagnosticoFault(event)">
 			
@@ -88,17 +153,28 @@
 			<s:method name = "updateDiagnosticoEquipo" result = "updateDiagnosticoEquiporesult(event)"/>
 			<s:method name = "deleteDiagnosticoEquipo" result = "deleteDiagnosticoEquiporesult(event)"/>
 		</s:RemoteObject>
-
+		<!-- Objeto remoto para el equipo -->
 		<s:RemoteObject id = "roEquipo" destination = "equipoBusiness" endpoint = "{NOKConstants.SERVICE_URL}"
 				fault="diagnosticoFault(event)">
 			<s:method name="infoEquipo" result="infoEquipoResult(event)"/>
 		</s:RemoteObject>
-
+		<!-- Objeto remoto para la falla-->
 		<s:RemoteObject id="roFalla" destination="fallabusiness" endpoint ="{NOKConstants.SERVICE_URL}"
 						fault="diagnosticoFault(event)">
-
+			<s:method name="infoFalla" result="infoFallaResult(event)"/>
 		</s:RemoteObject>
-		
+		<!--Objeto remoto para la informaciòn del diagnostico-->
+		<s:RemoteObject id="roInfoDiagnostico" result = "roInfoDiagnosticoResult(event)">
+			
+		</s:RemoteObject>
+		<!-- Grupo radio button registro del diagnostico-->
+		<s:RadioButtonGroup id="estatusRegbtngroup"
+							itemClick="estatusReg_itemClickHandler(event);"/>
+		<!-- Grupo radio button subcategoria de la falla-->
+		<s:RadioButtonGroup id="subcatbtngroup"
+							itemClick="estatusReg_itemClickHandler(event);"/>
+
+
 	</fx:Declarations>
 	<s:ButtonBar
 			width="100%"
@@ -117,11 +193,12 @@
 				<s:HorizontalLayout/>
 			</s:layout>
 			<s:Panel width="100%" height="100%" title="Lista de Diagnósticos">
-				<s:DataGrid x="0" y="0" width="100%" height="100%" requestedRowCount="4">
+				<s:DataGrid x="0" y="0" width="100%" height="100%" requestedRowCount="4" dataProvider="{acDiagnostico}"
+						id="dataGridDiagnostico" doubleClickEnabled="true" doubleClick="selectedDiagnosticoEquipo(event)">
 					<s:columns>
 						<s:ArrayList>
 							<s:GridColumn dataField="dataField1" headerText="FOLIO" width="50"></s:GridColumn>
-							<s:GridColumn dataField="dataField1" headerText="MTE"></s:GridColumn>
+							<s:GridColumn dataField="dataField1" headerText="Equipo"></s:GridColumn>
 							<s:GridColumn dataField="dataField2" headerText="Fecha de diagnostico"></s:GridColumn>
 							<s:GridColumn dataField="dataField3" headerText="Estatus"></s:GridColumn>
 							<s:GridColumn dataField="dataField3" headerText="Reporta"></s:GridColumn>
@@ -136,7 +213,7 @@
 				<s:HGroup width="100%" verticalAlign="middle">
 					<s:Label text="Equipo" width="120" textAlign="right"/>
 					<components:AutoComplete id="autoEquipo" width="100%" dataProvider="{acEquipo}"
-							labelField="nombre"/>
+							labelField="numeroeconomico"/>
 				</s:HGroup>
 				<s:HGroup width="100%" verticalAlign="middle">
 					<s:Label text="Fecha de diagnostico" width="120" textAlign="right"/>
@@ -145,14 +222,14 @@
 				</s:HGroup>
 				<s:HGroup width="100%" verticalAlign="middle">
 					<s:Label text="Estatus" width="120" textAlign="right"/>
-					<s:RadioButton id="rbFalla" label="FALLA"/>
-					<s:RadioButton id="rbCorrecto" label="CORRECTO"/>
-					<s:RadioButton id="rbIncompleto" label="INCOMPLETO"/>
-					<s:RadioButton id="rbCompleto" label="COMPLETO"/>
+					<s:RadioButton id="rbFalla" label="FALLA" group="{estatusRegbtngroup}"/>
+					<s:RadioButton id="rbCorrecto" label="CORRECTO" group="{estatusRegbtngroup}"/>
+					<s:RadioButton id="rbIncompleto" label="INCOMPLETO" group="{estatusRegbtngroup}"/>
+					<s:RadioButton id="rbCompleto" label="COMPLETO" group="{estatusRegbtngroup}"/>
 				</s:HGroup>
 				<s:HGroup width="100%" verticalAlign="middle" horizontalAlign="right">
 					<s:Button label="Nuevo Diagnostico"/>
-					<s:Button label="Ingresar" styleName="primaryButton"/>
+					<s:Button label="Ingresar" styleName="primaryButton" click=""/>
 				</s:HGroup>
 
 				<mx:HRule width="100%"/>
@@ -163,13 +240,13 @@
 				</s:HGroup>
 				<s:HGroup width="100%" verticalAlign="middle">
 					<s:Label text="Estatus" width="120" textAlign="right"/>
-					<s:RadioButton id="rbFallaDetalle" label="FALLA"/>
-					<s:RadioButton id="rbCorrectoDetalle" label="CORRECTO"/>
+					<s:RadioButton id="rbFallaDetalle" label="FALLA" group="{subcatbtngroup}"/>
+					<s:RadioButton id="rbCorrectoDetalle" label="CORRECTO" group="{subcatbtngroup}"/>
 				</s:HGroup>
 
 				<s:HGroup width="100%" verticalAlign="middle">
 					<s:Label text="Comentario" width="120" textAlign="right"/>
-					<s:TextArea width="100%"  height="100" />
+					<s:TextArea id="txtAreaComentDiagnostico" width="100%"  height="100" text="{}"/>
 				</s:HGroup>
 				<s:HGroup width="100%" verticalAlign="middle" horizontalAlign="right">
 					<s:Button label="Agregar al diagnóstico" styleName="primaryButton"/>
