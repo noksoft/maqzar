@@ -15,6 +15,8 @@ package view
 	import mx.collections.ArrayCollection;
 	import mx.controls.Alert;
 	import mx.controls.DateField;
+	import mx.events.ValidationResultEvent;
+	import mx.validators.Validator;
 	
 	import spark.components.Group;
 	
@@ -29,6 +31,9 @@ package view
 		
 		private const CREAR:String = "Crear";
 		private const ACTUALIZAR:String = "Actualizar";
+		
+		/************	VALIDATOR'S	*********************/
+		private var arrayValidationResult:Array;
 		
 		[Bindable]protected var flagCreateSolicitud:Boolean = false;
 		[Bindable]protected var flagEmpleadoRequisicion:Boolean = true;
@@ -48,6 +53,35 @@ package view
 			clearFormulario();
 			flagCreateSolicitud = true;
 			solicitudModel.solicitudSelected = new SolicitudVO();
+			clearValidators();
+		}
+		
+		/**
+		 * Validate Handler Empleado Requisicion
+		 */
+		protected function validEmpleadoRequisicion(_event:ValidationResultEvent):void{
+			solicitudView.autocompleteEmpleadoRequisicion.errorString = "";
+		}
+		
+		/**
+		 * Fault Handler Empleado Requisicion
+		 */
+		protected function invalidEmpleadoRequisicon(evt:ValidationResultEvent):void {
+			solicitudView.autocompleteEmpleadoRequisicion.errorString = "Debes seleccionar un Empleado";
+		}
+		
+		/**
+		 * Validate Handler Artículo
+		 */
+		protected function validArticulo(_event:ValidationResultEvent):void{
+			solicitudView.autocompleteArticulo.errorString = "";
+		}
+		
+		/**
+		 * Fault Handler Articulo
+		 */
+		protected function invalidArticulo(evt:ValidationResultEvent):void {
+			solicitudView.autocompleteArticulo.errorString = "Debes seleccionar un Artículo";
 		}
 		
 		/**
@@ -100,6 +134,7 @@ package view
 		 * Evento que se despacha al dar doble clic sobre una Adquisición (Un registro del grid de Adquisición)
 		 */
 		protected function solicitudSelected(_event:MouseEvent):void{
+			clearValidators();
 			if(_event.currentTarget.selectedItem != null){
 				flagCreateSolicitud = true;
 				solicitudModel.titleFormulario = SolicitudModel.ACTUALIZAR;
@@ -143,6 +178,7 @@ package view
 		 * Limpia el Formulario de la Adquisición Detalle
 		 */
 		public function clearFormulario():void{
+			clearValidators();
 			solicitudModel.titleFormulario = CREAR;
 			flagCreateSolicitud = false;
 			solicitudView.txtNomSolicitud.text = "";
@@ -154,22 +190,52 @@ package view
 		}
 		
 		public function saveSolicitud():void{
-			switch(solicitudModel.titleFormulario){
-				case SolicitudModel.CREAR:
-						saveUpdate();
-						eventSolicitud = new EventSolicitud(EventSolicitud.EVENT_SAVE_SOLICITUD);
-						dispatchEvent(eventSolicitud);
-						clearFormulario();
-					break;
-				case SolicitudModel.ACTUALIZAR:
-						saveUpdate();
-						eventSolicitud = new EventSolicitud(EventSolicitud.EVENT_UPDATE);
-						dispatchEvent(eventSolicitud);
-						clearFormulario();
-					break;
-				default:
-					break;
+			var flagValidation:Boolean = validateRequieres();
+			if(arrayValidationResult.length == 0 && flagValidation){
+				switch(solicitudModel.titleFormulario){
+					case SolicitudModel.CREAR:
+							saveUpdate();
+							eventSolicitud = new EventSolicitud(EventSolicitud.EVENT_SAVE_SOLICITUD);
+							dispatchEvent(eventSolicitud);
+							clearFormulario();
+						break;
+					case SolicitudModel.ACTUALIZAR:
+							saveUpdate();
+							eventSolicitud = new EventSolicitud(EventSolicitud.EVENT_UPDATE);
+							dispatchEvent(eventSolicitud);
+							clearFormulario();
+						break;
+					default:
+						break;
+				}
 			}
+		}
+		
+		/**
+		 * Valida los campos Obligatorios
+		 */
+		private function validateRequieres():Boolean{
+			if(solicitudView.autocompleteEmpleadoRequisicion.selectedItem != null){
+				//Unicamente validamos los campos de la Requisicion
+				arrayValidationResult = Validator.validateAll([solicitudView.validatorNombreSolicitud, solicitudView.validatorEmpleadoRequisicion,
+					solicitudView.autocompleteArticulo, solicitudView.validatorCantidad, solicitudView.validatorFechaRequisicion]);
+				return true;
+			}else{
+				clearValidators();
+				return false;
+			}
+		}
+		
+		/**
+		 * Limpia los validadores
+		 */
+		private function clearValidators():void{
+			arrayValidationResult = new Array();
+			solicitudView.txtNomSolicitud.errorString = "";
+			solicitudView.autocompleteEmpleadoRequisicion.errorString = "";
+			solicitudView.autocompleteArticulo.errorString = "";
+			solicitudView.txtCantidad.errorString = "";
+			solicitudView.fechaRequisicion.errorString = "";
 		}
 		
 		/**

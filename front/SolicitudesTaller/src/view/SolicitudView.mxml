@@ -8,6 +8,48 @@ Created by RZARAGOZA on 27/06/2015
 	xmlns:mx="library://ns.adobe.com/flex/mx" 
 	xmlns:view="view.*" 
 	xmlns:components="com.hillelcoren.components.*">
+	
+	<fx:Declarations>
+		<!--	Validación del Nombre de la Solicitud -->
+		<mx:StringValidator
+			id="validatorNombreSolicitud"
+			source="{txtNomSolicitud}"
+			property="text"
+			required="true"
+			requiredFieldError="Debes ingresar el Nombre de la Solicitud"/>
+		<mx:NumberValidator
+			id="validatorEmpleadoRequisicion"
+			source="{autocompleteEmpleadoRequisicion}"
+			property="selectedIndex"
+			minValue="0"
+			lowerThanMinError="Debes Seleccionar un Empleado"
+			valid="validEmpleadoRequisicion(event)"
+			invalid="invalidEmpleadoRequisicon(event)"/>
+		<mx:NumberValidator
+			id="validatorArticulo"
+			source="{autocompleteArticulo}"
+			property="selectedIndex"
+			minValue="0"
+			lowerThanMinError="Debes Seleccionar un Articulo"
+			valid="validArticulo(event)"
+			invalid="invalidArticulo(event)"/>
+		<mx:NumberValidator
+			id="validatorCantidad"
+			source="{txtCantidad}"
+			property="text"
+			required="true"
+			requiredFieldError="Debes ingresar la Cantidad"
+			minValue="1"
+			domain="int"/>
+		<mx:DateValidator
+			id="validatorFechaRequisicion"
+			source="{fechaRequisicion}"
+			property="text"
+			required="true"
+			requiredFieldError="Debes ingresar la fecha de la Requisición"
+			inputFormat="mm/dd/yyyy"
+			allowedFormatChars="*#~/"/>
+	</fx:Declarations>
 
 	<s:Panel
 		width="100%" height="100%"
