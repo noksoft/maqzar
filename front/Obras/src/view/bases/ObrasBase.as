@@ -256,9 +256,9 @@ public class ObrasBase extends SkinnableContainer {
     private var cursorLaboral:IViewCursor;
     private var entidadLocated:Boolean;
 
-    public function selectObra(event:Event):void {
+    public function selectObra(_event:Event):void {
         updateObra = true;
-        var obra:ObraVO = ObraVO(event.currentTarget.selectedItem);
+        var obra:ObraVO = ObraVO(_event.currentTarget.selectedItem);
         obraVOtmp = obra;
         form.txtContrato.text = obra.contrato;
         form.txtNombreDeObra.text = obra.nombre;
@@ -313,9 +313,9 @@ public class ObrasBase extends SkinnableContainer {
         Alert.show("Estás seguro de borrar el registro?", "", 3, this, borrarRegistroFromAlert);
     }
 
-    private function borrarRegistroFromAlert(event:CloseEvent):void {
+    private function borrarRegistroFromAlert(_event:CloseEvent):void {
         //Borramos el registro, mandamos el servicio para borrar el registro y lo removemos de la lista
-        if (event.detail == Alert.YES) {
+        if (_event.detail == Alert.YES) {
             form.remoteObra.deleteObra(dataToDelete as ObraVO);
         }
 
@@ -371,16 +371,16 @@ public class ObrasBase extends SkinnableContainer {
     }
 
 
-    public function changeEntidadList(event:Event):void {
-        entidadSeleccionada = event.target.selectedItem['idEntidad'];
+    public function changeEntidadList(_event:Event):void {
+        entidadSeleccionada = _event.target.selectedItem['idEntidad'];
         var mpio:MunicipioVO = new MunicipioVO();
         mpio.idEntidad = entidadSeleccionada;
         form.remoteDireccion.catMunicipio(mpio);
     }
 
 
-    public function changeMunicipio(event:Event):void {
-        municipioSeleccionado = event.target.selectedItem['idMunicipio'];
+    public function changeMunicipio(_event:Event):void {
+        municipioSeleccionado = _event.target.selectedItem['idMunicipio'];
         var localidad:LocalidadVO = new LocalidadVO();
         localidad.idEntidad = entidadSeleccionada;
         localidad.idMunicipio = municipioSeleccionado;
@@ -388,20 +388,20 @@ public class ObrasBase extends SkinnableContainer {
 
     }
 
-    protected function mapaObra_clickHandler(event:MapMouseEvent):void {
+    protected function mapaObra_clickHandler(_event:MapMouseEvent):void {
         // TODO Auto-generated method stub
-        const mapPoint:MapPoint = form.mapaObra.toMapFromStage(event.stageX, event.stageY);
+        const mapPoint:MapPoint = form.mapaObra.toMapFromStage(_event.stageX, _event.stageY);
         const latlong:MapPoint = WebMercatorUtil.webMercatorToGeographic(mapPoint) as MapPoint;
         const xy:MapPoint = WebMercatorUtil.geographicToWebMercator(mapPoint) as MapPoint;
         latitud = latlong.y.toFixed(6);
         longitud = latlong.x.toFixed(6);
         trace("Lat: " + latitud + " Lng: " + longitud);
         var content:Object = {};
-        content.wm = event;
-        content.ll = WebMercatorUtil.webMercatorToGeographic(event.mapPoint) as MapPoint;
+        content.wm = _event;
+        content.ll = WebMercatorUtil.webMercatorToGeographic(_event.mapPoint) as MapPoint;
         form.ldr.data = content;
         form.ldr.label = "Obra: " + form.txtNombreDeObra.text + "\n " + form.txtContrato.text;
-        form.mapaObra.infoWindow.show(event.mapPoint); // "Show the click"
+        form.mapaObra.infoWindow.show(_event.mapPoint); // "Show the click"
         form.txtLat.text = latitud;
         form.txtLong.text = longitud;
 
@@ -416,8 +416,8 @@ public class ObrasBase extends SkinnableContainer {
         form.mapaObra.addEventListener(MouseEvent.MOUSE_MOVE, mouseCatchCoord);
     }
 
-    protected function mouseCatchCoord(event:MouseEvent):void {
-        const mapPoint:MapPoint = form.mapaObra.toMapFromStage(event.stageX, event.stageY);
+    protected function mouseCatchCoord(_event:MouseEvent):void {
+        const mapPoint:MapPoint = form.mapaObra.toMapFromStage(_event.stageX, _event.stageY);
         const latlong:MapPoint = WebMercatorUtil.webMercatorToGeographic(mapPoint) as MapPoint;
         //txtLat.text = latlong.y.toFixed(6);
         //txtLong.text = latlong.x.toFixed(6);
