@@ -184,9 +184,9 @@ package view
 			solicitudView.txtNomSolicitud.text = "";
 			solicitudView.txtCantidad.text = "";
 			solicitudView.txtObservaciones.text = "";
-			solicitudView.autocompleteEmpleadoRequisicion.removeAll();
-			solicitudView.autocompleteArticulo.removeAll();
-			solicitudView.autocompleteFalla.removeAll();
+			solicitudView.autocompleteEmpleadoRequisicion.selectedItem = null;
+			solicitudView.autocompleteArticulo.selectedItem = null;
+			solicitudView.autocompleteFalla.selectedItem = null;
 		}
 		
 		public function saveSolicitud():void{

@@ -122,7 +122,7 @@ Created by RZARAGOZA on 27/06/2015
 				<s:Label
 					text="Empleado Requisición"
 					textAlign="right" width="120"/>
-				<components:AutoComplete
+				<s:DropDownList
 					id="autocompleteEmpleadoRequisicion"
 					width="100%"
 					enabled="{flagEmpleadoRequisicion}"
@@ -136,7 +136,7 @@ Created by RZARAGOZA on 27/06/2015
 				<s:Label
 					text="Artículo"
 					textAlign="right" width="120"/>
-				<components:AutoComplete
+				<s:DropDownList
 					id="autocompleteArticulo"
 					width="100%"
 					dataProvider="{solicitudModel.acArticulos}"
@@ -156,7 +156,7 @@ Created by RZARAGOZA on 27/06/2015
 				<s:Label
 					text="Falla"
 					textAlign="right" width="120"/>
-				<components:AutoComplete
+				<s:DropDownList
 					id="autocompleteFalla"
 					width="100%"
 					dataProvider="{solicitudModel.acFallasEquipo}"
