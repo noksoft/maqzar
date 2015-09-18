@@ -6,16 +6,11 @@ package view
 	import flash.events.MouseEvent;
 	
 	import model.ArticuloVO;
-	import model.CategoriaVO;
 	import model.EmpleadoVO;
-	import model.FallaVO;
-	import model.MarcaVO;
 	import model.ProcesoEstatusEnum;
 	import model.RequisicionDetalleDTO;
 	import model.RequisicionModel;
 	import model.RequisicionVO;
-	import model.SubCategoriaVO;
-	import model.SubMarcaVO;
 	
 	import mx.collections.ArrayCollection;
 	import mx.controls.DateField;
@@ -53,9 +48,6 @@ package view
 			articuloEvent.articuloVO = new ArticuloVO();
 			dispatchEvent(articuloEvent);
 			
-			var categoriaEvent:RequisicionEvent = new RequisicionEvent(RequisicionEvent.EVENT_FIND_CATEGORIAS);
-			categoriaEvent.categoriaVO = new CategoriaVO();
-			dispatchEvent(categoriaEvent);
 			
 			var empleadosEvent:RequisicionEvent = new RequisicionEvent(RequisicionEvent.EVENT_FIND_EMPLEADOS);
 			empleadosEvent.empleadoVO = new EmpleadoVO();

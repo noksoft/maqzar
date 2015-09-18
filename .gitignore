@@ -7,7 +7,7 @@ bin-debug
 trunk
 build
 Servers
-*.swf
+/*.swf
 back/RemoteSystemsTempFiles/.project
 
 front/AsignacionObra/AsignacionObra.iml
@@ -16,4 +16,8 @@ front/AsignacionObra/bin-debug/AsignacionObra.html
 
 front/AsignacionObra/bin-debug/AsignacionObra.swf
 
+<<<<<<< HEAD
 back/nok/WebContent/META-INF/context.xml
+=======
+*.swf
+>>>>>>> master

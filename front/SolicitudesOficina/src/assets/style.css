@@ -38,10 +38,25 @@ s|Application
 s|Panel{
 	dropShadowVisible: false;
 	borderColor: #C7C7C7;
-	chromeColor: #eaeaea;
-	
-	
+	chromeColor: #eaeaea;	
 }
+
+/***
+Toggle Button
+*/
+s|ToggleButton {
+	chromeColor: #5c5c5c;
+	color: #FFFFFF;
+}
+
+s|ToggleButton:upAndSelected,
+s|ToggleButton:overAndSelected,
+s|ToggleButton:downAndSelected,
+s|ToggleButton:disabledAndSelected {
+	chromeColor: #292929;
+	color: #FFFFFF;
+}
+
 s|RadioButton
 {
 	symbolColor: #444444;
@@ -174,5 +189,11 @@ s|TitleWindow
 	dropShadowVisible: false;
 	borderColor: #C7C7C7;
 	chromeColor: #eaeaea;
+}
+
+.textInputWithout{
+	borderColor: #000000;
+	borderVisible: false;
+	borderAlpha: 0;
 }
 

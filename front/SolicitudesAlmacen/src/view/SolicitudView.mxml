@@ -40,6 +40,14 @@ Created by RZARAGOZA on 27/06/2015
 			lowerThanMinError="Debes Seleccionar un Proveedor"
 			valid="validProveedor(event)"
 			invalid="invalidProveedor(event)"/>
+		<!--mx:NumberValidator
+			id="validadorFalla"
+			source="{autocompleteFalla}"
+			property="selectedIndex"
+			minValue="0"
+			lowerThanMinError="Debes Seleccionar la Falla"
+			valid=""
+			invalid=""/-->
 		<mx:NumberValidator
 			id="validatorArticulo"
 			source="{autocompleteArticulo}"
