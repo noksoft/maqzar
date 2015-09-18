@@ -12,10 +12,9 @@ package com.maqzar.views {
 	import com.maqzar.models.AsignacionModel;
 	
 	import flash.events.MouseEvent;
-
-import mx.controls.Alert;
-
-import mx.formatters.DateFormatter;
+	
+	import mx.controls.Alert;
+	import mx.formatters.DateFormatter;
 	
 	import spark.components.Group;
 	import spark.events.IndexChangeEvent;
@@ -61,12 +60,19 @@ import mx.formatters.DateFormatter;
 		* */
 		public function asignaPersonal(event:MouseEvent):void {
 			if(view.ddlObras.selectedIndex != -1){
-                var asignaEvent:AsignacionEvent = new AsignacionEvent(AsignacionEvent.ADD_PERSONAL);
-                var empleado:EmpleadoAsignadoVO = new EmpleadoAsignadoVO();
-                empleado.idObra = view.ddlObras.selectedItem.idObra;
-                empleado.idEmpleado = EmpleadoDisponibleVO(view.dataGridPersonalPorAsignar.selectedItem).idEmpleado;
-                asignaEvent.empleadosAsignados =  empleado;
-                dispatchEvent(asignaEvent);
+				trace(view.dataGridPersonalPorAsignar.selectedItem);
+				if(view.dataGridPersonalPorAsignar.selectedItem  != null){
+					
+					var asignaEvent:AsignacionEvent = new AsignacionEvent(AsignacionEvent.ADD_PERSONAL);
+					var empleado:EmpleadoAsignadoVO = new EmpleadoAsignadoVO();
+					empleado.idObra = view.ddlObras.selectedItem.idObra;
+					empleado.idEmpleado = EmpleadoDisponibleVO(view.dataGridPersonalPorAsignar.selectedItem).idEmpleado;
+					asignaEvent.empleadosAsignados =  empleado;
+					dispatchEvent(asignaEvent);	
+				}else{
+					trace("No puede lanzar");
+				}
+                
             }else{
                 Alert.show("No puedes continuar si no tienes seleccionada una obra");
             }
