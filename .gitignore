@@ -10,14 +10,5 @@ Servers
 /*.swf
 back/RemoteSystemsTempFiles/.project
 
-front/AsignacionObra/AsignacionObra.iml
+*.iml
 
-front/AsignacionObra/bin-debug/AsignacionObra.html
-
-front/AsignacionObra/bin-debug/AsignacionObra.swf
-
-<<<<<<< HEAD
-back/nok/WebContent/META-INF/context.xml
-=======
-*.swf
->>>>>>> master
