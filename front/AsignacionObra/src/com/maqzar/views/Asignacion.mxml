@@ -45,12 +45,12 @@ Created by Usuario on 25/04/2015.
 								  yearNavigationEnabled="true"/>
 				</s:HGroup>
 				<s:HGroup width="100%" verticalAlign="middle">
-					<s:Label text="Residente" textAlign="right" width="120"></s:Label>
+					<s:Label text="Residente" textAlign="right" width="120"/>
 					<s:TextInput id="txtResidente" width="100%" enabled="false"
 								 text="{asignacionModel.obraSelected.nombreEmpleado}"/>
 				</s:HGroup>
 				<s:HGroup width="100%" verticalAlign="middle">
-					<s:Label text="Jornada laboral" textAlign="right" width="120"></s:Label>
+					<s:Label text="Jornada laboral" textAlign="right" width="120"/>
 					<s:TextInput id="txtJornada" width="100%" enabled="false"
 								 text="{asignacionModel.obraSelected.tipoJornada}"/>
 				</s:HGroup>
@@ -63,7 +63,7 @@ Created by Usuario on 25/04/2015.
 			<!-- Asignacion de personal contenido -->
 			<s:VGroup width="100%" height="100%">
 				<s:HGroup width="100%" fontFamily="Roboto" fontSize="12">
-					<s:Label text="Personal" fontWeight="bold" fontSize="16"></s:Label>
+					<s:Label text="Personal" fontWeight="bold" fontSize="16"/>
 				</s:HGroup>
 				<components:AutoComplete prompt="Escribe el nombre del personal a filtrar" dataProvider="{asignacionModel.acPersonalDisponible}" labelField="nombre" width="100%"/>
 				<s:DataGrid
@@ -84,7 +84,7 @@ Created by Usuario on 25/04/2015.
 			
 			<s:VGroup width="100%" height="100%">
 				<s:HGroup width="100%" horizontalAlign="center">
-					<s:Label text="Recursos asignados a la obra" color="#53adff" fontWeight="bold" fontSize="16"></s:Label>
+					<s:Label text="Recursos asignados a la obra" color="#53adff" fontWeight="bold" fontSize="16"/>
 				</s:HGroup>
 				<s:DataGrid
 					id="dataGridPersonalAsignado"
@@ -102,7 +102,7 @@ Created by Usuario on 25/04/2015.
 									<fx:Component>
 										<s:GridItemRenderer>
 											
-											<mx:LinkButton label="{data.estatus=='ASIGNADO'?'Inactivar':'Activar'}" click="{outerDocument.cambiaEstatusEmpleado(data)}"/>
+											<mx:LinkButton label="{data.estatus=='A'?'Inactivar':'Activar'}" click="{outerDocument.cambiaEstatusEmpleado(data)}"/>
 										</s:GridItemRenderer>
 									</fx:Component>
 								</s:itemRenderer>
@@ -113,7 +113,7 @@ Created by Usuario on 25/04/2015.
 			</s:VGroup>
 		</s:HGroup>
 		<s:HGroup width="100%" height="30" verticalAlign="bottom">
-			<s:Label text="Maquinaria, equipo y transporte" fontWeight="bold" fontSize="16"></s:Label>
+			<s:Label text="Maquinaria, equipo y transporte" fontWeight="bold" fontSize="16"/>
 		</s:HGroup>
 		<components:AutoComplete prompt="Escribe el nombre del equipo o maquinria a filtrar" dataProvider="{asignacionModel.acEquiposDisponibles}" labelField="numeroeconomico" width="50%"/>
 
@@ -152,7 +152,7 @@ Created by Usuario on 25/04/2015.
 								<fx:Component>
 									<s:GridItemRenderer>
 										
-										<mx:LinkButton label="{data.estatus=='ASIGNADO'?'Inactivar':'Activar'}" click="outerDocument.cambiaEstatusEquipo(data)"/>
+										<mx:LinkButton label="{data.estatus=='A'?'Inactivar':'Activar'}" click="outerDocument.cambiaEstatusEquipo(data)"/>
 									</s:GridItemRenderer>
 								</fx:Component>
 							</s:itemRenderer>

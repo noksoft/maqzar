@@ -10,10 +10,5 @@ Servers
 /*.swf
 back/RemoteSystemsTempFiles/.project
 
-front/AsignacionObra/AsignacionObra.iml
+*.iml
 
-front/AsignacionObra/bin-debug/AsignacionObra.html
-
-front/AsignacionObra/bin-debug/AsignacionObra.swf
-
-*.swf

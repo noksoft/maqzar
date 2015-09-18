@@ -13,6 +13,7 @@ package com.maqzar.views {
 	
 	import flash.events.MouseEvent;
 	
+	import mx.controls.Alert;
 	import mx.formatters.DateFormatter;
 	
 	import spark.components.Group;
@@ -38,16 +39,16 @@ package com.maqzar.views {
 			
 		}
 		public function creacionCompleta():void{
-			//TODO Instanciar cada una de los eventos de carga para asignacion de recursos.
+			// Instancian cada una de los eventos de carga para asignacion de recursos.
 			var obraEvent:ObraEvent;
 			obraEvent = new ObraEvent(ObraEvent.OBRA_LIST_DATA);
 			obraEvent.obra = new ObraVO();
 			dispatchEvent(obraEvent);
-			
+
 			var empleadosDisponiblesEvent:AsignacionEvent = new AsignacionEvent(AsignacionEvent.ASIGNACION_GET_EMPLEADOS_DISPONIBLES);
 			empleadosDisponiblesEvent.empleadosDisponibles = new EmpleadoDisponibleVO();
 			dispatchEvent(empleadosDisponiblesEvent);
-			
+
 			// Trae todos los equipos de la empresa
 			var equipoDisponibleEvent:AsignacionEvent = new AsignacionEvent(AsignacionEvent.ASIGNACION_GET_EQUIPOS_DISPONIBLES);
 			equipoDisponibleEvent.equiposDisponibles = new EquipoVO();
@@ -58,12 +59,24 @@ package com.maqzar.views {
 		*
 		* */
 		public function asignaPersonal(event:MouseEvent):void {
-			var asignaEvent:AsignacionEvent = new AsignacionEvent(AsignacionEvent.ADD_PERSONAL);
-			var empleado:EmpleadoAsignadoVO = new EmpleadoAsignadoVO();
-			empleado.idObra = view.ddlObras.selectedItem.idObra;
-			empleado.idEmpleado = EmpleadoDisponibleVO(view.dataGridPersonalPorAsignar.selectedItem).idEmpleado;
-			asignaEvent.empleadosAsignados =  empleado;
-			dispatchEvent(asignaEvent);
+			if(view.ddlObras.selectedIndex != -1){
+				trace(view.dataGridPersonalPorAsignar.selectedItem);
+				if(view.dataGridPersonalPorAsignar.selectedItem  != null){
+					
+					var asignaEvent:AsignacionEvent = new AsignacionEvent(AsignacionEvent.ADD_PERSONAL);
+					var empleado:EmpleadoAsignadoVO = new EmpleadoAsignadoVO();
+					empleado.idObra = view.ddlObras.selectedItem.idObra;
+					empleado.idEmpleado = EmpleadoDisponibleVO(view.dataGridPersonalPorAsignar.selectedItem).idEmpleado;
+					asignaEvent.empleadosAsignados =  empleado;
+					dispatchEvent(asignaEvent);	
+				}else{
+					trace("No puede lanzar");
+				}
+                
+            }else{
+                Alert.show("No puedes continuar si no tienes seleccionada una obra");
+            }
+
 		}
 		
 		
