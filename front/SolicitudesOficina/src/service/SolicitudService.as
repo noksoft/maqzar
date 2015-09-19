@@ -8,6 +8,7 @@ package service
 	import model.ProveedorVO;
 	import model.SolicitudVO;
 	
+	import mx.collections.ArrayCollection;
 	import mx.controls.Alert;
 	import mx.rpc.AsyncToken;
 	import mx.rpc.remoting.mxml.RemoteObject;
@@ -51,6 +52,10 @@ package service
 		
 		public function updateSolicitud(vo:SolicitudVO):AsyncToken{
 			return solicitudRemote.updateSolicitud(vo);
+		}
+		
+		public function updateSolicitudes(vo:ArrayCollection):AsyncToken{
+			return solicitudRemote.updateSolicitudes(vo);
 		}
 		
 		public function deleteSolicitud(vo:SolicitudVO):AsyncToken{

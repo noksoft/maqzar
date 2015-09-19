@@ -58,6 +58,7 @@ package controller
 				trace("estatus_proceso: " + sol.estatus_proceso);
 			}
 			trace("End for each");
+			executeServiceCall(solicitudService.updateSolicitudes(solicitudModel.acSolicitudes), updateSolicitudesResult, updateSolicitudesFault);
 			//executeServiceCall(solicitudService.updateSolicitud(solicitudModel.solicitudSelected), updateSolicitudResult, updateSolicitudFault);
 		}
 		
@@ -80,14 +81,14 @@ package controller
 		}
 		
 		//Update Solicitudes
-		private function updateSolicitudResult(e:ResultEvent):void{
+		private function updateSolicitudesResult(e:ResultEvent):void{
 			try{
 				getSolicitudes();
 			}catch(e:Error){
 				trace(e.message);
 			}
 		}
-		private function updateSolicitudFault(e:FaultEvent):void{
+		private function updateSolicitudesFault(e:FaultEvent):void{
 			Alert.show("Fault Update");
 			trace(e.fault.message);
 		}

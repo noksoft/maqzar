@@ -81,6 +81,7 @@
 	<s:ToggleButton
 		id="toggleSolicitud"
 		width="100%" height="100%"
+		skinClass="assets.skins.ButtonBar.FirstButtonEducative"
 		click="toggleSolicitudClic(event)"
 		creationComplete="creationCompleteHandler(event)"/>
 </s:GridItemRenderer>

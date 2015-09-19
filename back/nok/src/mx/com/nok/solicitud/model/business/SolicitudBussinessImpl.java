@@ -46,6 +46,27 @@ public class SolicitudBussinessImpl implements ISolicitudBussiness, Serializable
 		}
 		return null;
 	}
+	
+	@Override
+	public void updateSolicitudes(List<SolicitudDTO> list){
+		try{
+			for (SolicitudDTO solicitud : list){
+				System.out.println("solicitud.getEstatus_proceso(): " + solicitud.getEstatus_proceso());
+				System.out.println("Proceso updateSolicitudes.");
+				switch(solicitud.getEstatus_proceso()){
+					case "Compra":
+							
+						break;
+					case "Adquicion":
+						
+						break;
+				}
+				//solicitudDAO.updateSolicitud(solicitud);
+			}
+		}catch(Exception e){
+			
+		}
+	}
 
 	@Override
 	public Boolean deleteSolicitud(SolicitudDTO solicitud) {
