@@ -9,7 +9,57 @@
 	width="100%" height="100%"
 	creationPolicy="all">
 	<fx:Declarations>
-		
+		<mx:NumberValidator
+			id="validatorSubcategoria"
+			source="{cmbSubCategoriaEditor}"
+			property="selectedIndex"
+			required="true"
+			minValue="0"
+			lowerThanMinError="Debes Seleccionar la Subcategoría"
+			valid="validateSubCategoriaHandler(event)"
+			invalid="validSubCategoriaFault(event)"/>
+		<mx:NumberValidator
+			id="validatorMarca"
+			source="{cmbMarcaEditor}"
+			property="selectedIndex"
+			required="true"
+			minValue="0"
+			lowerThanMinError="Debes Seleccionar la Marca"
+			valid="validateMarcaHandler(event)"
+			invalid="validMarcaFault(event)"/>
+		<mx:NumberValidator
+			id="validatorSubMarca"
+			source="{cmbSubMarcaEditor}"
+			property="selectedIndex"
+			required="true"
+			minValue="0"
+			lowerThanMinError="Debes Seleccionar la SubMarca"
+			valid="validateSubMarcaHandler(event)"
+			invalid="validSubMarcaFault(event)"/>
+		<mx:NumberValidator
+			id="validatorUnidad"
+			source="{cmbUnidad}"
+			property="selectedIndex"
+			required="true"
+			minValue="0"
+			lowerThanMinError="Debes Seleccionar la Unidad"
+			valid="validateUnidadHandler(event)"
+			invalid="validUnidadFault(event)"/>
+		<mx:StringValidator
+			id="validatorNombre"
+			source="{txtNombre}"
+			property="text"
+			required="true"
+			requiredFieldError="Debes ingresar un Nombre del Producto o Artículo"/>
+		<mx:DateValidator
+			id="validatorFechaAlta"
+			source="{dateAdquisicion}"
+			property="text"
+			required="true"
+			requiredFieldError="Debes ingresar la fecha de la Requisición"
+			inputFormat="mm/dd/yyyy"
+			allowedFormatChars="*#~/"/>
+			
 	</fx:Declarations>
 	
 	<view:layout>
@@ -86,7 +136,7 @@
 						<s:ArrayList>
 							<s:GridColumn headerText="Nombre" dataField="descripcion"/>
 							<s:GridColumn headerText="No. Parte" dataField="nParte"/>
-							<!--s:GridColumn headerText="Cantidad" dataField="cantidad"/-->
+							<s:GridColumn headerText="Cantidad" showDataTips="true" itemRenderer="view.renderer.ItemRendererCantidad"/>
 							<s:GridColumn headerText="Minímo" dataField="stockMin"/>
 							<s:GridColumn headerText="Máximo" dataField="stockMax"/>
 							<!--s:GridColumn headerText="Costo Unitario" dataField="costoUnitario"/-->
