@@ -4,11 +4,5 @@
 .idea/
 .metadata/
 bin-debug
-trunk
-build
-Servers
 /*.swf
 back/RemoteSystemsTempFiles/.project
-
-*.iml
-
