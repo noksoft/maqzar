@@ -287,5 +287,37 @@ package com.maqzar.controllers {
 				trace(error.message);	
 			}
 		}
+		
+		[EventHandler(event="AsignacionEvent.VALIDA_EMPLEADO_DISPONIBILIDAD", properties="empleadosDisponibles")]
+		public function validaEmpleadoDisponible(empleadosDisponibles:EmpleadoDisponibleVO):void
+		{
+			executeServiceCall(asignacionService.validaEmpleado(empleadosDisponibles),validaEmpleadoResult, asignacionFail);
+		}
+		
+		private function validaEmpleadoResult(e:ResultEvent):void
+		{
+			try
+			{
+				//if(e.result != null)
+				//{
+					var equipoAsignadoEvent:AsignacionEvent = new AsignacionEvent(AsignacionEvent.LISTA_EQUIPOS_ASIGNADOS_A_EMPLEADO);
+					equipoAsignadoEvent.listado = e.result as ArrayCollection;
+					dispatcher.dispatchEvent(equipoAsignadoEvent);
+					
+					/*if(e.result == true){
+						dispatcher.dispatchEvent(new AsignacionEvent(AsignacionEvent.ASIGNACION_REFRESCA_GRID_DESDE_COMBO));
+					}else
+					{
+						Alert.show("No puedes agregar el registro", "NOK");
+					}*/
+				/*}else{
+					Alert.show("No se cargaron los datos","MMW")
+				}*/
+			} 
+			catch(error:Error) 
+			{
+				trace(error.message);	
+			}
+		}
 	}
 }

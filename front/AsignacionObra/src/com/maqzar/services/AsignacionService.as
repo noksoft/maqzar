@@ -92,5 +92,13 @@ package com.maqzar.services {
 		{
 			return asignacionRemote.addEquipo(equiposDisponibles);
 		}
+		
+		public function validaEmpleado(empleado:EmpleadoDisponibleVO):AsyncToken
+		{
+			// Regresa una lista de equipos que el empleado tiene asignado.
+			// Falta revisar el servicio en JAVA
+			
+			return asignacionRemote.validaEmpleado(empleado);
+		}
 	}
 }

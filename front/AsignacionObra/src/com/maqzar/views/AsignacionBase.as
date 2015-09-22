@@ -15,8 +15,10 @@ package com.maqzar.views {
 	
 	import mx.controls.Alert;
 	import mx.formatters.DateFormatter;
+	import mx.managers.PopUpManager;
 	
 	import spark.components.Group;
+	import spark.components.TitleWindow;
 	import spark.events.IndexChangeEvent;
 	
 	public class AsignacionBase extends Group {
@@ -87,6 +89,24 @@ package com.maqzar.views {
 		*
 		* */
 		public function asignaMET(event:MouseEvent):void {
+            if(view.ddlObras.selectedIndex != -1){
+                //Abrir el Popup para pedir al empleado de la lista de arriba, dicha lista ya esdta cargada en el grid anterior.
+                var popUpEmpleado:EmpleadoMaquinariaPopup = EmpleadoMaquinariaPopup(PopUpManager.createPopUp(this, EmpleadoMaquinariaPopup,true)  as spark.components.TitleWindow);
+				PopUpManager.centerPopUp(popUpEmpleado);
+				popUpEmpleado.maquinaria = view.dataGridMaquinaEquipoTransporteDisponible.selectedItem as EquipoVO;
+				popUpEmpleado.addEventListener(AsignacionEvent.EMPLEADO_SELECCIONADO,empleadoSeleccionadoEvent);
+				
+            }else
+            {
+                Alert.show("No puedes pasar maquinaria si no tienes seleccionada la lista de obras");
+            }
+
+		}
+		public function empleadoSeleccionadoEvent(event:AsignacionEvent):void
+		{
+			trace(event);
+			trace("Empleado Seleccionado")
+			/*
 			var asignaEquipoEvent:AsignacionEvent = new AsignacionEvent(AsignacionEvent.ADD_EQUIPO);
 			var equipo:EquipoVO = view.dataGridMaquinaEquipoTransporteDisponible.selectedItem as EquipoVO;
 			var equipoEnvioServicio:EquiposAsignadosObraVO = new EquiposAsignadosObraVO();
@@ -94,8 +114,8 @@ package com.maqzar.views {
 			equipoEnvioServicio.idEquipo = int(equipo.id_equipo);
 			asignaEquipoEvent.equiposAsignadosObraVO = equipoEnvioServicio;
 			dispatchEvent(asignaEquipoEvent);
+			*/
 		}
-		
 		
 	
 		

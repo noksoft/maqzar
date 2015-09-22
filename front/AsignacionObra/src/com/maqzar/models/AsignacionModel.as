@@ -17,6 +17,7 @@ public class AsignacionModel {
     public var acEquiposDisponibles:ArrayCollection;
     public var acEquiposAsignados:ArrayCollection;
     public var acEmpleadosAsignados:ArrayCollection;
+	public var acEquiposDondeEmpleadoTieneAsignado:ArrayCollection;
 
 }
 }

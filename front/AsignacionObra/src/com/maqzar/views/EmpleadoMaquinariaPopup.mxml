@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!--
+  Created by carloszaragoza on 11/09/15.
+-->
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:components="com.hillelcoren.components.*"
+			   width="490" height="245" title="Asignación de empleado a maquinaria">
+  <fx:Script><![CDATA[
+	  import com.maqzar.dtos.EmpleadoDisponibleVO;
+	  import com.maqzar.dtos.EquipoVO;
+	  import com.maqzar.events.AsignacionEvent;
+	  import com.maqzar.models.AsignacionModel;
+	  
+	  import mx.collections.ArrayCollection;
+	  import mx.managers.PopUpManager;
+	  
+	  import org.swizframework.processors.DispatcherProcessor;
+	  [Dispatcher]
+	  public var dispatcher:IEventDispatcher;
+	  
+      [Inject]
+      [Bindable]
+      public var asignacionModel:AsignacionModel;
+	
+	  public var maquinaria:EquipoVO = new EquipoVO();
+	  public var empleado:EmpleadoDisponibleVO = new EmpleadoDisponibleVO();
+	  protected function changeSeleccionaEmpleadoValidaDisponibilidad(event:Event):void
+	  {
+		// obtiene el valor del datagrid:
+		 empleado = autoCompleteEmpleados.selectedItem as EmpleadoDisponibleVO;
+		 trace(empleado.nombre);
+		 trace(maquinaria.nombre);
+		 //Ya trengo las dos cosas, al empleado y la obra, aqui validamos si el empleado tiene asignado ya una maquinaria de la tabla.
+		 //se hace un servicio para probar que el empleado tiene asignado una maquinaria, si la tiene se le avisa
+		 //si queire reasignar a la nueva maquinara, de lo contrario, se regresa a la caja de texto para buscar.
+		 validaEmpleado();
+		 
+	  }
+	  protected function validaEmpleado():void
+	  {
+		  var eventoValidaEmpleado:AsignacionEvent = new AsignacionEvent(AsignacionEvent.VALIDA_EMPLEADO_DISPONIBILIDAD);
+		  eventoValidaEmpleado.empleadosDisponibles = empleado;
+		  
+		  dispatcher.dispatchEvent(eventoValidaEmpleado);
+	  }
+	  
+	  protected function empleadoSeleccionado(event:MouseEvent):void
+	  {
+		  // TODO Auto-generated method stub
+		  var evento:AsignacionEvent = new AsignacionEvent(AsignacionEvent.EMPLEADO_SELECCIONADO);
+		  evento.empleadosDisponibles = autoCompleteEmpleados.selectedItem;
+		  dispatchEvent(evento);
+		  PopUpManager.removePopUp(this);
+	  }
+	  
+	  [EventHandler(event="AsignacionEvent.LISTA_EQUIPOS_ASIGNADOS_A_EMPLEADO", properties="listado")]
+	  public function listaDeEquiposAsignadosCatchEvent(listado:ArrayCollection):void
+	  {
+		  trace(listado);
+		  trace("LISTA_EQUIPOS_ASIGNADOS_A_EMPLEADO");
+	  }
+	  
+  ]]></fx:Script>
+  <s:layout>
+      <s:VerticalLayout />
+  </s:layout>
+	<s:controlBarContent>
+		<s:Label id="lblEstatus" text="Responsable de {asignacionModel.acEquiposDondeEmpleadoTieneAsignado.length} equipos"/>
+	</s:controlBarContent>
+    <s:VGroup width="100%" height="100%" gap="2" paddingBottom="5" paddingLeft="5" paddingRight="5"
+			  paddingTop="5">
+        <s:Label text="Nombre del empleado"/>
+        <components:AutoComplete width="100%" label="nombre" id="autoCompleteEmpleados"
+								 change="changeSeleccionaEmpleadoValidaDisponibilidad(event)" labelField="nombre"
+								 dataProvider="{asignacionModel.acPersonalDisponible}">
+
+        </components:AutoComplete>
+		<s:Button width="100%" label="Asignar empleado" click="empleadoSeleccionado(event)"/>
+    </s:VGroup>
+</s:TitleWindow>
