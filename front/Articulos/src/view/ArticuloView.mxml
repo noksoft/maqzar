@@ -148,6 +148,7 @@
 							<s:GridColumn headerText="Sub Categoría" dataField="subcategoria"/>
 							<s:GridColumn headerText="Marca" dataField="marca"/>
 							<s:GridColumn headerText="SubMarca" dataField="submarca"/>
+							<s:GridColumn headerText="Tipo Categoría" dataField="nombreTipocategoria"/>
 							<s:GridColumn headerText="Estatus" dataField="estatus"/>
 						</s:ArrayList>
 					</s:columns>

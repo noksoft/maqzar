@@ -24,6 +24,8 @@ package model
 		public var unidad:String = "";
 		public var fechaAdquisicion:Date = new Date();
 		public var estatus:Boolean = true;
+		public var idTipocategoria:String = "";
+		public var nombreTipocategoria:String = "Articulo";
 		public var filterEstatusArticulo:String = "true";
 	}
 }

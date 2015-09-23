@@ -151,8 +151,8 @@ package view
 			roCategoriaEditor.showBusyCursor = true;
 			
 			//GetArticulos			
-			roArticuloData.getOperation("catArticulo").addEventListener(ResultEvent.RESULT, resultCatItems);
-			roArticuloData.getOperation("catArticulo").addEventListener(FaultEvent.FAULT, faultCatItems);
+			roArticuloData.getOperation("getArticulosByTipocategoria").addEventListener(ResultEvent.RESULT, resultCatItems);
+			roArticuloData.getOperation("getArticulosByTipocategoria").addEventListener(FaultEvent.FAULT, faultCatItems);
 			
 			//Insert Articulo
 			roArticuloData.getOperation("insertArticulo").addEventListener(ResultEvent.RESULT, insertItemHandler);
@@ -354,7 +354,7 @@ package view
 				itemSelected.idSubmarca = SubMarcaVO(viewArticulo.cmbSubMarca.selectedItem).idSubmarca;
 			}
 			
-			roArticuloData.catArticulo(itemSelected);
+			roArticuloData.getArticulosByTipocategoria(itemSelected);
 		}
 		
 		public function getItems():void

@@ -63,6 +63,9 @@
 		<result property="stockMin" 			column="stock_min" />	
 		<result property="stockMax" 			column="stock_max" />	
 		<result property="estatus" 				column="estatus" />
+		<result property="ubicacion"			column="ubicacion"/>
+		<result property="unidad"				column="unidad"/>
+		<result property="fechaAdquisicion"		column="fecha_adquisicion"/>
 	</resultMap>
 
 	<procedure id="infoArticulo" resultMap="articuloMap" parameterClass="classArticuloMap" >
@@ -78,6 +81,10 @@
 		 #stockMin#,#stockMax#, #costoUnitario#, #costoTotal#, #ubicacion#, #unidad#, #fechaAdquisicion#,
 		 #idsubcategoria#, #estatus#)
 	</procedure>	
+	
+	<procedure id="updateCantidadArticulo" resultMap="articuloMap" parameterClass="classArticuloMap" >
+		SELECT * FROM spu_articulo_cantidad(#idArticulo#, #cantidad#)
+	</procedure>
 	
 	<procedure id="deleteArticulo" resultClass="java.lang.Boolean" parameterClass="classArticuloMap" >
 		SELECT * FROM spd_articulo(#idArticulo#, #idSubmarca#)
@@ -97,7 +104,6 @@
 	<procedure id="buscaArticulo" resultMap="articuloMap" parameterClass="classArticuloMap" >
 		SELECT * FROM spr_buscaArticulo(#idArticulo#,#idSubmarca#,#filterEstatusArticulo#)
 	</procedure>
-	
 
 	<procedure id="infoMarca" resultMap="marcaMap" parameterClass="classMarcaMap" >
 		SELECT * FROM spr_marca(#idMarca#,#idSubcategoria#, #filterEstatusMarca#);

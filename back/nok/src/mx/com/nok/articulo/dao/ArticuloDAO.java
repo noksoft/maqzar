@@ -29,6 +29,8 @@ public interface ArticuloDAO{
 	public ArticuloDTO updateEstatusArticulo(ArticuloDTO dto)throws Exception;
 	
 	
-	public List<?> buscaArticulo(ArticuloDTO dto)  throws Exception;	
+	public List<?> buscaArticulo(ArticuloDTO dto)  throws Exception;
+	public ArticuloDTO findArticuloById(ArticuloDTO dto) throws Exception;
+	public void updateCantidadArticulo(ArticuloDTO dto) throws Exception;
 
 }
