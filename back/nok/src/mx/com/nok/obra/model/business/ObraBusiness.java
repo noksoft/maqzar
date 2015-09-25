@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mx.com.nok.empleado.model.dto.EmpleadoDTO;
+import mx.com.nok.equipo.model.dto.EquipoDTO;
 import mx.com.nok.obra.dao.ObraDAO;
 import mx.com.nok.obra.model.dto.EmpleadoDisponibleDTO;
 import mx.com.nok.obra.model.dto.EmpleadosAsignadosObraDTO;
@@ -388,6 +389,18 @@ public class ObraBusiness implements Serializable, ObraService{
 			estatus = false;
 		}
 		return estatus;
+	}
+	
+	public List<EquipoDTO> getEquiposQueUsaElEmpleado(EmpleadoDTO dto){
+		List<EquipoDTO> list  = new ArrayList<EquipoDTO>();
+		try {
+			list = obraDAO.getEmpleadoConMaquinaria(dto);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			list = null;
+		}
+		return list;
 	}
 
 	

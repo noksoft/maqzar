@@ -2,6 +2,8 @@ package mx.com.nok.obra.model.service;
 
 import java.util.List;
 
+import mx.com.nok.empleado.model.dto.EmpleadoDTO;
+import mx.com.nok.equipo.model.dto.EquipoDTO;
 import mx.com.nok.obra.model.dto.EmpleadoDisponibleDTO;
 import mx.com.nok.obra.model.dto.EmpleadosAsignadosObraDTO;
 import mx.com.nok.obra.model.dto.EquiposAsignadosObraDTO;
@@ -39,6 +41,10 @@ public interface ObraService {
 	public boolean addEquipo(EquiposAsignadosObraDTO dto);
 	
 	public boolean addEmpleado(EmpleadosAsignadosObraDTO dto);
+	
+	//Firma para el servicio de consultar si el empleado tiene o no maquinarias o equipos asignados o que tan disponible esta
+	public List<EquipoDTO> getEquiposQueUsaElEmpleado(EmpleadoDTO dto);
+	
 	
 	
 }

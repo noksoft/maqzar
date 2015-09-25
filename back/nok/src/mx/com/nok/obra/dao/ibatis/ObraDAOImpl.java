@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
+import mx.com.nok.empleado.model.dto.EmpleadoDTO;
+import mx.com.nok.equipo.model.dto.EquipoDTO;
 import mx.com.nok.obra.dao.ObraDAO;
 import mx.com.nok.obra.model.dto.EmpleadoDisponibleDTO;
 import mx.com.nok.obra.model.dto.EmpleadosAsignadosObraDTO;
@@ -172,6 +174,11 @@ public class ObraDAOImpl extends SqlMapClientDaoSupport implements ObraDAO {
 	@Override
 	public String getEstausEmpleado(EmpleadosAsignadosObraDTO dto){
 		return (String)this.getSqlMapClientTemplate().queryForObject("utilEmpleadoEstatus",dto);
+	}
+	
+	@Override
+	public List<EquipoDTO> getEmpleadoConMaquinaria(EmpleadoDTO dto) throws Exception{
+		return this.getSqlMapClientTemplate().queryForList("getEmpleadoConMaquinaria", dto);
 	}
 	
 

@@ -2,6 +2,8 @@ package mx.com.nok.obra.dao;
 
 import java.util.List;
 
+import mx.com.nok.empleado.model.dto.EmpleadoDTO;
+import mx.com.nok.equipo.model.dto.EquipoDTO;
 import mx.com.nok.obra.model.dto.EmpleadoDisponibleDTO;
 import mx.com.nok.obra.model.dto.EmpleadosAsignadosObraDTO;
 import mx.com.nok.obra.model.dto.EquiposAsignadosObraDTO;
@@ -48,5 +50,9 @@ public interface ObraDAO {
 	public boolean addEmpleado(EmpleadosAsignadosObraDTO dto) throws Exception;
 	
 	public String getEstausEmpleado(EmpleadosAsignadosObraDTO dto) throws Exception;
+
+	public List<EquipoDTO> getEmpleadoConMaquinaria(EmpleadoDTO dto) throws Exception;
+	
+	
 
 }
