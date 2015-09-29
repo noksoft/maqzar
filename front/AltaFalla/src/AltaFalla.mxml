@@ -9,10 +9,12 @@
 		<![CDATA[
         import mx.collections.ArrayCollection;
         import mx.controls.Alert;
-        import mx.events.ItemClickEvent;
         import mx.events.FlexEvent;
+        import mx.events.ItemClickEvent;
         import mx.rpc.events.FaultEvent;
         import mx.rpc.events.ResultEvent;
+        import mx.validators.Validator;
+
 
         [Bindable]
         public var acFallas:ArrayCollection;
@@ -30,6 +32,9 @@
         public var fallaEquipodes:FallaEquipoDTO = new FallaEquipoDTO();
         [Bindable]
         protected var itemSelected:FallaEquipoDTO = new FallaEquipoDTO();
+
+        private var arrayValidationResult:Array;
+
 
         protected function infoObraresultHandler(event:ResultEvent):void {
             // TODO Auto-generated method stub
@@ -194,7 +199,7 @@
                     dateSelected.errorString = "";
                     itemSelected.fecha_registro = tempDate.getFullYear().toString() + "/" + (tempDate.getMonth() + 1).toString() + "/" + tempDate.getDate();
                 }else{
-                    dateSelected.errorString = "Debes ingresar la fehca";
+                    dateSelected.errorString = "Debes ingresar la fecha";
                 }
             }
 
@@ -259,6 +264,13 @@
             roSubfalla.catSubfalla(catSubfalla);
 
 
+
+
+        }
+
+        private function validateAllInputs():void{
+            arrayValidationResult = new Array();
+            arrayValidationResult = Validator.validateAll([val_Obra,val_Operador,val_Maquinaria,val_Fallas,val_SubFalla,val_Descripcion,val_Observaciones,val_Fecha]);
         }
 
         protected function insertFallaEquiporesult(event:ResultEvent):void {
@@ -319,6 +331,8 @@
         private function updateFallasObras():void{
             roAltaFalla.getFallasEquipo(new FallaEquipoDTO());
         }
+
+        
 
         protected function updateFallaEquiporesult(event:ResultEvent):void {
             // TODO Auto-generated method stub
@@ -400,6 +414,60 @@
                             itemClick="Prioridad_itemClickHandler(event);"/>
         <s:RadioButtonGroup id="tipoFallabtgroup"
                             itemClick="Prioridad_itemClickHandler(event);"/>
+
+		<!-- Validators -->
+
+		<mx:StringValidator id="val_Obra"
+							source = "{nomObra}"
+							property="text"
+							required="true"
+							requiredFieldError="Debes de elejir una obra."/>
+
+		<mx:StringValidator id="val_Operador"
+							source = "{autocompleteEmpleados}"
+							property ="text"
+							required ="true"
+							requiredFieldError="Debes introducir el nombre de un operador."/>
+
+		<mx:StringValidator id="val_Maquinaria"
+							source = "{autocompleteEquipo}"
+							property = "text"
+							required = "true"
+							requiredFieldError = "Debes seleccionar un Equipo."/>
+
+		<mx:StringValidator id="val_Fallas"
+							source = "{ddlfallas}"
+							property = "text"
+							required="true"
+							requiredFieldError="Debes elegir una Falla."/>
+
+		<mx:StringValidator id="val_SubFalla"
+							source="{autocompleteSubfalla}"
+							property="text"
+							required="true"
+							requiredFieldError="Debes elegir una SubFalla."/>
+
+		<mx:StringValidator id="val_Descripcion"
+							source="{textareaDescripcion}"
+							property="text"
+							required="true"
+							requiredFieldError="Debes ingresar una Descripción."/>
+
+		<mx:StringValidator id = "val_Observaciones"
+							source="{txtObservaciones}"
+							property="text"
+							required="true"
+							requiredFieldError="Debes ingresar alguna Observación"/>
+
+		<mx:DateValidator id="val_Fecha"
+						  source="{dateSelected}"
+						  property="text"
+						  inputFormat="YYYY-MM-DD"
+                          required = "true"
+						  requiredFieldError="Es necesario ingresar una Fecha."/>
+
+		<!-- End Validators-->
+
     </fx:Declarations>
 
     <s:Group x="0" y="0" width="100%" height="100%">
