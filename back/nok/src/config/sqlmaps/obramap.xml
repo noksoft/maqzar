@@ -8,6 +8,8 @@
 	<typeAlias alias="classEmpleadoDisponibleMap" type="mx.com.nok.obra.model.dto.EmpleadoDisponibleDTO"/>
 	<typeAlias alias="classEquiposAsignadosObraMap" type="mx.com.nok.obra.model.dto.EquiposAsignadosObraDTO"/>
 	<typeAlias alias="classEmpleadosAsignadosObraMap" type="mx.com.nok.obra.model.dto.EmpleadosAsignadosObraDTO"/>
+<!-- 	Traemos la lista de equipos -->
+	<typeAlias alias="classEquiposMap" type="mx.com.nok.equipo.model.dto.EquipoDTO"/>
 	
 	<typeAlias alias="classAsignacionMap" type="mx.com.nok.asignacion.model.dto.AsignacionDTO"/>
 	
@@ -185,6 +187,10 @@
 		parameterClass="classObraMap">
 		SELECT * FROM
 		 (#idObra#,#idEmpleado#)
+	</procedure>
+	
+	<procedure id="getEmpleadoConMaquinaria" resultMap="obraMap" parameterClass = "classEquiposMap">
+		select * from t_asignacion_obra where empleado;
 	</procedure>
 
 

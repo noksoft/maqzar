@@ -93,7 +93,8 @@ package com.maqzar.views {
                 //Abrir el Popup para pedir al empleado de la lista de arriba, dicha lista ya esdta cargada en el grid anterior.
                 var popUpEmpleado:EmpleadoMaquinariaPopup = EmpleadoMaquinariaPopup(PopUpManager.createPopUp(this, EmpleadoMaquinariaPopup,true)  as spark.components.TitleWindow);
 				PopUpManager.centerPopUp(popUpEmpleado);
-				popUpEmpleado.maquinaria = view.dataGridMaquinaEquipoTransporteDisponible.selectedItem as EquipoVO;
+				asignacionModel.maquinariaSelected = view.dataGridMaquinaEquipoTransporteDisponible.selectedItem as EquipoVO;
+
 				popUpEmpleado.addEventListener(AsignacionEvent.EMPLEADO_SELECCIONADO,empleadoSeleccionadoEvent);
 				
             }else
