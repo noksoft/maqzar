@@ -56,6 +56,11 @@
 				</s:List>
 			</s:Panel>
 			<s:VGroup width="100%" height="100%">
+				<s:HGroup width="100%" verticalAlign="middle">
+					<s:Button label="Ir a Semana actual"/>
+					<s:Label text="Selecciona una semana del calendario"/>
+					<mx:DateField/>
+				</s:HGroup>
 				<mx:AdvancedDataGrid id="adg1" y="0" left="255" width="100%" height="100%"
 									 designViewDataType="tree">
 					<mx:groupedColumns>

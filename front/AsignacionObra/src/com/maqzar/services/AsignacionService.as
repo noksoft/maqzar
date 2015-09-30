@@ -3,6 +3,7 @@
  */
 package com.maqzar.services {
 	import com.maqzar.constant.NOKConstants;
+	import com.maqzar.dtos.AsignacionDTO;
 	import com.maqzar.dtos.AsignacionVO;
 	import com.maqzar.dtos.EmpleadoAsignadoVO;
 	import com.maqzar.dtos.EmpleadoDisponibleVO;
@@ -99,6 +100,11 @@ package com.maqzar.services {
 			// Falta revisar el servicio en JAVA
 			
 			return asignacionRemote.validaEmpleado(empleado);
+		}
+		
+		public function infoAsignacionesDisponiblesObra(asignacion:AsignacionDTO):AsyncToken
+		{
+			return asignacionRemote.infoAsignacionesDisponiblesObra(asignacion);
 		}
 	}
 }
