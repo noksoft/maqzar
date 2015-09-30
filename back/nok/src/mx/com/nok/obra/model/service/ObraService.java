@@ -2,13 +2,9 @@ package mx.com.nok.obra.model.service;
 
 import java.util.List;
 
-<<<<<<< HEAD
 import mx.com.nok.asignacion.model.dto.AsignacionDTO;
-=======
 import mx.com.nok.empleado.model.dto.EmpleadoDTO;
 import mx.com.nok.equipo.model.dto.EquipoDTO;
-import mx.com.nok.obra.model.dto.EmpleadoDisponibleDTO;
->>>>>>> origin/master
 import mx.com.nok.obra.model.dto.EmpleadosAsignadosObraDTO;
 import mx.com.nok.obra.model.dto.EquiposAsignadosObraDTO;
 import mx.com.nok.obra.model.dto.ObraDTO;

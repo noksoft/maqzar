@@ -4,20 +4,17 @@ import java.util.List;
 
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
-<<<<<<< HEAD
 import mx.com.nok.asignacion.model.dto.AsignacionDTO;
-=======
 import mx.com.nok.empleado.model.dto.EmpleadoDTO;
 import mx.com.nok.equipo.model.dto.EquipoDTO;
->>>>>>> origin/master
 import mx.com.nok.obra.dao.ObraDAO;
-import mx.com.nok.obra.model.dto.EmpleadoDisponibleDTO;
 import mx.com.nok.obra.model.dto.EmpleadosAsignadosObraDTO;
 import mx.com.nok.obra.model.dto.EquiposAsignadosObraDTO;
 import mx.com.nok.obra.model.dto.ObraDTO;
 import mx.com.nok.obra.model.dto.ObraRecursoEquipoDTO;
 import mx.com.nok.obra.model.dto.ObraRecursoMaquneDTO;
 import mx.com.nok.obra.model.dto.ObraRecursoPersonaDTO;
+
 @SuppressWarnings("unchecked")
 public class ObraDAOImpl extends SqlMapClientDaoSupport implements ObraDAO {
 
