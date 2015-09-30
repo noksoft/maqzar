@@ -22,6 +22,7 @@
 		<result property="nombre"							column="nombre"/>
 		<result property="paterno"							column="paterno"/>
 		<result property="materno"							column="materno"/>
+		<result property="nombreCompleto"					column="nombreCompleto"/>
 		<result property="idEquipo"							column="id_equipo"/>
 		<result property="numeroeconomico"					column="numeroeconomico"/>
 		<result property="descripcion"						column="descripcion"/>

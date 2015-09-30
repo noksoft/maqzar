@@ -13,7 +13,7 @@ import mx.com.nok.obra.model.service.ObraService;
 
 public class ObraAction  extends ActionSupport implements ServletRequestAware, ServletResponseAware {
 	private static final long serialVersionUID = 1L; 
-	private Logger log = Logger.getLogger(this.getClass());
+	private Logger log = Logger.getLogger(ObraAction.class);
     private HttpServletRequest servletRequest;
     private HttpServletResponse servletResponse;
     private ObraService obraService;
