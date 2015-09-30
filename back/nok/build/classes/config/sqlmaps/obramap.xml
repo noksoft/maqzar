@@ -6,21 +6,40 @@
 	<typeAlias alias="classObraRecursoMaquneMap" type="mx.com.nok.obra.model.dto.ObraRecursoMaquneDTO" />
 	
 	<typeAlias alias="classEmpleadoDisponibleMap" type="mx.com.nok.obra.model.dto.EmpleadoDisponibleDTO"/>
-	
 	<typeAlias alias="classEquiposAsignadosObraMap" type="mx.com.nok.obra.model.dto.EquiposAsignadosObraDTO"/>
-	
 	<typeAlias alias="classEmpleadosAsignadosObraMap" type="mx.com.nok.obra.model.dto.EmpleadosAsignadosObraDTO"/>
 	
+	<typeAlias alias="classAsignacionMap" type="mx.com.nok.asignacion.model.dto.AsignacionDTO"/>
 	
-	<resultMap id="empleadosAsignadosMap" class="classEmpleadosAsignadosObraMap">
+	<resultMap id="asignacionObraMap" class="classAsignacionMap">
+		<result property="tipoAsignacion"					column="tipo_asignacion"/>
+		<result property="idObra"							column="id_obra"/>
+		<result property="nombreObra"						column="nombre_obra"/>
+		<result property="descripcionObra"					column="descripcion_obra"/>
+		<result property="idEmpleado"						column="id_empleado"/>
+		<result property="nombre"							column="nombre"/>
+		<result property="paterno"							column="paterno"/>
+		<result property="materno"							column="materno"/>
+		<result property="idEquipo"							column="id_equipo"/>
+		<result property="numeroeconomico"					column="numeroeconomico"/>
+		<result property="descripcion"						column="descripcion"/>
+		<result property="tipocategoria"					column="tipocategoria"/>
+		<result property="categoria"						column="categoria"/>
+		<result property="subcategoria"						column="subcategoria"/>
+		<result property="estatus"							column="estatus"/>
+		<result property="habilidades"						column="habilidades"/>
+	</resultMap>
+	
+	
+	<!-- resultMap id="empleadosAsignadosMap" class="classEmpleadosAsignadosObraMap">
 		<result property="nombre" column="nombre" />
 		<result property="estatus" column="estatus" />
 		<result property="habilidades" column="habilidades"/>
 		<result property="idEmpleado" column = "id_empleado"/>
 		<result property="idObra" column = "id_obra"/>
-	</resultMap>
+	</resultMap-->
 	
-	<resultMap id="equiposAsignadosMap" class="classEquiposAsignadosObraMap">
+	<!-- resultMap id="equiposAsignadosMap" class="classEquiposAsignadosObraMap">
 		<result property="idObra" column="id_obra" />
 		<result property="idEquipo" column="id_equipo" />
 		<result property="descripcion" column="descripcion"/>
@@ -29,7 +48,7 @@
 		<result property="categoria" column = "categoria"/>
 		<result property="subCategoria" column = "subcategoria"/>
 		<result property="estatus" column = "estatus"/>
-	</resultMap>
+	</resultMap-->
 
 
 	<resultMap id="obraRecursoMaquneMap" class="classObraRecursoMaquneMap">
@@ -75,15 +94,20 @@
   from cat_empleados;
 	</procedure>
 	
-	<!--  infoEquiposAsignadosObra -->
-	<procedure id= "infoEquiposAsignadosObra" parameterClass="classEquiposAsignadosObraMap" resultMap = "equiposAsignadosMap">
-		select id_obra, id_equipo, descripcion, numeroeconomico, tipocategoria, categoria, subcategoria, estatus from vw_asignacion where id_obra = #idObra# and id_equipo is not null
+	<!-- info de equipos y empleados asignados en Obra -->
+	<procedure id="infoAsignacionesObra" parameterClass="classAsignacionMap" resultMap="asignacionObraMap">
+		SELECT * FROM spr_infoasignacionobra(#idObra#, #typeQuery#)
 	</procedure>
 	
 	<!--  infoEquiposAsignadosObra -->
-	<procedure id= "infoEmpleadosAsignadosObra" parameterClass="classEmpleadosAsignadosObraMap" resultMap = "empleadosAsignadosMap">
+	<!-- procedure id= "infoEquiposAsignadosObra" parameterClass="classEquiposAsignadosObraMap" resultMap = "equiposAsignadosMap">
+		select id_obra, id_equipo, descripcion, numeroeconomico, tipocategoria, categoria, subcategoria, estatus from vw_asignacion where id_obra = #idObra# and id_equipo is not null
+	</procedure-->
+	
+	<!--  infoEquiposAsignadosObra -->
+	<!--  procedure id= "infoEmpleadosAsignadosObra" parameterClass="classEmpleadosAsignadosObraMap" resultMap = "empleadosAsignadosMap">
 		select concat( nombre,' ' ,paterno,' ', materno) as nombre, estatus, spd_util_habilidades(id_empleado) as habilidades, id_empleado, id_obra from vw_asignacion where id_obra = #idObra# and id_empleado is not null;
-	</procedure>
+	</procedure-->
 	
 	<procedure id= "cambiaEstatusEmpleado" resultClass = "java.lang.Boolean" parameterClass="classEmpleadosAsignadosObraMap">
 		SELECT * FROM spu_estatus_empleado_asignado(#estatus#,#idEmpleado#,#idObra#)

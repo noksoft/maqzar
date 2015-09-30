@@ -2,7 +2,7 @@ package mx.com.nok.obra.model.service;
 
 import java.util.List;
 
-import mx.com.nok.obra.model.dto.EmpleadoDisponibleDTO;
+import mx.com.nok.asignacion.model.dto.AsignacionDTO;
 import mx.com.nok.obra.model.dto.EmpleadosAsignadosObraDTO;
 import mx.com.nok.obra.model.dto.EquiposAsignadosObraDTO;
 import mx.com.nok.obra.model.dto.ObraDTO;
@@ -27,9 +27,11 @@ public interface ObraService {
 	public List<?> infoObraRecursoPersona(ObraRecursoPersonaDTO dto);
 	public boolean deleteObraRecursoEquipo(ObraRecursoPersonaDTO dto);
 	
+	public List<AsignacionDTO> infoAsignacionesDisponiblesObra(AsignacionDTO dto);
+	/*
 	public List<EmpleadoDisponibleDTO> infoEmpleadoDisponible(EmpleadoDisponibleDTO dto);
 	public List<EquiposAsignadosObraDTO> infoEquiposAsignadosObra(EquiposAsignadosObraDTO dto);
-	
+	*/
 	public List<EmpleadosAsignadosObraDTO> infoEmpleadosAsignadosObra(EmpleadosAsignadosObraDTO dto);
 	
 	public boolean cambiaEstatusEmpleado(EmpleadosAsignadosObraDTO dto);

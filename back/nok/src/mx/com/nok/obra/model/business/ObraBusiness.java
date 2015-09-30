@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import mx.com.nok.asignacion.model.dto.AsignacionDTO;
 import mx.com.nok.empleado.model.dto.EmpleadoDTO;
 import mx.com.nok.obra.dao.ObraDAO;
 import mx.com.nok.obra.model.dto.EmpleadoDisponibleDTO;
@@ -288,6 +289,17 @@ public class ObraBusiness implements Serializable, ObraService{
 		return false;
 	}
 	
+	public List<AsignacionDTO> infoAsignacionesDisponiblesObra(AsignacionDTO dto){
+		List<AsignacionDTO> listAsignaciones = new ArrayList<AsignacionDTO>();
+		try{
+			listAsignaciones = obraDAO.infoAsigancionesDisponiblesObra(dto);
+		}catch(Exception e){
+			e.printStackTrace();
+			listAsignaciones = null;
+		}
+		return listAsignaciones;
+	}
+	/*
 	public List<EmpleadoDisponibleDTO> infoEmpleadoDisponible(EmpleadoDisponibleDTO dto){
 		
 		List<EmpleadoDisponibleDTO> list= new ArrayList<EmpleadoDisponibleDTO>();
@@ -314,7 +326,7 @@ public class ObraBusiness implements Serializable, ObraService{
 		}
 		return list;
 	}
-	
+	*/
 	public List<EmpleadosAsignadosObraDTO> infoEmpleadosAsignadosObra(EmpleadosAsignadosObraDTO dto){
 		List<EmpleadosAsignadosObraDTO> list = new ArrayList<EmpleadosAsignadosObraDTO>();
 		try {

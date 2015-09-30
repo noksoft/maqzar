@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
+import mx.com.nok.asignacion.model.dto.AsignacionDTO;
 import mx.com.nok.obra.dao.ObraDAO;
 import mx.com.nok.obra.model.dto.EmpleadoDisponibleDTO;
 import mx.com.nok.obra.model.dto.EmpleadosAsignadosObraDTO;
@@ -119,19 +120,25 @@ public class ObraDAOImpl extends SqlMapClientDaoSupport implements ObraDAO {
 		return false;
 	}
 
+	@Override
+	public List<AsignacionDTO> infoAsigancionesDisponiblesObra(AsignacionDTO dto) throws Exception{
+		List<AsignacionDTO> list = null;
+			list = this.getSqlMapClientTemplate().queryForList("infoAsignacionesObra", dto);
+		return list;
+	}
 	
-	@Override
-	public List<EmpleadoDisponibleDTO> infoEmpleadoDisponible(EmpleadoDisponibleDTO dto)
-			throws Exception {
-		return this.getSqlMapClientTemplate().
-				queryForList("infoEmpleadoDisponible",dto);
-		//return null;
-	}
-	@Override
-	public List<EquiposAsignadosObraDTO> infoEquiposAsignadosObra(EquiposAsignadosObraDTO dto)
-	throws Exception{
-		return this.getSqlMapClientTemplate().queryForList("infoEquiposAsignadosObra",dto);
-	}
+//	@Override
+//	public List<EmpleadoDisponibleDTO> infoEmpleadoDisponible(EmpleadoDisponibleDTO dto)
+//			throws Exception {
+//		return this.getSqlMapClientTemplate().
+//				queryForList("infoEmpleadoDisponible",dto);
+//		//return null;
+//	}
+//	@Override
+//	public List<EquiposAsignadosObraDTO> infoEquiposAsignadosObra(EquiposAsignadosObraDTO dto)
+//	throws Exception{
+//		return this.getSqlMapClientTemplate().queryForList("infoEquiposAsignadosObra",dto);
+//	}
 	
 	@Override
 	public List<EmpleadosAsignadosObraDTO> infoEmpleadosAsignadosObra(EmpleadosAsignadosObraDTO dto)
