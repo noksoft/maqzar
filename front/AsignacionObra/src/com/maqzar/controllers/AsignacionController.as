@@ -2,6 +2,7 @@
  * Created by Carlos Zaragoza on 09/05/2015.
  */
 package com.maqzar.controllers {
+	import com.maqzar.dtos.AsignacionDTO;
 	import com.maqzar.dtos.AsignacionVO;
 	import com.maqzar.dtos.EmpleadoAsignadoVO;
 	import com.maqzar.dtos.EmpleadoDisponibleVO;
@@ -288,31 +289,21 @@ package com.maqzar.controllers {
 			}
 		}
 		
-		[EventHandler(event="AsignacionEvent.VALIDA_EMPLEADO_DISPONIBILIDAD", properties="empleadosDisponibles")]
-		public function validaEmpleadoDisponible(empleadosDisponibles:EmpleadoDisponibleVO):void
+		[EventHandler(event="AsignacionEvent.CALL_ASIGNACIONES_DISPONIBLES_EMPLEADOS", properties="asignacionDTO")]
+		public function validaEmpleadoDisponible(asignacionDTO:AsignacionDTO):void
 		{
-			executeServiceCall(asignacionService.validaEmpleado(empleadosDisponibles),validaEmpleadoResult, asignacionFail);
+			executeServiceCall(asignacionService.infoAsignacionesDisponiblesObra(asignacionDTO),infoAsignacionesDisponiblesObraResult, asignacionFail);
 		}
 		
-		private function validaEmpleadoResult(e:ResultEvent):void
+		private function infoAsignacionesDisponiblesObraResult(e:ResultEvent):void
 		{
 			try
 			{
-				//if(e.result != null)
-				//{
+				asignacionModel.acAsignacionEmpleados =  e.result as ArrayCollection;
 					var equipoAsignadoEvent:AsignacionEvent = new AsignacionEvent(AsignacionEvent.LISTA_EQUIPOS_ASIGNADOS_A_EMPLEADO);
 					equipoAsignadoEvent.listado = e.result as ArrayCollection;
 					dispatcher.dispatchEvent(equipoAsignadoEvent);
 					
-					/*if(e.result == true){
-						dispatcher.dispatchEvent(new AsignacionEvent(AsignacionEvent.ASIGNACION_REFRESCA_GRID_DESDE_COMBO));
-					}else
-					{
-						Alert.show("No puedes agregar el registro", "NOK");
-					}*/
-				/*}else{
-					Alert.show("No se cargaron los datos","MMW")
-				}*/
 			} 
 			catch(error:Error) 
 			{

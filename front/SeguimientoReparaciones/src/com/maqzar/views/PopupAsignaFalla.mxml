@@ -23,13 +23,11 @@
 		<s:Label text="Equipo"/>
 		<s:TextInput width="100%" text="EXCAVADORA HIDRÁULICA PC200-8"/>
 		<s:Label text="Falla"/>
-		<s:TextInput width="100%" text="FALLA AMORTIGUADOR - COMPRESOR ABC SUB MARZO1COMPRESOR ABC"/>
+		<s:TextInput width="100%" text="FALLA AMORTIGUADOR"/>
 		<s:Label text="Subfalla"/>
-		<s:TextInput width="100%"/>
-		<s:HGroup width="100%">
-		</s:HGroup>
+		<s:TextInput width="100%" text="COMPRESOR ABC SUB MARZO1COMPRESOR ABC"/>
 		<s:Label text="Fecha de programación"/>
-		<mx:DateField/>
+		<mx:DateField showToday="true"/>
 		<s:Label text="Responsable Asignado"/>
 		<components:AutoComplete width="100%">
 		</components:AutoComplete>

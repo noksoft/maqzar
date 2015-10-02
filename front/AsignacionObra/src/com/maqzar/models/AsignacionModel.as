@@ -21,6 +21,7 @@ public class AsignacionModel {
 	public var acEquiposDondeEmpleadoTieneAsignado:ArrayCollection;
 
 	public var maquinariaSelected:EquipoVO;
+	public var acAsignacionEmpleados:ArrayCollection;
 
 }
 }

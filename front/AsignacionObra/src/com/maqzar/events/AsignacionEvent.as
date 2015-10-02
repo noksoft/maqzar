@@ -2,6 +2,7 @@
  * Created by Usuario on 09/05/2015.
  */
 package com.maqzar.events {
+import com.maqzar.dtos.AsignacionDTO;
 import com.maqzar.dtos.EmpleadoAsignadoVO;
 import com.maqzar.dtos.EmpleadoDisponibleVO;
 import com.maqzar.dtos.EquipoVO;
@@ -31,11 +32,15 @@ public class AsignacionEvent extends Event {
 	public static const VALIDA_EMPLEADO_DISPONIBILIDAD:String = "validaEmpleadoDisponibilidad";
 	public static const LISTA_EQUIPOS_ASIGNADOS_A_EMPLEADO:String = "listaEquiposAsignadosAEmpleados";
 	
+	public static const CALL_ASIGNACIONES_DISPONIBLES_EMPLEADOS:String = "callAsignacionesDisponiblesEmpleados";
+	public static const CALL_ASIGNACIONES_DISPONIBLES_EQUIPOS:String = "callAsignacionesDisponiblesEquipos";
+	
 	public var empleadosDisponibles:EmpleadoDisponibleVO;
 	public var equiposDisponibles:EquipoVO;
 	public var equiposAsignadosObraVO:EquiposAsignadosObraVO;
 	public var empleadosAsignados:EmpleadoAsignadoVO;
 	public var listado:ArrayCollection;
+	public var asignacionDTO:AsignacionDTO;
 	
 	
 
