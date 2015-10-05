@@ -25,8 +25,6 @@ package com.maqzar.services {
 			obrasRemote.showBusyCursor = true;
 			equiposRemote.endpoint = NOKConstants.SERVICE_URL;
 			equiposRemote.showBusyCursor = true;
-			
-			
 		}
 		
 		public function findAll(vo:AsignacionVO):AsyncToken

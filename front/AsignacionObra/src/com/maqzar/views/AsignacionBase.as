@@ -29,16 +29,9 @@ package com.maqzar.views {
 		[Inject]
 		[Bindable]
 		public var asignacionModel:AsignacionModel;
-		
 		private var view:Asignacion = Asignacion(this);
-		
-	
-		
-		
 		public function AsignacionBase() {
 			super();
-			
-			
 		}
 		public function creacionCompleta():void{
 			// Instancian cada una de los eventos de carga para asignacion de recursos.

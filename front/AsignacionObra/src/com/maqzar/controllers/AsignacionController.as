@@ -30,7 +30,7 @@ package com.maqzar.controllers {
 		
 		private var asignacionService:AsignacionService = new AsignacionService();
 		private function asignacionFail(e:FaultEvent):void {
-			
+			trace(e.fault.message);
 		}
 		public function saveAsignacion(vo:AsignacionVO):void
 		{
@@ -84,8 +84,6 @@ package com.maqzar.controllers {
 				trace(e.message);	
 			}
 		}
-		
-		
 		[EventHandler(event="AsignacionEvent.ASIGNACION_GET_EQUIPOS_DISPONIBLES", properties="equiposDisponibles")]		
 		public function findAllEquipos(equiposDisponibles:EquipoVO):void
 		{
