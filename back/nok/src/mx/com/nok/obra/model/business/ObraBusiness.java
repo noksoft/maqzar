@@ -8,7 +8,6 @@ import mx.com.nok.asignacion.model.dto.AsignacionDTO;
 import mx.com.nok.empleado.model.dto.EmpleadoDTO;
 import mx.com.nok.equipo.model.dto.EquipoDTO;
 import mx.com.nok.obra.dao.ObraDAO;
-import mx.com.nok.obra.model.dto.EmpleadoDisponibleDTO;
 import mx.com.nok.obra.model.dto.EmpleadosAsignadosObraDTO;
 import mx.com.nok.obra.model.dto.EquiposAsignadosObraDTO;
 import mx.com.nok.obra.model.dto.ObraDTO;
@@ -300,7 +299,7 @@ public class ObraBusiness implements Serializable, ObraService{
 		}
 		return listAsignaciones;
 	}
-	
+	/*
 	public List<EmpleadoDisponibleDTO> infoEmpleadoDisponible(EmpleadoDisponibleDTO dto){
 		
 		List<EmpleadoDisponibleDTO> list= new ArrayList<EmpleadoDisponibleDTO>();
@@ -316,7 +315,7 @@ public class ObraBusiness implements Serializable, ObraService{
 		
 		return list;
 	}
-	/*
+	
 	public List<EquiposAsignadosObraDTO> infoEquiposAsignadosObra( EquiposAsignadosObraDTO dto){
 		List<EquiposAsignadosObraDTO> list = new ArrayList<EquiposAsignadosObraDTO>();
 		try {
