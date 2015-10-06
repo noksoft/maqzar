@@ -8,6 +8,7 @@ import mx.com.nok.asignacion.model.dto.AsignacionDTO;
 import mx.com.nok.empleado.model.dto.EmpleadoDTO;
 import mx.com.nok.equipo.model.dto.EquipoDTO;
 import mx.com.nok.obra.dao.ObraDAO;
+import mx.com.nok.obra.model.dto.EmpleadoDisponibleDTO;
 import mx.com.nok.obra.model.dto.EmpleadosAsignadosObraDTO;
 import mx.com.nok.obra.model.dto.EquiposAsignadosObraDTO;
 import mx.com.nok.obra.model.dto.ObraDTO;
@@ -129,18 +130,18 @@ public class ObraDAOImpl extends SqlMapClientDaoSupport implements ObraDAO {
 		return list;
 	}
 	
-//	@Override
-//	public List<EmpleadoDisponibleDTO> infoEmpleadoDisponible(EmpleadoDisponibleDTO dto)
-//			throws Exception {
-//		return this.getSqlMapClientTemplate().
-//				queryForList("infoEmpleadoDisponible",dto);
-//		//return null;
-//	}
-//	@Override
-//	public List<EquiposAsignadosObraDTO> infoEquiposAsignadosObra(EquiposAsignadosObraDTO dto)
-//	throws Exception{
-//		return this.getSqlMapClientTemplate().queryForList("infoEquiposAsignadosObra",dto);
-//	}
+	@Override
+	public List<EmpleadoDisponibleDTO> infoEmpleadoDisponible(EmpleadoDisponibleDTO dto)
+			throws Exception {
+		return this.getSqlMapClientTemplate().
+				queryForList("infoEmpleadoDisponible",dto);
+		//return null;
+	}
+	@Override
+	public List<EquiposAsignadosObraDTO> infoEquiposAsignadosObra(EquiposAsignadosObraDTO dto)
+	throws Exception{
+		return this.getSqlMapClientTemplate().queryForList("infoEquiposAsignadosObra",dto);
+	}
 	
 	@Override
 	public List<EmpleadosAsignadosObraDTO> infoEmpleadosAsignadosObra(EmpleadosAsignadosObraDTO dto)

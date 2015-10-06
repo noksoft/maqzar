@@ -84,9 +84,11 @@ package com.maqzar.views {
 		public function asignaMET(event:MouseEvent):void {
             if(view.ddlObras.selectedIndex != -1){
                 //Abrir el Popup para pedir al empleado de la lista de arriba, dicha lista ya esdta cargada en el grid anterior.
-                var popUpEmpleado:EmpleadoMaquinariaPopup = EmpleadoMaquinariaPopup(PopUpManager.createPopUp(this, EmpleadoMaquinariaPopup,true)  as spark.components.TitleWindow);
-				PopUpManager.centerPopUp(popUpEmpleado);
 				asignacionModel.maquinariaSelected = view.dataGridMaquinaEquipoTransporteDisponible.selectedItem as EquipoVO;
+				asignacionModel.obraSelected = view.ddlObras.selectedItem as ObraVO;
+				var popUpEmpleado:EmpleadoMaquinariaPopup = EmpleadoMaquinariaPopup(PopUpManager.createPopUp(this, EmpleadoMaquinariaPopup,true)  as spark.components.TitleWindow);
+				PopUpManager.centerPopUp(popUpEmpleado);
+				
 
 				popUpEmpleado.addEventListener(AsignacionEvent.EMPLEADO_SELECCIONADO,empleadoSeleccionadoEvent);
 				

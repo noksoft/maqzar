@@ -5,6 +5,7 @@ import java.util.List;
 import mx.com.nok.asignacion.model.dto.AsignacionDTO;
 import mx.com.nok.empleado.model.dto.EmpleadoDTO;
 import mx.com.nok.equipo.model.dto.EquipoDTO;
+import mx.com.nok.obra.model.dto.EmpleadoDisponibleDTO;
 import mx.com.nok.obra.model.dto.EmpleadosAsignadosObraDTO;
 import mx.com.nok.obra.model.dto.EquiposAsignadosObraDTO;
 import mx.com.nok.obra.model.dto.ObraDTO;
@@ -36,10 +37,10 @@ public interface ObraDAO {
 	public boolean deleteObraRecursoEquipo(ObraRecursoPersonaDTO dto)throws Exception;
 	
 	public List<AsignacionDTO> infoAsigancionesDisponiblesObra(AsignacionDTO dto) throws Exception;
-	/**
+	
 	public List<EmpleadoDisponibleDTO> infoEmpleadoDisponible(EmpleadoDisponibleDTO dto) throws Exception;
 	public List<EquiposAsignadosObraDTO> infoEquiposAsignadosObra(EquiposAsignadosObraDTO dto)throws Exception;
-	**/
+	
 	
 	public List<EmpleadosAsignadosObraDTO> infoEmpleadosAsignadosObra(EmpleadosAsignadosObraDTO dto) throws Exception;
 	

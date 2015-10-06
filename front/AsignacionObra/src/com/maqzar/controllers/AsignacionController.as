@@ -308,5 +308,29 @@ package com.maqzar.controllers {
 				trace(error.message);	
 			}
 		}
+		
+		[EventHandler(event="AsignacionEvent.CALL_EQUIPOS_QUE_TIENE_EMPLEADO", properties="asignacionDTO")]
+		public function validaEmpleadoDisponibleEmpleado(asignacionDTO:AsignacionDTO):void
+		{
+			executeServiceCall(asignacionService.infoAsignacionesDisponiblesObra(asignacionDTO),infoAsignacionesDisponiblesObraResultEmpleado, asignacionFail);
+		}
+		
+		private function infoAsignacionesDisponiblesObraResultEmpleado(e:ResultEvent):void
+		{
+			try
+			{
+				asignacionModel.acAsignacionEmpleados =  e.result as ArrayCollection;
+				var equipoAsignadoEvent:AsignacionEvent = new AsignacionEvent(AsignacionEvent.LISTA_EQUIPOS_ASIGNADOS_A_EMPLEADO_LISTADO);
+				equipoAsignadoEvent.listado = e.result as ArrayCollection;
+				dispatcher.dispatchEvent(equipoAsignadoEvent);
+				
+			} 
+			catch(error:Error) 
+			{
+				trace(error.message);	
+			}
+		}
+		
+		
 	}
 }

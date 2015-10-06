@@ -5,6 +5,7 @@ import java.util.List;
 import mx.com.nok.asignacion.model.dto.AsignacionDTO;
 import mx.com.nok.empleado.model.dto.EmpleadoDTO;
 import mx.com.nok.equipo.model.dto.EquipoDTO;
+import mx.com.nok.obra.model.dto.EmpleadoDisponibleDTO;
 import mx.com.nok.obra.model.dto.EmpleadosAsignadosObraDTO;
 import mx.com.nok.obra.model.dto.EquiposAsignadosObraDTO;
 import mx.com.nok.obra.model.dto.ObraDTO;
@@ -30,10 +31,10 @@ public interface ObraService {
 	public boolean deleteObraRecursoEquipo(ObraRecursoPersonaDTO dto);
 	
 	public List<AsignacionDTO> infoAsignacionesDisponiblesObra(AsignacionDTO dto);
-	/*
+	
 	public List<EmpleadoDisponibleDTO> infoEmpleadoDisponible(EmpleadoDisponibleDTO dto);
 	public List<EquiposAsignadosObraDTO> infoEquiposAsignadosObra(EquiposAsignadosObraDTO dto);
-	*/
+	
 	public List<EmpleadosAsignadosObraDTO> infoEmpleadosAsignadosObra(EmpleadosAsignadosObraDTO dto);
 	
 	public boolean cambiaEstatusEmpleado(EmpleadosAsignadosObraDTO dto);

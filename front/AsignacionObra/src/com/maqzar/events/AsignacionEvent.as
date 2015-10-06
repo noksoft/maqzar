@@ -41,6 +41,8 @@ public class AsignacionEvent extends Event {
 	public var empleadosAsignados:EmpleadoAsignadoVO;
 	public var listado:ArrayCollection;
 	public var asignacionDTO:AsignacionDTO;
+	public static const CALL_EQUIPOS_QUE_TIENE_EMPLEADO:String = "callEquiposQueTieneEmpleado";
+	public static const LISTA_EQUIPOS_ASIGNADOS_A_EMPLEADO_LISTADO:String = "listaEquiposAsignadosAEmpleadoListado";
 	
 	
 

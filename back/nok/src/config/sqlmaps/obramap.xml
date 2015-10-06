@@ -34,15 +34,15 @@
 	</resultMap>
 	
 	
-	<!-- resultMap id="empleadosAsignadosMap" class="classEmpleadosAsignadosObraMap">
+	<resultMap id="empleadosAsignadosMap" class="classEmpleadosAsignadosObraMap">
 		<result property="nombre" column="nombre" />
 		<result property="estatus" column="estatus" />
 		<result property="habilidades" column="habilidades"/>
 		<result property="idEmpleado" column = "id_empleado"/>
 		<result property="idObra" column = "id_obra"/>
-	</resultMap-->
+	</resultMap>
 	
-	<!-- resultMap id="equiposAsignadosMap" class="classEquiposAsignadosObraMap">
+	<resultMap id="equiposAsignadosMap" class="classEquiposAsignadosObraMap">
 		<result property="idObra" column="id_obra" />
 		<result property="idEquipo" column="id_equipo" />
 		<result property="descripcion" column="descripcion"/>
@@ -51,7 +51,7 @@
 		<result property="categoria" column = "categoria"/>
 		<result property="subCategoria" column = "subcategoria"/>
 		<result property="estatus" column = "estatus"/>
-	</resultMap-->
+	</resultMap>
 
 
 	<resultMap id="obraRecursoMaquneMap" class="classObraRecursoMaquneMap">
@@ -99,18 +99,18 @@
 	
 	<!-- info de equipos y empleados asignados en Obra -->
 	<procedure id="infoAsignacionesObra" parameterClass="classAsignacionMap" resultMap="asignacionObraMap">
-		SELECT * FROM spr_infoasignacionobra(#idObra#, #typeQuery#)
+		SELECT * FROM spr_infoasignacionobra(#idObra#,#idEmpleado#,#idEquipo#,#typeQuery#)
 	</procedure>
 	
 	<!--  infoEquiposAsignadosObra -->
-	<!-- procedure id= "infoEquiposAsignadosObra" parameterClass="classEquiposAsignadosObraMap" resultMap = "equiposAsignadosMap">
+	<procedure id= "infoEquiposAsignadosObra" parameterClass="classEquiposAsignadosObraMap" resultMap = "equiposAsignadosMap">
 		select id_obra, id_equipo, descripcion, numeroeconomico, tipocategoria, categoria, subcategoria, estatus from vw_asignacion where id_obra = #idObra# and id_equipo is not null
-	</procedure-->
+	</procedure>
 	
 	<!--  infoEquiposAsignadosObra -->
-	<!--  procedure id= "infoEmpleadosAsignadosObra" parameterClass="classEmpleadosAsignadosObraMap" resultMap = "empleadosAsignadosMap">
+	<procedure id= "infoEmpleadosAsignadosObra" parameterClass="classEmpleadosAsignadosObraMap" resultMap = "empleadosAsignadosMap">
 		select concat( nombre,' ' ,paterno,' ', materno) as nombre, estatus, spd_util_habilidades(id_empleado) as habilidades, id_empleado, id_obra from vw_asignacion where id_obra = #idObra# and id_empleado is not null;
-	</procedure-->
+	</procedure>
 	
 	<procedure id= "cambiaEstatusEmpleado" resultClass = "java.lang.Boolean" parameterClass="classEmpleadosAsignadosObraMap">
 		SELECT * FROM spu_estatus_empleado_asignado(#estatus#,#idEmpleado#,#idObra#)
