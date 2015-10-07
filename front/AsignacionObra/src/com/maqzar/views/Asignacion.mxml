@@ -142,17 +142,17 @@ Created by Usuario on 25/04/2015.
 				dataProvider="{asignacionModel.acEquiposAsignados}">
 				<s:columns>
 					<s:ArrayList>
-						<s:GridColumn headerText="Número económico" dataField="numeroEconomico"/>
-						<s:GridColumn headerText="Categoria" dataField="tipoCategoria"/>
-						<s:GridColumn headerText="Subcategoria" dataField="subCategoria"/>
-						<s:GridColumn headerText="Estatus" dataField="estatus"/>
+						<s:GridColumn headerText="Número económico" dataField="numeroeconomico"/>
+						<s:GridColumn headerText="Empleado asignado" dataField="nombreCompleto"/>
+						<!--<s:GridColumn headerText="Subcategoria" dataField="subcategoria"/>-->
+						
 						
 						<s:GridColumn headerText="" dataField="">
 							<s:itemRenderer>
 								<fx:Component>
 									<s:GridItemRenderer>
 										
-										<mx:LinkButton label="{data.estatus=='A'?'Inactivar':'Activar'}" click="outerDocument.cambiaEstatusEquipo(data)"/>
+										<mx:LinkButton label="{data.estatusEquipo=='A'?'Inactivar':'Activar'}" click="outerDocument.cambiaEstatusEquipo(data)"/>
 									</s:GridItemRenderer>
 								</fx:Component>
 							</s:itemRenderer>
