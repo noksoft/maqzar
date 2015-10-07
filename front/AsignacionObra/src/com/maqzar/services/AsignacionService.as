@@ -64,7 +64,10 @@ package com.maqzar.services {
 		
 		public function findAllEquiposAsignados(equiposAsignadosObraVO:EquiposAsignadosObraVO):AsyncToken
 		{
-			return asignacionRemote.infoEquiposAsignadosObra(equiposAsignadosObraVO);
+			var asignacion:AsignacionDTO = new AsignacionDTO();
+			asignacion.idObra = equiposAsignadosObraVO.idObra.toString();
+			asignacion.typeQuery = "ALL";
+			return asignacionRemote.infoAsignacionesDisponiblesObra(asignacion);
 		}
 		
 		public function findaAllEmpleadosAsignados(empleadosAsignados:EmpleadoAsignadoVO):AsyncToken

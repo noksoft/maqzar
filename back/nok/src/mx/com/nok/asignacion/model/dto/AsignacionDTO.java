@@ -25,7 +25,14 @@ public class AsignacionDTO implements Serializable {
     private Boolean estatus;
     private String habilidades;
     private String typeQuery;
+    private String estatusEquipo;
     
+	public String getEstatusEquipo() {
+		return estatusEquipo;
+	}
+	public void setEstatusEquipo(String estatusEquipo) {
+		this.estatusEquipo = estatusEquipo;
+	}
 	public String getTipoAsignacion() {
 		return tipoAsignacion;
 	}

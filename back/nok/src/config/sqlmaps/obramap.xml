@@ -31,6 +31,7 @@
 		<result property="subcategoria"						column="subcategoria"/>
 		<result property="estatus"							column="estatus"/>
 		<result property="habilidades"						column="habilidades"/>
+		<result property="estatusEquipo"					column="estatus_equipo"/>
 	</resultMap>
 	
 	
