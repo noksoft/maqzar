@@ -107,5 +107,9 @@ package com.maqzar.services {
 		{
 			return asignacionRemote.infoAsignacionesDisponiblesObra(asignacion);
 		}
+
+		public function insertAsignacionObraService(asignacionDTO:AsignacionDTO):AsyncToken {
+			return asignacionRemote.insertAsignacion(asignacionDTO);
+		}
 	}
 }

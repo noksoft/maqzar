@@ -111,7 +111,6 @@ package com.maqzar.controllers {
 		{
 			executeServiceCall(asignacionService.findAllEquiposAsignados(equiposAsignadosObraVO),findAllEquiposAsignadosResult, asignacionFail);
 		}
-		
 		private function findAllEquiposAsignadosResult(e:ResultEvent):void
 		{
 			try
@@ -328,6 +327,32 @@ package com.maqzar.controllers {
 			catch(error:Error) 
 			{
 				trace(error.message);	
+			}
+		}
+
+
+		[EventHandler(event="AsignacionEvent.INSERT_ASIGNACION_OBRA", properties="asignacionDTO")]
+		public function insertAsignacionObraController(asignacionDTO:AsignacionDTO):void
+		{
+			executeServiceCall(asignacionService.insertAsignacionObraService(asignacionDTO),insertAsignacionObraServiceResult, asignacionFail);
+		}
+
+		private function insertAsignacionObraServiceResult(e:ResultEvent):void
+		{
+			try
+			{
+				if(e.result == true){
+					dispatcher.dispatchEvent(new AsignacionEvent(AsignacionEvent.ASIGNACION_REFRESCA_GRID_DESDE_COMBO));
+					dispatcher.dispatchEvent(new AsignacionEvent(AsignacionEvent.CIERRA_POPUP));
+				}
+				else{
+					Alert.show("No actualizó","NOK");
+				}
+
+			}
+			catch(error:Error)
+			{
+				trace(error.message);
 			}
 		}
 		

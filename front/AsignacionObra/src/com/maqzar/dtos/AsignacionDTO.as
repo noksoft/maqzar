@@ -23,6 +23,7 @@ package com.maqzar.dtos
 		public var habilidades:String;
 		public var typeQuery:String;
 		public var estatusEquipo:String;
+		public var transferencia:Boolean;
 		public function AsignacionDTO()
 		{
 		}

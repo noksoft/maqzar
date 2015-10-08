@@ -1,5 +1,5 @@
 /**
- * Created by Usuario on 25/04/2015.
+ * @author Carlos Zaragoza Ortiz
  */
 package com.maqzar.views {
 	import com.maqzar.dtos.EmpleadoAsignadoVO;
@@ -20,7 +20,7 @@ package com.maqzar.views {
 	import spark.components.Group;
 	import spark.components.TitleWindow;
 	import spark.events.IndexChangeEvent;
-	
+
 	public class AsignacionBase extends Group {
 		/**
 		 * inyecciones
@@ -57,7 +57,6 @@ package com.maqzar.views {
 			if(view.ddlObras.selectedIndex != -1){
 				trace(view.dataGridPersonalPorAsignar.selectedItem);
 				if(view.dataGridPersonalPorAsignar.selectedItem  != null){
-					
 					var asignaEvent:AsignacionEvent = new AsignacionEvent(AsignacionEvent.ADD_PERSONAL);
 					var empleado:EmpleadoAsignadoVO = new EmpleadoAsignadoVO();
 					empleado.idObra = view.ddlObras.selectedItem.idObra;
@@ -67,16 +66,11 @@ package com.maqzar.views {
 				}else{
 					trace("No puede lanzar");
 				}
-                
             }else{
                 Alert.show("No puedes continuar si no tienes seleccionada una obra");
             }
 
 		}
-		
-		
-		
-		
 		/*
 		* Asigna la maquinaria al grid asignado.
 		*
@@ -112,10 +106,6 @@ package com.maqzar.views {
 			dispatchEvent(asignaEquipoEvent);
 			*/
 		}
-		
-	
-		
-		
 		/*
 		* Selecciona el objeto del DDL para cambiar los valores dentro del detalle de la función.
 		*
@@ -146,9 +136,7 @@ package com.maqzar.views {
 			var cambiaEstatusEvent:AsignacionEvent = new AsignacionEvent(AsignacionEvent.ASIGNACION_CAMBIA_ESTATUS_EQUIPO);
 			cambiaEstatusEvent.equiposAsignadosObraVO = vo;
 			dispatchEvent(cambiaEstatusEvent);
-			
 		}
-		
 		public function cambiaEstatusEmpleado(data:*):void
 		{
 			var vo:EmpleadoAsignadoVO = data as EmpleadoAsignadoVO;
@@ -156,9 +144,5 @@ package com.maqzar.views {
 			cambiaEstatusEvent.empleadosAsignados = vo;
 			dispatchEvent(cambiaEstatusEvent);
 		}
-		
-		
-		
-		
 	}
 }
