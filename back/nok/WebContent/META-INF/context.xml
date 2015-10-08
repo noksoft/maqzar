@@ -11,14 +11,11 @@
       validationQuery=""
       username="zkriaoigfwylqg"
       maxActive="4"
-      sslmode="require"
-<<<<<<< Updated upstream
-		url="jdbc:postgresql://ec2-54-225-115-77.compute-1.amazonaws.com:5432/d9hcjiqbhdpe5j?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
-=======
-      url="jdbc:postgresql://localhost:5432/d9hcjiqbhdpe5j"/>
+      sslmode="require" 
+      url="jdbc:postgresql://ec2-54-225-115-77.compute-1.amazonaws.com:5432/d9hcjiqbhdpe5j?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
       <!-- url="jdbc:postgresql://localhost:5432/d9hcjiqbhdpe5j"/-->
 		<!-- url="jdbc:postgresql://ec2-54-225-115-77.compute-1.amazonaws.com:5432/d9hcjiqbhdpe5j?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/-->
->>>>>>> Stashed changes
+
       <!-- url="jdbc:postgresql://localhost:5432/d9hcjiqbhdpe5j"/-->
       <!-- url="jdbc:postgresql://ec2-54-225-115-77.compute-1.amazonaws.com:5432/d9hcjiqbhdpe5j?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/> -->
       <!-- url="jdbc:postgresql://localhost:5432/d9hcjiqbhdpe5j"/>-->
