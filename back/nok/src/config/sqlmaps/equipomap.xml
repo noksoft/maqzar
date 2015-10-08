@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
 <sqlMap namespace="equipoMap">
-	<typeAlias alias ="classEquipoMap" type="mx.com.nok.equipo.model.dto.EquipoDTO"/>
-	<typeAlias alias="classMarcaMotor" type="mx.com.nok.equipo.model.dto.MarcaMotorDTO"/>
+	<typeAlias alias ="classEquipoMap" 			type="mx.com.nok.equipo.model.dto.EquipoDTO"/>
+	<typeAlias alias="classMarcaMotor" 			type="mx.com.nok.equipo.model.dto.MarcaMotorDTO"/>
+	<typeAlias alias="classDiagnostico" 		type="mx.com.nok.equipo.model.dto.DiagnosticoDTO"/>
+	<typeAlias alias="classDiagnosticoDetalle"	type="mx.com.nok.equipo.model.dto.DiagnosticoDetalle"/>
 		
 	<resultMap id="equipoMap" 	class="classEquipoMap">		
 		<result property="id_equipo" 			column="id_equipo" />
@@ -58,6 +60,44 @@
 		<result property="idMarcaMotor" 		column="id_marcamotor"/>
 		<result property="marcaMotor" 			column="marcamotor"/>
 		<result property="estatus" 				column="estatus"/>
+	</resultMap>
+	
+	<resultMap id="diagnosticoMap" class="classDiagnostico">
+		<result property="id_t_diagnostico" 		column="id_t_diagnostico"/>
+		<result property="id_equipo" 				column="id_equipo"/>
+		<result property="descripcion" 				column="descripcion"/>
+		<result property="fecha_diagnostico" 		column="fecha_diagnostico"/>
+		<result property="fecha_alta" 				column="fecha_alta"/>
+		<result property="id_empleado" 				column="id_empleado"/>
+		<result property="numeroeconomico" 			column="numeroeconomico"/>
+		<result property="rfc_empleado" 			column="rfc_empleado"/>
+		<result property="nombre_empleado" 			column="nombre_empleado"/>
+		<result property="paterno" 					column="paterno"/>
+		<result property="materno" 					column="materno"/>
+		<result property="tipo_empleado" 			column="tipo_empleado"/>
+		<result property="telefono" 				column="telefono"/>
+		<result property="celular" 					column="celular"/>
+	</resultMap>
+	
+	<resultMap id="diagnosticoDetalleMap" class="classDiagnosticoDetalle">
+		<result property="id_t_diagnostico_detalle" 		column="id_t_diagnostico_detalle"/>
+		<result property="id_t_diagnostico" 				column="id_t_diagnostico"/>
+		<result property="id_subcategoria" 					column="id_subcategoria"/>
+		<result property="comentario" 						column="comentario"/>
+		<result property="id_empleado" 						column="id_empleado"/>
+		<result property="id_equipo" 						column="id_equipo"/>
+		<result property="descripcion" 						column="descripcion"/>
+		<result property="fecha_diagnostico" 				column="fecha_diagnostico"/>
+		<result property="fecha_alta" 						column="fecha_alta"/>
+		<result property="numeroeconomico" 					column="numeroeconomico"/>
+		<result property="rfc_empleado" 					column="rfc_empleado"/>
+		<result property="nombre_empleado" 					column="nombre_empleado"/>
+		<result property="paterno" 							column="paterno"/>
+		<result property="materno" 							column="materno"/>
+		<result property="tipo_empleado" 					column="tipo_empleado"/>
+		<result property="telefono" 						column="telefono"/>
+		<result property="celular" 							column="celular"/>
+		<result property="estatus" 							column="estatus"/>
 	</resultMap>
 
 	<!--Equipo-->	
@@ -245,9 +285,6 @@
 		SELECT * FROM spd_Equipo(#id_equipo#)
 	</procedure>	
 	
-	
-	
-	
 	<!-- Sección para obtener las marcas de motor -->
 	<procedure id="infoMarcaMotor" resultMap="marcaMotorMap" parameterClass="classMarcaMotor">
 		SELECT * FROM spr_marcamotor(#idMarcaMotor#, #marcaMotor#, #filterEstatusMarcaMotor#)
@@ -263,6 +300,40 @@
 	
 	<procedure id="deleteMarcamotor" resultClass="java.lang.Boolean" parameterClass="classMarcaMotor" >
 		SELECT * FROM spd_marcamotor(#idMarcaMotor#)
+	</procedure>
+	
+	<!-- DIAGNOSTICO -->
+	<procedure id="getDiagnostico" resultMap="diagnosticoMap" parameterClass="classDiagnostico">
+		SELECT * FROM spr_diagnostico(#id_t_diagnostico#, #id_equipo#, #id_empleado#)
+	</procedure>
+	
+	<procedure id="insertDiagnostico" resultMap="diagnosticoMap" parameterClass="classDiagnostico">
+		SELECT * FROM spi_diagnostico(#id_equipo#, #descripcion#, #fecha_diagnostico#, #fecha_alta#, #id_empleado#)	
+	</procedure>
+	
+	<procedure id="updateDiagnostico" resultMap="diagnosticoMap" parameterClass="classDiagnostico">
+		SELECT * FROM spu_diagnostico(#id_t_diagnostico#, #id_equipo#, #descripcion#, #fecha_diagnostico#, #fecha_alta#, #id_empleado#)
+	</procedure>
+	
+	<procedure id="deleteDiagnostico" resultClass="java.lang.Boolean" parameterClass="classDiagnostico">
+		SELECT * FROM spd_diagnostico(#id_t_diagnostico#)
+	</procedure>
+	
+	<!-- DIAGNOSTICO DETALLE -->
+	<procedure id="getDiagnosticoDetalle" resultMap="diagnosticoDetalleMap" parameterClass="classDiagnosticoDetalle">
+		SELECT * FROM spr_diagnostico_detalle(#id_t_diagnostico_detalle#, #id_t_diagnostico#, #id_equipo#, #id_empleado#)
+	</procedure>
+	
+	<procedure id="insertDiagnosticoDetalle" resultMap="diagnosticoDetalleMap" parameterClass="classDiagnosticoDetalle">
+		SELECT * FROM spi_diagnostico_detalle(#id_t_diagnostico#, #id_subcategoria#, #estatus#, #comentario#, #id_empleado#)
+	</procedure>
+	
+	<procedure id="updateDiagnosticoDetalle" resultMap="diagnosticoDetalleMap" parameterClass="classDiagnosticoDetalle">
+		SELECT * FROM spu_diagnostico_detalle(#id_t_diagnostico_detalle#, #id_t_diagnostico#, #id_subcategoria#, #estatus#, #comentario#, #id_empleado#)
+	</procedure>
+	
+	<procedure id="deleteDiagnosticoDetalle" resultClass="java.lang.Boolean" parameterClass="classDiagnosticoDetalle">
+		SELECT * FROM spd_diagnostico_detalle(#id_t_diagnostico_detalle#)
 	</procedure>
 	
 </sqlMap>

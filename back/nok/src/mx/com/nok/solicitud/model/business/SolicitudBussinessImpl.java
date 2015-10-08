@@ -73,13 +73,14 @@ public class SolicitudBussinessImpl implements ISolicitudBussiness, Serializable
 							}
 						break;
 					case "Adquicion":
-						
+						break;
+					default:
 						break;
 				}
 				//solicitudDAO.updateSolicitud(solicitud);
 			}
 		}catch(Exception e){
-			
+			e.printStackTrace();
 		}
 	}
 
