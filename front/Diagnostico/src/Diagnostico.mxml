@@ -109,7 +109,7 @@
 					break;
 
 			}
-			<!--case para el radiobutton de estatus subcategoria-->
+			//case para el radiobutton de estatus subcategoria-->
 			switch (itemSelected.estatus){
 				case 0:
 					subcatbtngroup.selectedValue = "Falla"

@@ -3,9 +3,9 @@
   <component name="FlexBuildConfigurationManager" active="AltaFalla">
     <configurations>
       <configuration name="AltaFalla" main-class="AltaFalla" output-file="AltaFalla.swf" output-folder="$MODULE_DIR$/bin-debug" use-html-wrapper="true" wrapper-template-path="$MODULE_DIR$/html-template">
-        <dependencies target-player="11.1">
+        <dependencies>
           <entries>
-            <entry library-id="997441a6-12d6-46f7-9fd1-6bca9c4cd38e">
+            <entry library-id="95ab9dba-4803-4c5a-8504-2532dbf071f4">
               <dependency linkage="Merged" />
             </entry>
           </entries>
