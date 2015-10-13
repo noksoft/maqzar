@@ -14,6 +14,8 @@
 	<typeAlias alias="classAsignacionMap" type="mx.com.nok.asignacion.model.dto.AsignacionDTO"/>
 	
 	<resultMap id="asignacionObraMap" class="classAsignacionMap">
+		<result property="idAsignacionObra"					column="id_asignacion_obra"/>
+		<result property="fechaAsignacion"					column="fecha_asignacion"/>
 		<result property="tipoAsignacion"					column="tipo_asignacion"/>
 		<result property="idObra"							column="id_obra"/>
 		<result property="nombreObra"						column="nombre_obra"/>
@@ -100,8 +102,21 @@
 	
 	<!-- info de equipos y empleados asignados en Obra -->
 	<procedure id="infoAsignacionesObra" parameterClass="classAsignacionMap" resultMap="asignacionObraMap">
-		SELECT * FROM spr_infoasignacionobra(#idObra#,#idEmpleado#,#idEquipo#,#typeQuery#)
+		SELECT * FROM spr_infoasignacionobra(#idAsignacionObra#, #idObra#,#idEmpleado#,#idEquipo#,#typeQuery#)
 	</procedure>
+	
+	<procedure id="insertAsignacionObra" parameterClass="classAsignacionMap" resultMap="asignacionObraMap">
+		SELECT * FROM spi_asignacion_obra(#idObra#,#idEmpleado#,#tipoAsignacion#, #fechaAsignacion#, #estatus#, #idEquipo#,#estatusEquipo#)
+	</procedure>
+	
+	<procedure id="updateAsignacionObra" parameterClass="classAsignacionMap" resultMap="asignacionObraMap">
+		SELECT * FROM spu_asignacion_obra(#idAsignacionObra#, #idObra#,#idEmpleado#,#tipoAsignacion#, #fechaAsignacion#, #estatus#, #idEquipo#,#estatusEquipo#)
+	</procedure>
+	
+	<procedure id="deleteAsignacionObra" parameterClass="classAsignacionMap" resultClass="java.lang.Boolean">
+		SELECT * FROM spd_asignacion_obra (#idAsignacionObra#)
+	</procedure>
+	
 	
 	<!--  infoEquiposAsignadosObra -->
 	<procedure id= "infoEquiposAsignadosObra" parameterClass="classEquiposAsignadosObraMap" resultMap = "equiposAsignadosMap">

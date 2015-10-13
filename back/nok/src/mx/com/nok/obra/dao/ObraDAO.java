@@ -38,6 +38,10 @@ public interface ObraDAO {
 	
 	public List<AsignacionDTO> infoAsigancionesDisponiblesObra(AsignacionDTO dto) throws Exception;
 	
+	public AsignacionDTO insertAsignacionObra(AsignacionDTO dto) throws Exception;
+	public AsignacionDTO updateAsignacionObra(AsignacionDTO dto) throws Exception;
+	public Boolean deleteAsignacionObra(AsignacionDTO dto) throws Exception;
+	
 	public List<EmpleadoDisponibleDTO> infoEmpleadoDisponible(EmpleadoDisponibleDTO dto) throws Exception;
 	public List<EquiposAsignadosObraDTO> infoEquiposAsignadosObra(EquiposAsignadosObraDTO dto)throws Exception;
 	

@@ -6,10 +6,12 @@ public class AsignacionDTO implements Serializable {
 
 
 	private static final long serialVersionUID = 1L;
-
+	
+	private String idAsignacionObra;
 	private String tipoAsignacion;
     private String idObra;
-    private String nombreObra;
+    private String fechaAsignacion;
+	private String nombreObra;
     private String descripcionObra;
     private String idEmpleado;
     private String nombre;
@@ -22,10 +24,24 @@ public class AsignacionDTO implements Serializable {
     private String tipocategoria;
     private String categoria;
     private String subcategoria;
-    private Boolean estatus;
+    private String estatus;
     private String habilidades;
     private String typeQuery;
     private String estatusEquipo;
+    
+    public String getIdAsignacionObra() {
+		return idAsignacionObra;
+	}
+	public void setIdAsignacionObra(String idAsignacionObra) {
+		this.idAsignacionObra = idAsignacionObra;
+	}
+	
+	public String getFechaAsignacion() {
+		return fechaAsignacion;
+	}
+	public void setFechaAsignacion(String fechaAsignacion) {
+		this.fechaAsignacion = fechaAsignacion;
+	}
     
 	public String getEstatusEquipo() {
 		return estatusEquipo;
@@ -123,10 +139,10 @@ public class AsignacionDTO implements Serializable {
 	public void setSubcategoria(String subcategoria) {
 		this.subcategoria = subcategoria;
 	}
-	public Boolean getEstatus() {
+	public String getEstatus() {
 		return estatus;
 	}
-	public void setEstatus(Boolean estatus) {
+	public void setEstatus(String estatus) {
 		this.estatus = estatus;
 	}
 	public String getHabilidades() {

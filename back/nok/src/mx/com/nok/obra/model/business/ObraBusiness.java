@@ -416,6 +416,36 @@ public class ObraBusiness implements Serializable, ObraService{
 		return list;
 	}
 
+	@Override
+	public AsignacionDTO insertAsignacionObra(AsignacionDTO dto) {
+		try{
+			return obraDAO.insertAsignacionObra(dto);
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public AsignacionDTO updateAsignacionObra(AsignacionDTO dto) {
+		try{
+			return obraDAO.updateAsignacionObra(dto);
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public boolean deleteAsignacionObra(AsignacionDTO dto) {
+		try{
+			return obraDAO.deleteAsignacionObra(dto);
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+	}
+
 	
 
 

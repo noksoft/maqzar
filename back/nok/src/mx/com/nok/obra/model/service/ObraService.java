@@ -31,6 +31,9 @@ public interface ObraService {
 	public boolean deleteObraRecursoEquipo(ObraRecursoPersonaDTO dto);
 	
 	public List<AsignacionDTO> infoAsignacionesDisponiblesObra(AsignacionDTO dto);
+	public AsignacionDTO insertAsignacionObra(AsignacionDTO dto);
+	public AsignacionDTO updateAsignacionObra(AsignacionDTO dto);
+	public boolean deleteAsignacionObra(AsignacionDTO dto);
 	
 	public List<EmpleadoDisponibleDTO> infoEmpleadoDisponible(EmpleadoDisponibleDTO dto);
 	public List<EquiposAsignadosObraDTO> infoEquiposAsignadosObra(EquiposAsignadosObraDTO dto);

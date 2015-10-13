@@ -188,6 +188,21 @@ public class ObraDAOImpl extends SqlMapClientDaoSupport implements ObraDAO {
 	public List<EquipoDTO> getEmpleadoConMaquinaria(EmpleadoDTO dto) throws Exception{
 		return this.getSqlMapClientTemplate().queryForList("getEmpleadoConMaquinaria", dto);
 	}
+
+	@Override
+	public AsignacionDTO insertAsignacionObra(AsignacionDTO dto) throws Exception {
+		return (AsignacionDTO)this.getSqlMapClientTemplate().queryForObject("insertAsignacionObra", dto);
+	}
+
+	@Override
+	public AsignacionDTO updateAsignacionObra(AsignacionDTO dto) throws Exception {
+		return (AsignacionDTO)this.getSqlMapClientTemplate().queryForObject("updateAsignacionObra", dto);
+	}
+
+	@Override
+	public Boolean deleteAsignacionObra(AsignacionDTO dto) throws Exception {
+		return (boolean)this.getSqlMapClientTemplate().queryForObject("deleteAsignacionObra", dto);
+	}
 	
 
 }
