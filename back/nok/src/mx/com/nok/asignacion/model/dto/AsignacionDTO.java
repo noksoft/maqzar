@@ -28,6 +28,7 @@ public class AsignacionDTO implements Serializable {
     private String habilidades;
     private String typeQuery;
     private String estatusEquipo;
+    private String typeInsert;
     
     public String getIdAsignacionObra() {
 		return idAsignacionObra;
@@ -165,6 +166,12 @@ public class AsignacionDTO implements Serializable {
 				+ idEquipo + ", numeroeconomico=" + numeroeconomico + ", descripcion=" + descripcion
 				+ ", tipocategoria=" + tipocategoria + ", categoria=" + categoria + ", subcategoria=" + subcategoria
 				+ ", estatus=" + estatus + ", habilidades=" + habilidades + ", typeQuery=" + typeQuery + "]";
+	}
+	public String getTypeInsert() {
+		return typeInsert;
+	}
+	public void setTypeInsert(String typeInsert) {
+		this.typeInsert = typeInsert;
 	}
     
 }

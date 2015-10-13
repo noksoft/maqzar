@@ -106,11 +106,11 @@
 	</procedure>
 	
 	<procedure id="insertAsignacionObra" parameterClass="classAsignacionMap" resultMap="asignacionObraMap">
-		SELECT * FROM spi_asignacion_obra(#idObra#,#idEmpleado#,#tipoAsignacion#, #fechaAsignacion#, #estatus#, #idEquipo#,#estatusEquipo#)
+		SELECT * FROM spi_asignacion_obra(#idObra#,#idEmpleado#,#tipoAsignacion#, #fechaAsignacion#, #estatus#, #idEquipo#,#estatusEquipo#, #typeInsert#)
 	</procedure>
 	
 	<procedure id="updateAsignacionObra" parameterClass="classAsignacionMap" resultMap="asignacionObraMap">
-		SELECT * FROM spu_asignacion_obra(#idAsignacionObra#, #idObra#,#idEmpleado#,#tipoAsignacion#, #fechaAsignacion#, #estatus#, #idEquipo#,#estatusEquipo#)
+		SELECT * FROM spu_asignacion_obra(#idAsignacionObra#, #idObra#,#idEmpleado#,#tipoAsignacion#, #fechaAsignacion#, #estatus#, #idEquipo#,#estatusEquipo#, #typeInsert#)
 	</procedure>
 	
 	<procedure id="deleteAsignacionObra" parameterClass="classAsignacionMap" resultClass="java.lang.Boolean">
