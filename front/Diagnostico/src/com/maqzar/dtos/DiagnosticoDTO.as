@@ -2,6 +2,9 @@
  * Created by jess on 08/08/15.
  */
 package com.maqzar.dtos {
+[Bindable]
+[RemoteClass(alias="mx.com.nok.equipo.model.dto.DiagnosticoDTO")]
+
 public class DiagnosticoDTO {
     private var _id_diagnostico:int;
     private var _id_equipo:int;
