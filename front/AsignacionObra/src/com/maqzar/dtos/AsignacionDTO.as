@@ -4,6 +4,7 @@ package com.maqzar.dtos
 	[RemoteClass(alias="mx.com.nok.asignacion.model.dto.AsignacionDTO")]
 	public class AsignacionDTO
 	{
+		public var idAsignacionObra:String;
 		public var tipoAsignacion:String;
 		public var idObra:String;
 		public var nombreObra:String;
@@ -19,10 +20,11 @@ package com.maqzar.dtos
 		public var tipocategoria:String;
 		public var categoria:String;
 		public var subcategoria:String;
-		public var estatus:Boolean;
+		public var estatus:String;
 		public var habilidades:String;
 		public var typeQuery:String;
 		public var estatusEquipo:String;
+		public var typeInsert:String;
 		public var transferencia:Boolean;
 		public function AsignacionDTO()
 		{

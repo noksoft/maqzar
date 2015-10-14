@@ -35,7 +35,9 @@
 		  var asignacionEmpleado:AsignacionDTO = new AsignacionDTO();
 		  asignacionEmpleado.typeQuery = "EQUIPOS";
 		  asignacionEmpleado.idEquipo = asignacionModel.maquinariaSelected.id_equipo;
+		  asignacionEmpleado.idEmpleado = empleado.idEmpleado.toString(); 
 		  asignacionEmpleado.idObra = asignacionModel.obraSelected.idObra;
+		  asignacionEmpleado.idAsignacionObra = "";
 		  llamaListaEmpleadosEvent.asignacionDTO = asignacionEmpleado;
 		  dispatcher.dispatchEvent(llamaListaEmpleadosEvent);
 		  
@@ -61,6 +63,7 @@
 		  asignacionEmpleado.idEmpleado = empleado.idEmpleado.toString(); 
 		  asignacionEmpleado.idEquipo = asignacionModel.maquinariaSelected.id_equipo;
 		  asignacionEmpleado.idObra = asignacionModel.obraSelected.idObra;
+		  asignacionEmpleado.idAsignacionObra = '';
 		  eventoValidaEmpleado.asignacionDTO = asignacionEmpleado;
 		  
 		  dispatcher.dispatchEvent(eventoValidaEmpleado);
@@ -72,34 +75,43 @@
 			  //no se transfiere
 			  transferencia = false;
 			  insertar(transferencia);
-		  }else if(listEquipos.selectedIndex > 0 && listEmpleadosLocalizados.selectedIndex > 0 ){
+			  trace("Insertar no hay referencia, no se esta usando el equipo");
+		  }else if(listEmpleadosLocalizados.selectedIndex > 0 ){
 			  Alert.show("El empleado está activo en otra equipo, deseas transferirlo","",3,this,cambiarVariable);
+			  trace("Insertar si hay transferencia de empleados");
 		  }
 
 
 
 	  }
-	  public function cambiarVariable(event:CloseEvent){
+	  public function cambiarVariable(event:CloseEvent):void{
 
-
+		trace("Captura el SI o el No");
 		  if(event.detail == Alert.YES)
 		  {
+			  trace("Transfiere");
 			  transferencia = true;
 			  insertar(transferencia);
 		  } else{
+			  trace("No Transfiere");
 			  transferencia = false;
 			  insertar(transferencia);
 		  }
 
 	  }
 
-	  public function insertar(transferir:Boolean){
+	  public function insertar(transferir:Boolean):void{
 		  var evento:AsignacionEvent = new AsignacionEvent(AsignacionEvent.INSERT_ASIGNACION_OBRA);
 		  var asignacionObjeto:AsignacionDTO = new AsignacionDTO();
 		  if(transferir){
 			  asignacionObjeto.transferencia = true;
+			  asignacionObjeto.typeInsert = 'EMPLEADO-EQUIPO';
 		  }else{
 			  asignacionObjeto.transferencia = false;
+			  if(autoCompleteEmpleados.selectedItem.nombre!=""){
+				  asignacionObjeto.typeInsert = 'EQUIPO';	  
+			  }
+			  
 		  }
 		  asignacionObjeto.idEmpleado = autoCompleteEmpleados.selectedItem.idEmpleado;
 		  asignacionObjeto.idObra = asignacionModel.obraSelected.idObra;
@@ -111,7 +123,7 @@
 			  asignacionObjeto.tipoAsignacion = "EQ";
 		  }
 		  asignacionObjeto.estatusEquipo = 'A';
-
+		  
 
 		  evento.asignacionDTO = asignacionObjeto;
 		  dispatchEvent(evento);
