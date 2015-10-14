@@ -7,3 +7,4 @@ bin-debug
 /*.swf
 back/RemoteSystemsTempFiles/.project
 **bin-debug/
+*.iml
