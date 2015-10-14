@@ -18,7 +18,9 @@
 		import com.maqzar.constant.NOKConstants;
 		import com.maqzar.dtos.DiagnosticoDTO;
 		import com.maqzar.dtos.EquipoVO;
+		import com.maqzar.dtos.ObraVO;
 		import com.maqzar.dtos.SubFallaDTO;
+		import com.maqzar.events.DiagnosticoEvent;
 
 		import mx.collections.ArrayCollection;
 		import mx.events.FlexEvent;
@@ -70,8 +72,11 @@
 
 		//inicializacion
 		protected function initcreationCompleteHandler(event:FlexEvent):void {
+			var diagnosticoEquipo:DiagnosticoDTO = new DiagnosticoDTO();
 			var infoEquipo:EquipoVO = new EquipoVO();
-			var fallaEquipo:SubFallaDTO = new SubFallaDTO();
+			var infoObra:ObraVO = new ObraVO();
+			var subFalla:SubFallaDTO = new SubFallaDTO();
+
 		}
 
 		private function validateAllInputs():void{
