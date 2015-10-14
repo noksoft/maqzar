@@ -13,7 +13,13 @@
     </libraryPath>
     <sourceAttachmentPath/>
   </compiler>
+<<<<<<< HEAD
   <applications/>
+=======
+  <applications>
+    <application path="SolicitudesOficina.mxml"/>
+  </applications>
+>>>>>>> master
   <modules/>
   <buildCSSFiles/>
   <flashCatalyst validateFlashCatalystCompatibility="false"/>

@@ -2,6 +2,7 @@
  * Created by Usuario on 09/05/2015.
  */
 package com.maqzar.models {
+import com.maqzar.dtos.EquipoVO;
 import com.maqzar.dtos.ObraVO;
 
 import mx.collections.ArrayCollection;
@@ -17,6 +18,10 @@ public class AsignacionModel {
     public var acEquiposDisponibles:ArrayCollection;
     public var acEquiposAsignados:ArrayCollection;
     public var acEmpleadosAsignados:ArrayCollection;
+	public var acEquiposDondeEmpleadoTieneAsignado:ArrayCollection;
+
+	public var maquinariaSelected:EquipoVO;
+	public var acAsignacionEmpleados:ArrayCollection;
 
 }
 }

@@ -1,7 +1,8 @@
 /**
- * Created by Usuario on 09/05/2015.
+ * Created by Carlos Zaragoza on 09/05/2015.
  */
 package com.maqzar.controllers {
+	import com.maqzar.dtos.AsignacionDTO;
 	import com.maqzar.dtos.AsignacionVO;
 	import com.maqzar.dtos.EmpleadoAsignadoVO;
 	import com.maqzar.dtos.EmpleadoDisponibleVO;
@@ -29,7 +30,7 @@ package com.maqzar.controllers {
 		
 		private var asignacionService:AsignacionService = new AsignacionService();
 		private function asignacionFail(e:FaultEvent):void {
-			
+			trace(e.fault.message);
 		}
 		public function saveAsignacion(vo:AsignacionVO):void
 		{
@@ -69,7 +70,6 @@ package com.maqzar.controllers {
 		
 		private function findAllEmpleadosResult(e:ResultEvent):void
 		{
-			// TODO Auto Generated method stub
 			try
 			{
 				if(e.result != null)
@@ -84,8 +84,6 @@ package com.maqzar.controllers {
 				trace(e.message);	
 			}
 		}
-		
-		
 		[EventHandler(event="AsignacionEvent.ASIGNACION_GET_EQUIPOS_DISPONIBLES", properties="equiposDisponibles")]		
 		public function findAllEquipos(equiposDisponibles:EquipoVO):void
 		{
@@ -113,7 +111,6 @@ package com.maqzar.controllers {
 		{
 			executeServiceCall(asignacionService.findAllEquiposAsignados(equiposAsignadosObraVO),findAllEquiposAsignadosResult, asignacionFail);
 		}
-		
 		private function findAllEquiposAsignadosResult(e:ResultEvent):void
 		{
 			try
@@ -140,7 +137,6 @@ package com.maqzar.controllers {
 		
 		private function findaAllEmpleadosAsignadosResult(e:ResultEvent):void
 		{
-			// TODO Auto Generated method stub
 			try
 			{
 				if(e.result != null)
@@ -165,7 +161,6 @@ package com.maqzar.controllers {
 		
 		private function cambiaEstatusEquipoResult(e:ResultEvent):void
 		{
-			// TODO Auto Generated method stub
 			try
 			{
 				if(e.result != null)
@@ -200,7 +195,6 @@ package com.maqzar.controllers {
 		
 		private function cambiaEstatusEmpleadoResult(e:ResultEvent):void
 		{
-			// TODO Auto Generated method stub
 			try
 			{
 				if(e.result != null)
@@ -212,6 +206,9 @@ package com.maqzar.controllers {
 						//Alert.show("Se actualizó","NOK");
 						dispatcher.dispatchEvent(new AsignacionEvent(AsignacionEvent.ASIGNACION_REFRESCA_GRID_DESDE_COMBO));
 						//disparamos la consulta!
+						var empleadosDisponiblesEvent:AsignacionEvent = new AsignacionEvent(AsignacionEvent.ASIGNACION_GET_EMPLEADOS_DISPONIBLES);
+						empleadosDisponiblesEvent.empleadosDisponibles = new EmpleadoDisponibleVO();
+						dispatcher.dispatchEvent(empleadosDisponiblesEvent);
 						
 					}
 					
@@ -242,6 +239,11 @@ package com.maqzar.controllers {
 				{
 					if(e.result == true){
 						dispatcher.dispatchEvent(new AsignacionEvent(AsignacionEvent.ASIGNACION_REFRESCA_GRID_DESDE_COMBO));
+						// Begin Asigna lista de refresh de personal disponible.
+						var empleadosDisponiblesEvent:AsignacionEvent = new AsignacionEvent(AsignacionEvent.ASIGNACION_GET_EMPLEADOS_DISPONIBLES);
+						empleadosDisponiblesEvent.empleadosDisponibles = new EmpleadoDisponibleVO();
+						dispatcher.dispatchEvent(empleadosDisponiblesEvent);
+						// End Asigna
 					}else
 					{
 						Alert.show("No puedes agregar el registro", "NOK");
@@ -263,9 +265,7 @@ package com.maqzar.controllers {
 			executeServiceCall(asignacionService.addEquipo(equiposAsignadosObraVO),addEquipoResult, asignacionFail);
 		}
 		
-		private function addEquipoResult(e:ResultEvent):void
-		{
-
+		private function addEquipoResult(e:ResultEvent):void {
 			try
 			{
 				if(e.result != null)
@@ -276,8 +276,6 @@ package com.maqzar.controllers {
 					{
 						Alert.show("No puedes agregar el registro", "NOK");
 					}
-					
-					
 				}else{
 					Alert.show("No se cargaron los datos","NOK")
 				}
@@ -287,6 +285,77 @@ package com.maqzar.controllers {
 				trace(error.message);	
 			}
 		}
+		
+		[EventHandler(event="AsignacionEvent.CALL_ASIGNACIONES_DISPONIBLES_EMPLEADOS", properties="asignacionDTO")]
+		public function validaEmpleadoDisponible(asignacionDTO:AsignacionDTO):void
+		{
+			executeServiceCall(asignacionService.infoAsignacionesDisponiblesObra(asignacionDTO),infoAsignacionesDisponiblesObraResult, asignacionFail);
+		}
+		
+		private function infoAsignacionesDisponiblesObraResult(e:ResultEvent):void
+		{
+			try
+			{
+				asignacionModel.acAsignacionEmpleados =  e.result as ArrayCollection;
+					var equipoAsignadoEvent:AsignacionEvent = new AsignacionEvent(AsignacionEvent.LISTA_EQUIPOS_ASIGNADOS_A_EMPLEADO);
+					equipoAsignadoEvent.listado = e.result as ArrayCollection;
+					dispatcher.dispatchEvent(equipoAsignadoEvent);
+					
+			} 
+			catch(error:Error) 
+			{
+				trace(error.message);	
+			}
+		}
+		
+		[EventHandler(event="AsignacionEvent.CALL_EQUIPOS_QUE_TIENE_EMPLEADO", properties="asignacionDTO")]
+		public function validaEmpleadoDisponibleEmpleado(asignacionDTO:AsignacionDTO):void
+		{
+			executeServiceCall(asignacionService.infoAsignacionesDisponiblesObra(asignacionDTO),infoAsignacionesDisponiblesObraResultEmpleado, asignacionFail);
+		}
+		
+		private function infoAsignacionesDisponiblesObraResultEmpleado(e:ResultEvent):void
+		{
+			try
+			{
+				asignacionModel.acAsignacionEmpleados =  e.result as ArrayCollection;
+				var equipoAsignadoEvent:AsignacionEvent = new AsignacionEvent(AsignacionEvent.LISTA_EQUIPOS_ASIGNADOS_A_EMPLEADO_LISTADO);
+				equipoAsignadoEvent.listado = e.result as ArrayCollection;
+				dispatcher.dispatchEvent(equipoAsignadoEvent);
+				
+			} 
+			catch(error:Error) 
+			{
+				trace(error.message);	
+			}
+		}
+
+
+		[EventHandler(event="AsignacionEvent.INSERT_ASIGNACION_OBRA", properties="asignacionDTO")]
+		public function insertAsignacionObraController(asignacionDTO:AsignacionDTO):void
+		{
+			executeServiceCall(asignacionService.insertAsignacionObraService(asignacionDTO),insertAsignacionObraServiceResult, asignacionFail);
+		}
+
+		private function insertAsignacionObraServiceResult(e:ResultEvent):void
+		{
+			try
+			{
+				if(e.result == true){
+					dispatcher.dispatchEvent(new AsignacionEvent(AsignacionEvent.ASIGNACION_REFRESCA_GRID_DESDE_COMBO));
+					dispatcher.dispatchEvent(new AsignacionEvent(AsignacionEvent.CIERRA_POPUP));
+				}
+				else{
+					Alert.show("No actualizó","NOK");
+				}
+
+			}
+			catch(error:Error)
+			{
+				trace(error.message);
+			}
+		}
+		
 		
 	}
 }

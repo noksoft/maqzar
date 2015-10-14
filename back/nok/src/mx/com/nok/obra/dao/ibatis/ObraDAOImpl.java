@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
+import mx.com.nok.asignacion.model.dto.AsignacionDTO;
+import mx.com.nok.empleado.model.dto.EmpleadoDTO;
+import mx.com.nok.equipo.model.dto.EquipoDTO;
 import mx.com.nok.obra.dao.ObraDAO;
 import mx.com.nok.obra.model.dto.EmpleadoDisponibleDTO;
 import mx.com.nok.obra.model.dto.EmpleadosAsignadosObraDTO;
@@ -12,6 +15,7 @@ import mx.com.nok.obra.model.dto.ObraDTO;
 import mx.com.nok.obra.model.dto.ObraRecursoEquipoDTO;
 import mx.com.nok.obra.model.dto.ObraRecursoMaquneDTO;
 import mx.com.nok.obra.model.dto.ObraRecursoPersonaDTO;
+
 @SuppressWarnings("unchecked")
 public class ObraDAOImpl extends SqlMapClientDaoSupport implements ObraDAO {
 
@@ -119,6 +123,12 @@ public class ObraDAOImpl extends SqlMapClientDaoSupport implements ObraDAO {
 		return false;
 	}
 
+	@Override
+	public List<AsignacionDTO> infoAsigancionesDisponiblesObra(AsignacionDTO dto) throws Exception{
+		List<AsignacionDTO> list = null;
+			list = this.getSqlMapClientTemplate().queryForList("infoAsignacionesObra", dto);
+		return list;
+	}
 	
 	@Override
 	public List<EmpleadoDisponibleDTO> infoEmpleadoDisponible(EmpleadoDisponibleDTO dto)
@@ -172,6 +182,26 @@ public class ObraDAOImpl extends SqlMapClientDaoSupport implements ObraDAO {
 	@Override
 	public String getEstausEmpleado(EmpleadosAsignadosObraDTO dto){
 		return (String)this.getSqlMapClientTemplate().queryForObject("utilEmpleadoEstatus",dto);
+	}
+	
+	@Override
+	public List<EquipoDTO> getEmpleadoConMaquinaria(EmpleadoDTO dto) throws Exception{
+		return this.getSqlMapClientTemplate().queryForList("getEmpleadoConMaquinaria", dto);
+	}
+
+	@Override
+	public AsignacionDTO insertAsignacionObra(AsignacionDTO dto) throws Exception {
+		return (AsignacionDTO)this.getSqlMapClientTemplate().queryForObject("insertAsignacionObra", dto);
+	}
+
+	@Override
+	public AsignacionDTO updateAsignacionObra(AsignacionDTO dto) throws Exception {
+		return (AsignacionDTO)this.getSqlMapClientTemplate().queryForObject("updateAsignacionObra", dto);
+	}
+
+	@Override
+	public Boolean deleteAsignacionObra(AsignacionDTO dto) throws Exception {
+		return (boolean)this.getSqlMapClientTemplate().queryForObject("deleteAsignacionObra", dto);
 	}
 	
 

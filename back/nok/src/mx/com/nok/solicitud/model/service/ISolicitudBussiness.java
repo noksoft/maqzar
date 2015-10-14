@@ -10,4 +10,7 @@ public interface ISolicitudBussiness {
 	public SolicitudDTO insertSolicitud(SolicitudDTO solicitud);
 	public SolicitudDTO updateSolicitud(SolicitudDTO solicitud);
 	public Boolean deleteSolicitud(SolicitudDTO solicitud);
+	
+	//Método que nos permite recibir un array de solicitudes
+	public void updateSolicitudes (List<SolicitudDTO> list);
 }

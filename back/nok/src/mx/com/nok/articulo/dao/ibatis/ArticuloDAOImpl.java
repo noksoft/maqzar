@@ -87,7 +87,7 @@ public class ArticuloDAOImpl extends SqlMapClientDaoSupport implements ArticuloD
 	}
 	
 	/**
-	 * Busca los Art’culos de acuerdo al tipo de categor’as
+	 * Busca los Artï¿½culos de acuerdo al tipo de categorï¿½as
 	 * @param ArticuloDTO
 	 * @return List<ArticulosDTO> Lista de Articulos encontrados
 	 */
@@ -119,6 +119,17 @@ public class ArticuloDAOImpl extends SqlMapClientDaoSupport implements ArticuloD
 	public List<?> buscaArticulo(ArticuloDTO dto) throws Exception {
 		return this.getSqlMapClientTemplate().
 		queryForList("buscaArticulo",dto);
+	}
+
+	@Override
+	public ArticuloDTO findArticuloById(ArticuloDTO dto) throws Exception {
+		return (ArticuloDTO)this.getSqlMapClientTemplate().queryForObject("buscaArticulo", dto);
+	}
+
+	@Override
+	public void updateCantidadArticulo(ArticuloDTO dto) throws Exception {
+		this.getSqlMapClientTemplate().
+		queryForObject("updateCantidadArticulo",dto);
 	}
 
 	

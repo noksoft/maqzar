@@ -5,9 +5,6 @@ import java.util.Date;
 
 public class ArticuloDTO implements Serializable{
 
-	
-	
-	
 	private static final long serialVersionUID = 1L;
 	
 	private String idArticulo; 
@@ -33,6 +30,14 @@ public class ArticuloDTO implements Serializable{
 	private String idTipocategoria;
 	private String nombreTipocategoria;
 	private String filterEstatusArticulo="";
+	
+	public ArticuloDTO(){
+		
+	}
+	
+	public ArticuloDTO(String idArticulo){
+		this.idArticulo = idArticulo;
+	}
 	
 	public String toString(){
 		return  "\n[ idArticulo = " + idArticulo + 

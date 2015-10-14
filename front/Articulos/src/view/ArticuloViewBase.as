@@ -62,19 +62,6 @@ package view
 		private var roArticuloEditor:RemoteObject = new RemoteObject();
 		private var roCategoriaEditor:RemoteObject = new RemoteObject();
 		
-		/************	VALIDATOR'S	*********************/
-		private var validateSubCategoria:NumberValidator = new NumberValidator();
-		private var validateSubMarca:NumberValidator = new NumberValidator();
-		private var validateNombre:StringValidator = new StringValidator();
-		private var validateNoParte:StringValidator = new StringValidator();
-		//private var validateCantidad:StringValidator = new StringValidator();
-		private var validateStockMin:StringValidator = new StringValidator();
-		private var validateStockMax:StringValidator = new StringValidator();
-		//private var validateCostoUnitario:StringValidator = new StringValidator();
-		//private var validateCostoTotal:StringValidator = new StringValidator();
-		private var validateUbicacion:StringValidator = new StringValidator();
-		private var validateFechaAdquisicion:DateValidator = new DateValidator();
-		
 		/***********	VARIABLE'S	*****************/
 		[Bindable]protected var titleFormulario:String;
 		private const CREAR:String = "Crear";
@@ -86,83 +73,59 @@ package view
 		}
 		
 		/**
-		 * Iniciliza los validator's
-		 */
-		protected function initValidators():void{
-			//Validator SubCategoria
-			validateSubCategoria.source(viewArticulo.cmbSubCategoriaEditor);
-			validateSubCategoria.property = "selectedIndex";
-			validateSubCategoria.minValue = 0;
-			validateSubCategoria.requiredFieldError = "Debe de seleccionar la SubCategoría";
-			validateSubCategoria.addEventListener(ValidationResultEvent.VALID, validateSubCategoriaHandler);
-			validateSubCategoria.addEventListener(ValidationResultEvent.INVALID, validSubCategoriaFault);
-			
-			//Validator SubMarca
-			validateSubMarca.source(viewArticulo.cmbSubMarcaEditor);
-			validateSubMarca.property = "selectedIndex";
-			validateSubMarca.minValue = 0;
-			validateSubMarca.requiredFieldError = "Debe de seleccionar la SubMarca";
-			validateSubMarca.addEventListener(ValidationResultEvent.VALID, validateSubMarcaHandler);
-			validateSubMarca.addEventListener(ValidationResultEvent.INVALID, validSubMarcaFault);
-			
-			//Validator Nombre(Descripción)
-			validateNombre.source(viewArticulo.txtNombre);
-			validateNombre.property = "text";
-			validateNombre.required = true;
-			validateNombre.requiredFieldError = "Debes ingresar el Nombre del Artículo.";
-			
-			//Validator NoParte
-			validateNoParte.source(viewArticulo.txtNoParte);
-			validateNoParte.property = "text";
-			validateNoParte.required = true;
-			validateNoParte.requiredFieldError = "Debes ingresar el No. de Parte.";
-
-			//Validator StockMin
-			validateStockMin.source(viewArticulo.txtStockMin);
-			validateStockMin.property = "text";
-			validateStockMin.required = true;
-			validateStockMin.requiredFieldError = "Debes ingresar el Stock mínimo.";
-			
-			//Validator StockMax
-			validateStockMax.source(viewArticulo.txtStockMax);
-			validateStockMax.property = "text";
-			validateStockMax.required = true;
-			validateStockMax.requiredFieldError = "Debes ingresar el Stock máximo.";
-
-			//Vlidator fecha Adquisicion
-			validateFechaAdquisicion.source(viewArticulo.dateAdquisicion);
-			validateFechaAdquisicion.property = "text";
-			validateFechaAdquisicion.inputFormat = "dd/mm/yyyy";
-			validateFechaAdquisicion.allowedFormatChars = "*#~/";
-
-		}
-		
-		/**
 		 * Validate Handler SubCategoria
 		 */
-		private function validateSubCategoriaHandler(_event:ValidationResultEvent):void{
+		public function validateSubCategoriaHandler(_event:ValidationResultEvent):void{
 			viewArticulo.cmbSubCategoriaEditor.errorString = "Debe de seleccionar la SubCategoía";
 		}
 		
 		/**
 		 * Fault Handler SubCategoria
 		 */
-		private function validSubCategoriaFault(_event:ValidationResultEvent):void{
+		public function validSubCategoriaFault(_event:ValidationResultEvent):void{
 			viewArticulo.cmbSubCategoriaEditor.errorString = "";
+		}
+		
+		/**
+		 * Validate Handler Marca
+		 */
+		public function validateMarcaHandler(_event:ValidationResultEvent):void{
+			viewArticulo.cmbMarcaEditor.errorString = "Debe de seleccionar la Marca";
+		}
+		
+		/**
+		 * Fault Handler Marca
+		 */
+		public function validMarcaFault(_event:ValidationResultEvent):void{
+			viewArticulo.cmbMarcaEditor.errorString = "";
 		}
 		
 		/**
 		 * Validate Handler SubMarca
 		 */
-		private function validateSubMarcaHandler(_event:ValidationResultEvent):void{
+		public function validateSubMarcaHandler(_event:ValidationResultEvent):void{
 			viewArticulo.cmbSubMarcaEditor.errorString = "Debe de seleccionar la SubMarca";
 		}
 		
 		/**
 		 * Fault Handler SubMarca
 		 */
-		private function validSubMarcaFault(_event:ValidationResultEvent):void{
+		public function validSubMarcaFault(_event:ValidationResultEvent):void{
 			viewArticulo.cmbSubMarcaEditor.errorString = "";
+		}
+		
+		/**
+		 * Validate Handler Unidad
+		 */
+		public function validateUnidadHandler(_event:ValidationResultEvent):void{
+			viewArticulo.cmbUnidad.errorString = "Debe de seleccionar la Unidad";
+		}
+		
+		/**
+		 * Fault Handler Unidad
+		 */
+		public function validUnidadFault(_event:ValidationResultEvent):void{
+			viewArticulo.cmbUnidad.errorString = "";
 		}
 		
 		public function init():void
@@ -188,8 +151,8 @@ package view
 			roCategoriaEditor.showBusyCursor = true;
 			
 			//GetArticulos			
-			roArticuloData.getOperation("catArticulo").addEventListener(ResultEvent.RESULT, resultCatItems);
-			roArticuloData.getOperation("catArticulo").addEventListener(FaultEvent.FAULT, faultCatItems);
+			roArticuloData.getOperation("getArticulosByTipocategoria").addEventListener(ResultEvent.RESULT, resultCatItems);
+			roArticuloData.getOperation("getArticulosByTipocategoria").addEventListener(FaultEvent.FAULT, faultCatItems);
 			
 			//Insert Articulo
 			roArticuloData.getOperation("insertArticulo").addEventListener(ResultEvent.RESULT, insertItemHandler);
@@ -391,7 +354,7 @@ package view
 				itemSelected.idSubmarca = SubMarcaVO(viewArticulo.cmbSubMarca.selectedItem).idSubmarca;
 			}
 			
-			roArticuloData.catArticulo(itemSelected);
+			roArticuloData.getArticulosByTipocategoria(itemSelected);
 		}
 		
 		public function getItems():void
@@ -411,11 +374,8 @@ package view
 			itemSelected.submarca = SubMarcaVO(viewArticulo.cmbSubMarcaEditor.selectedItem).submarca;
 			itemSelected.descripcion = viewArticulo.txtNombre.text;
 			itemSelected.nParte = viewArticulo.txtNoParte.text;
-			//itemSelected.cantidad = GeneralUtils.StringToNumber(viewArticulo.txtCantidad.text);
 			itemSelected.stockMin = GeneralUtils.StringToNumber(viewArticulo.txtStockMin.text);
 			itemSelected.stockMax = GeneralUtils.StringToNumber(viewArticulo.txtStockMax.text);
-			//itemSelected.costoUnitario = GeneralUtils.StringToNumber(viewArticulo.txtCostoUnitario.text);
-			//itemSelected.costoTotal = GeneralUtils.StringToNumber(viewArticulo.txtCostoTotal.text);
 			itemSelected.unidad = (viewArticulo.cmbUnidad.selectedItem != null) ? viewArticulo.cmbUnidad.selectedItem : "";
 			itemSelected.ubicacion = viewArticulo.txtUbicacion.text;
 			itemSelected.fechaAdquisicion = viewArticulo.dateAdquisicion.selectedDate;
@@ -423,23 +383,23 @@ package view
 		
 		public function saveItem():void
 		{
-			//var arrayValidationResult:Array = Validator.validateAll([validateSubCategoria, validateSubMarca, validateNombre, validateNoParte, validateStockMin, validateStockMax, validateUbicacion, validateFechaAdquisicion]);
+			var arrayValidationResult:Array = Validator.validateAll([viewArticulo.validatorSubcategoria, viewArticulo.validatorMarca, viewArticulo.validatorSubMarca, viewArticulo.validatorUnidad, viewArticulo.validatorNombre, viewArticulo.validatorFechaAlta]);
 			switch(titleFormulario){
 				case CREAR:
-					//if(arrayValidationResult.length == 0){
+					if(arrayValidationResult.length == 0){
 						saveUpdate();
 						roArticuloData.insertArticulo(itemSelected);
-					//}else{
-					//	AlertUtils.showNoticeMessage("Notificación", "Debe de seleccionar los campos obligatorios");
-					//}
+					}else{
+						AlertUtils.showNoticeMessage("Notificación", "Debe de seleccionar los campos obligatorios");
+					}
 					break;
 				case ACTUALIZAR:
-					//if(arrayValidationResult.length == 0){
+					if(arrayValidationResult.length == 0){
 						saveUpdate()
 						roArticuloData.updateArticulo(itemSelected);
-					//}else{
-					//	AlertUtils.showNoticeMessage("Notificación", "Debe de seleccionar los campos obligatorios");
-					//}
+					}else{
+						AlertUtils.showNoticeMessage("Notificación", "Debe de seleccionar los campos obligatorios");
+					}
 					break;
 				default:
 					break;
@@ -517,6 +477,19 @@ package view
 			//Selecciona la Subcategoria a partir del itemSelected (Articulo)
 			trace("Init");
 			trace("listSubCategoriasEditor.length: " + listSubCategoriasEditor.length);
+			trace(itemSelected);
+			//Sub Categoria
+			//Marca
+			//SubMarca
+			//Nombre Articulo
+			//No. Parte
+			//Stock Minimo
+			//Stock Máximo
+			//Ubicación
+			//Unidad
+			//Fecha Adquisición
+			//Estatus
+			
 			for each(var objSubCategoria:SubCategoriaVO in listSubCategoriasEditor){
 				if(objSubCategoria.idSubcategoria == itemSelected.idsubcategoria){
 					viewArticulo.cmbSubCategoriaEditor.selectedItem = objSubCategoria;
@@ -687,9 +660,12 @@ package view
 			try{
 				if(_event.result != null){
 					listMarcasEditor = _event.result as ArrayCollection;
-					if(itemSelected != null && itemSelected.idMarca != null){
+					if(itemSelected != null 
+						&& itemSelected.idMarca != null
+						&& itemSelected.idMarca != ""){
 						//Selecciona la Marca a partir del itemSelected (Articulo)
 						for each(var objMarca:MarcaVO in listMarcasEditor){
+							trace(objMarca.idMarca + " == " + itemSelected.idMarca);
 							if(objMarca.idMarca == itemSelected.idMarca){
 								viewArticulo.cmbMarcaEditor.selectedItem = objMarca;
 								upListSubMarcasEditor();
@@ -713,6 +689,7 @@ package view
 					listSubMarcasEditor = _event.result as ArrayCollection;
 					if(itemSelected != null && itemSelected.idSubmarca != null){
 						for each(var objSubMarca:SubMarcaVO in listSubMarcasEditor){
+							trace(objSubMarca.idSubmarca + " == " + itemSelected.idSubmarca);
 							if(objSubMarca.idSubmarca == itemSelected.idSubmarca){
 								viewArticulo.cmbSubMarcaEditor.selectedItem = objSubMarca;
 								break;

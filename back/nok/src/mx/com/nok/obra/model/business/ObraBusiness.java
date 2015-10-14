@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import mx.com.nok.asignacion.model.dto.AsignacionDTO;
 import mx.com.nok.empleado.model.dto.EmpleadoDTO;
+import mx.com.nok.equipo.model.dto.EquipoDTO;
 import mx.com.nok.obra.dao.ObraDAO;
 import mx.com.nok.obra.model.dto.EmpleadoDisponibleDTO;
 import mx.com.nok.obra.model.dto.EmpleadosAsignadosObraDTO;
@@ -288,6 +290,17 @@ public class ObraBusiness implements Serializable, ObraService{
 		return false;
 	}
 	
+	public List<AsignacionDTO> infoAsignacionesDisponiblesObra(AsignacionDTO dto){
+		List<AsignacionDTO> listAsignaciones = new ArrayList<AsignacionDTO>();
+		try{
+			listAsignaciones = obraDAO.infoAsigancionesDisponiblesObra(dto);
+		}catch(Exception e){
+			e.printStackTrace();
+			listAsignaciones = null;
+		}
+		return listAsignaciones;
+	}
+	
 	public List<EmpleadoDisponibleDTO> infoEmpleadoDisponible(EmpleadoDisponibleDTO dto){
 		
 		List<EmpleadoDisponibleDTO> list= new ArrayList<EmpleadoDisponibleDTO>();
@@ -303,6 +316,7 @@ public class ObraBusiness implements Serializable, ObraService{
 		
 		return list;
 	}
+	
 	
 	public List<EquiposAsignadosObraDTO> infoEquiposAsignadosObra( EquiposAsignadosObraDTO dto){
 		List<EquiposAsignadosObraDTO> list = new ArrayList<EquiposAsignadosObraDTO>();
@@ -388,6 +402,48 @@ public class ObraBusiness implements Serializable, ObraService{
 			estatus = false;
 		}
 		return estatus;
+	}
+	
+	public List<EquipoDTO> getEquiposQueUsaElEmpleado(EmpleadoDTO dto){
+		List<EquipoDTO> list  = new ArrayList<EquipoDTO>();
+		try {
+			list = obraDAO.getEmpleadoConMaquinaria(dto);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			list = null;
+		}
+		return list;
+	}
+
+	@Override
+	public AsignacionDTO insertAsignacionObra(AsignacionDTO dto) {
+		try{
+			return obraDAO.insertAsignacionObra(dto);
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public AsignacionDTO updateAsignacionObra(AsignacionDTO dto) {
+		try{
+			return obraDAO.updateAsignacionObra(dto);
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public boolean deleteAsignacionObra(AsignacionDTO dto) {
+		try{
+			return obraDAO.deleteAsignacionObra(dto);
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	

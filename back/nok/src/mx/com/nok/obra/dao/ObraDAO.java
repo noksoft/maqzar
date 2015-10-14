@@ -2,6 +2,9 @@ package mx.com.nok.obra.dao;
 
 import java.util.List;
 
+import mx.com.nok.asignacion.model.dto.AsignacionDTO;
+import mx.com.nok.empleado.model.dto.EmpleadoDTO;
+import mx.com.nok.equipo.model.dto.EquipoDTO;
 import mx.com.nok.obra.model.dto.EmpleadoDisponibleDTO;
 import mx.com.nok.obra.model.dto.EmpleadosAsignadosObraDTO;
 import mx.com.nok.obra.model.dto.EquiposAsignadosObraDTO;
@@ -33,6 +36,12 @@ public interface ObraDAO {
 	public List<?> infoObraRecursoPersona(ObraRecursoPersonaDTO dto)throws Exception;
 	public boolean deleteObraRecursoEquipo(ObraRecursoPersonaDTO dto)throws Exception;
 	
+	public List<AsignacionDTO> infoAsigancionesDisponiblesObra(AsignacionDTO dto) throws Exception;
+	
+	public AsignacionDTO insertAsignacionObra(AsignacionDTO dto) throws Exception;
+	public AsignacionDTO updateAsignacionObra(AsignacionDTO dto) throws Exception;
+	public Boolean deleteAsignacionObra(AsignacionDTO dto) throws Exception;
+	
 	public List<EmpleadoDisponibleDTO> infoEmpleadoDisponible(EmpleadoDisponibleDTO dto) throws Exception;
 	public List<EquiposAsignadosObraDTO> infoEquiposAsignadosObra(EquiposAsignadosObraDTO dto)throws Exception;
 	
@@ -48,5 +57,9 @@ public interface ObraDAO {
 	public boolean addEmpleado(EmpleadosAsignadosObraDTO dto) throws Exception;
 	
 	public String getEstausEmpleado(EmpleadosAsignadosObraDTO dto) throws Exception;
+
+	public List<EquipoDTO> getEmpleadoConMaquinaria(EmpleadoDTO dto) throws Exception;
+	
+	
 
 }

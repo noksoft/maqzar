@@ -4,20 +4,25 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
+import mx.com.nok.equipo.dao.DiagnosticoDAO;
 import mx.com.nok.equipo.dao.EquipoDAO;
+import mx.com.nok.equipo.model.dto.DiagnosticoDTO;
+import mx.com.nok.equipo.model.dto.DiagnosticoDetalle;
 import mx.com.nok.equipo.model.dto.EquipoDTO;
 import mx.com.nok.equipo.model.dto.MarcaMotorDTO;
+import mx.com.nok.equipo.model.service.DiagnositicoService;
 import mx.com.nok.equipo.model.service.EquipoService;
 import mx.com.nok.menu.model.dto.MenuDTO;
 import mx.com.nok.utils.FileUtils;
 
-public class EquipoBusiness implements  Serializable, EquipoService{
+public class EquipoBusiness implements  Serializable, EquipoService, DiagnositicoService{
 	
-	private EquipoDAO equipoDAO;
+	
 	private static final long serialVersionUID = 1L;
 	
+	private EquipoDAO equipoDAO;
+	private DiagnosticoDAO diagnosticoDAO;
+
 	public  List<?> infoEquipo(EquipoDTO dto) {
 		List <?> list= new ArrayList<MenuDTO>();
 		try {			
@@ -62,8 +67,6 @@ public class EquipoBusiness implements  Serializable, EquipoService{
 	
 	public EquipoDTO updateEquipo(EquipoDTO dto) {
 		try {
-			System.out.println("dto.getModelomotor(): " + dto.getModelomotor());
-			System.out.println("dto.getNumeromotor(): " + dto.getNumeromotor());
 			return equipoDAO.updateEquipo(dto);
 		} catch (Exception e) {			
 			e.printStackTrace();
@@ -144,6 +147,117 @@ public class EquipoBusiness implements  Serializable, EquipoService{
 			e.printStackTrace();
 			return false;
 		}
+	}
+
+
+	@Override
+	public DiagnosticoDTO insertDiagnostico(DiagnosticoDTO dto) {
+		try{
+			return diagnosticoDAO.insertDiagnostico(dto);
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+
+	@Override
+	public DiagnosticoDTO updateDiagnostico(DiagnosticoDTO dto) {
+		try{
+			return diagnosticoDAO.updateDiagnostico(dto);
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+
+	@Override
+	public boolean deleteDiagnostico(DiagnosticoDTO dto) {
+		try{
+			return diagnosticoDAO.deleteDiagnostico(dto);
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+
+	@Override
+	public List<DiagnosticoDTO> getDiagnosticos(DiagnosticoDTO dto) {
+		List<DiagnosticoDTO> list = new ArrayList<>();
+		try{
+			list = diagnosticoDAO.getDiagnosticos(dto);
+			for (DiagnosticoDTO diagnosticoDTO : list){
+				List<DiagnosticoDetalle> listDiagnosticoDetalle = new ArrayList<>();
+				DiagnosticoDetalle detalleDTO = new DiagnosticoDetalle();
+				if(diagnosticoDTO.getId_t_diagnostico() != null 
+						&& diagnosticoDTO.getId_t_diagnostico() != ""){
+					detalleDTO.setId_t_diagnostico(diagnosticoDTO.getId_t_diagnostico());
+					listDiagnosticoDetalle = getDiagnosticoDetalle(detalleDTO);
+					diagnosticoDTO.setDetalle(listDiagnosticoDetalle);					
+				}
+				
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+
+	@Override
+	public DiagnosticoDetalle insertDiagnosticoDetalle(DiagnosticoDetalle dto) {
+		try{
+			return diagnosticoDAO.insertDiagnosticoDetalle(dto);
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+
+	@Override
+	public DiagnosticoDetalle updateDiagnosticoDetalle(DiagnosticoDetalle dto) {
+		try{
+			return diagnosticoDAO.updateDiagnosticoDetalle(dto);
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+
+	@Override
+	public boolean deleteDiagnosticoDetalle(DiagnosticoDetalle dto) {
+		try{
+			return diagnosticoDAO.deleteDiagnosticoDetalle(dto);
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+
+	@Override
+	public List<DiagnosticoDetalle> getDiagnosticoDetalle(DiagnosticoDetalle dto) {
+		List<DiagnosticoDetalle> list = new ArrayList<>();
+		try{
+			list = diagnosticoDAO.getDiagnosticoDetalle(dto);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+
+	public DiagnosticoDAO getDiagnosticoDAO() {
+		return diagnosticoDAO;
+	}
+
+
+	public void setDiagnosticoDAO(DiagnosticoDAO diagnosticoDAO) {
+		this.diagnosticoDAO = diagnosticoDAO;
 	}
 
 }

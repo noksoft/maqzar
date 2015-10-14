@@ -3,6 +3,7 @@
  */
 package com.maqzar.services {
 	import com.maqzar.constant.NOKConstants;
+	import com.maqzar.dtos.AsignacionDTO;
 	import com.maqzar.dtos.AsignacionVO;
 	import com.maqzar.dtos.EmpleadoAsignadoVO;
 	import com.maqzar.dtos.EmpleadoDisponibleVO;
@@ -24,8 +25,6 @@ package com.maqzar.services {
 			obrasRemote.showBusyCursor = true;
 			equiposRemote.endpoint = NOKConstants.SERVICE_URL;
 			equiposRemote.showBusyCursor = true;
-			
-			
 		}
 		
 		public function findAll(vo:AsignacionVO):AsyncToken
@@ -55,7 +54,6 @@ package com.maqzar.services {
 		
 		public function findAllEmpleados(empleado:EmpleadoDisponibleVO):AsyncToken
 		{
-			// TODO Auto Generated method stub
 			return asignacionRemote.infoEmpleadoDisponible(empleado);
 		}
 		
@@ -66,38 +64,52 @@ package com.maqzar.services {
 		
 		public function findAllEquiposAsignados(equiposAsignadosObraVO:EquiposAsignadosObraVO):AsyncToken
 		{
-			// TODO Auto Generated method stub
-			return asignacionRemote.infoEquiposAsignadosObra(equiposAsignadosObraVO);
+			var asignacion:AsignacionDTO = new AsignacionDTO();
+			asignacion.idObra = equiposAsignadosObraVO.idObra.toString();
+			asignacion.typeQuery = "ALL";
+			return asignacionRemote.infoAsignacionesDisponiblesObra(asignacion);
 		}
 		
 		public function findaAllEmpleadosAsignados(empleadosAsignados:EmpleadoAsignadoVO):AsyncToken
 		{
-			// TODO Auto Generated method stub
 			return asignacionRemote.infoEmpleadosAsignadosObra(empleadosAsignados);
 		}
 		
 		public function cambiaEstatusEquipo(equipo:EquiposAsignadosObraVO):AsyncToken
 		{
-			// TODO Auto Generated method stub
 			return asignacionRemote.cambiaEstatusEquipo(equipo);
 		}
 		
 		public function cambiaEstatusEmpleado(empleado:EmpleadoAsignadoVO):AsyncToken
 		{
-			// TODO Auto Generated method stub
 			return asignacionRemote.cambiaEstatusEmpleado(empleado);
 		}
 		
 		public function addEmpleado(empleadosAsignados:EmpleadoAsignadoVO):AsyncToken
 		{
-			// TODO Auto Generated method stub
 			return asignacionRemote.addEmpleado(empleadosAsignados);
 		}
 		
 		public function addEquipo(equiposDisponibles:EquiposAsignadosObraVO):AsyncToken
 		{
-			// TODO Auto Generated method stub
 			return asignacionRemote.addEquipo(equiposDisponibles);
+		}
+		
+		public function validaEmpleado(empleado:EmpleadoDisponibleVO):AsyncToken
+		{
+			// Regresa una lista de equipos que el empleado tiene asignado.
+			// Falta revisar el servicio en JAVA
+			
+			return asignacionRemote.validaEmpleado(empleado);
+		}
+		
+		public function infoAsignacionesDisponiblesObra(asignacion:AsignacionDTO):AsyncToken
+		{
+			return asignacionRemote.infoAsignacionesDisponiblesObra(asignacion);
+		}
+
+		public function insertAsignacionObraService(asignacionDTO:AsignacionDTO):AsyncToken {
+			return asignacionRemote.insertAsignacion(asignacionDTO);
 		}
 	}
 }

@@ -399,20 +399,20 @@ package view
 				if(solicitudView.autocompleteEmpleadoAdquisicion.selectedItem != null){
 					//Vamos a validar todos los campos
 					arrayValidationResult = Validator.validateAll([solicitudView.validatorNombreSolicitud, solicitudView.validatorEmpleadoRequisicion,
-										solicitudView.validatorEmpleadoAdquisicion, solicitudView.autocompleteProveedor, solicitudView.autocompleteArticulo,
-										solicitudView.validatorCantidad, solicitudView.validatorCosto, solicitudView.autocompleteFalla, solicitudView.validatorFechaRequisicion,
+										solicitudView.validatorEmpleadoAdquisicion, solicitudView.validatorProveedor, solicitudView.validatorArticulo,
+										solicitudView.validatorCantidad, solicitudView.validatorCosto, solicitudView.validatorFechaRequisicion,
 										solicitudView.validatorFechaAdquisicion, solicitudView.validatorTiempoEntrega, solicitudView.validatorFormaPago]);
 					return true;
 				}else{
 					//Unicamente validamos los campos de la Requisicion
 					arrayValidationResult = Validator.validateAll([solicitudView.validatorNombreSolicitud, solicitudView.validatorEmpleadoRequisicion,
-						solicitudView.autocompleteArticulo, solicitudView.validatorCantidad, solicitudView.validatorFechaRequisicion]);
+						solicitudView.validatorArticulo, solicitudView.validatorCantidad, solicitudView.validatorFechaRequisicion]);
 					return true;
 				}
 			}else if (solicitudView.autocompleteEmpleadoAdquisicion.selectedItem != null){
 				//Validamos los campos de una Adquisición
 				arrayValidationResult = Validator.validateAll([solicitudView.validatorNombreSolicitud, solicitudView.validatorEmpleadoAdquisicion, 
-										solicitudView.autocompleteProveedor, solicitudView.autocompleteArticulo, solicitudView.validatorCantidad, 
+										solicitudView.validatorProveedor, solicitudView.validatorArticulo, solicitudView.validatorCantidad, 
 										solicitudView.validatorCosto, solicitudView.validatorFechaAdquisicion, solicitudView.validatorTiempoEntrega, 
 										solicitudView.validatorFormaPago]);
 				return true;
