@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="Flex" version="4">
-  <component name="FlexBuildConfigurationManager" active="AltaFalla">
+  <component name="FlexBuildConfigurationManager" active="Diagnostico">
     <configurations>
-      <configuration name="AltaFalla" main-class="AltaFalla" output-file="AltaFalla.swf" output-folder="$MODULE_DIR$/bin-debug" use-html-wrapper="true" wrapper-template-path="$MODULE_DIR$/html-template">
+      <configuration name="Diagnostico" main-class="Diagnostico" output-file="Diagnostico.swf" output-folder="$MODULE_DIR$/bin-debug" use-html-wrapper="true" wrapper-template-path="$MODULE_DIR$/html-template">
         <dependencies target-player="11.1">
           <entries>
-            <entry library-id="95ab9dba-4803-4c5a-8504-2532dbf071f4">
+            <entry library-id="b8f04240-b906-4d6e-a72c-8414c9addde3">
               <dependency linkage="Merged" />
             </entry>
           </entries>
@@ -30,5 +30,16 @@
     </content>
     <orderEntry type="jdk" jdkName="flex_sdk_4.6" jdkType="Flex SDK Type (new)" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library" exported="">
+      <library type="flex">
+        <properties id="b8f04240-b906-4d6e-a72c-8414c9addde3" />
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/libs" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/libs" recursive="false" />
+      </library>
+    </orderEntry>
   </component>
 </module>

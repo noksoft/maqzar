@@ -1,22 +1,21 @@
 /**
- * Created by jess on 08/08/15.
+ * Created by jess on 12/10/15.
  */
 package com.maqzar.dtos {
-<<<<<<< HEAD
-import spark.skins.spark.StackedFormHeadingSkin;
 
-=======
->>>>>>> master
 [Bindable]
-[RemoteClass(alias="mx.com.nok.equipo.model.dto.DiagnosticoDTO")]
+[RemoteClass(alias="mx.com.nok.equipo.model.dto.DiagnosticoDetalle")]
+public class DiagnosticoDetalleDTO {
 
-public class DiagnosticoDTO {
+        private var _id_t_diagnostico_detalle:String;
         private var _id_t_diagnostico:String;
+        private var _id_subcategoria:String;
+        private var _comentario:String;
+        private var _id_empleado:String;
         private var _id_equipo:String;
         private var _descripcion:String;
         private var _fecha_diagnostico:String;
         private var _fecha_alta:String;
-        private var _id_empleado:String;
         private var _numeroeconomico:String;
         private var _rfc_empleado:String;
         private var _nombre_empleado:String;
@@ -25,8 +24,16 @@ public class DiagnosticoDTO {
         private var _tipo_empleado:String;
         private var _telefono:String;
         private var _celular:String;
+        private var _estatus:String;
+    public function DiagnosticoDetalleDTO() {
+    }
 
-    public function DiagnosticoDTO() {
+    public function get id_t_diagnostico_detalle():String {
+        return _id_t_diagnostico_detalle;
+    }
+
+    public function set id_t_diagnostico_detalle(value:String):void {
+        _id_t_diagnostico_detalle = value;
     }
 
     public function get id_t_diagnostico():String {
@@ -35,6 +42,30 @@ public class DiagnosticoDTO {
 
     public function set id_t_diagnostico(value:String):void {
         _id_t_diagnostico = value;
+    }
+
+    public function get id_subcategoria():String {
+        return _id_subcategoria;
+    }
+
+    public function set id_subcategoria(value:String):void {
+        _id_subcategoria = value;
+    }
+
+    public function get comentario():String {
+        return _comentario;
+    }
+
+    public function set comentario(value:String):void {
+        _comentario = value;
+    }
+
+    public function get id_empleado():String {
+        return _id_empleado;
+    }
+
+    public function set id_empleado(value:String):void {
+        _id_empleado = value;
     }
 
     public function get id_equipo():String {
@@ -67,14 +98,6 @@ public class DiagnosticoDTO {
 
     public function set fecha_alta(value:String):void {
         _fecha_alta = value;
-    }
-
-    public function get id_empleado():String {
-        return _id_empleado;
-    }
-
-    public function set id_empleado(value:String):void {
-        _id_empleado = value;
     }
 
     public function get numeroeconomico():String {
@@ -139,6 +162,14 @@ public class DiagnosticoDTO {
 
     public function set celular(value:String):void {
         _celular = value;
+    }
+
+    public function get estatus():String {
+        return _estatus;
+    }
+
+    public function set estatus(value:String):void {
+        _estatus = value;
     }
 }
 }

@@ -18,7 +18,9 @@
 		import com.maqzar.constant.NOKConstants;
 		import com.maqzar.dtos.DiagnosticoDTO;
 		import com.maqzar.dtos.EquipoVO;
+		import com.maqzar.dtos.ObraVO;
 		import com.maqzar.dtos.SubFallaDTO;
+		import com.maqzar.events.DiagnosticoEvent;
 
 		import mx.collections.ArrayCollection;
 		import mx.events.FlexEvent;
@@ -70,8 +72,16 @@
 
 		//inicializacion
 		protected function initcreationCompleteHandler(event:FlexEvent):void {
+			var diagnosticoEquipo:DiagnosticoDTO = new DiagnosticoDTO();
 			var infoEquipo:EquipoVO = new EquipoVO();
-			var fallaEquipo:SubFallaDTO = new SubFallaDTO();
+			var infoObra:ObraVO = new ObraVO();
+			var subFalla:SubFallaDTO = new SubFallaDTO();
+
+		}
+
+		private function validateAllInputs():void{
+			arrayValidationResult = new Array();
+			arrayValidationResult = Validator.validateAll([val_Equipo,val_Fecha,val_SubFalla,val_txtComentario]);
 		}
 
 		private function validateAllInputs():void{
@@ -92,6 +102,7 @@
 		}
 
 		private function updateDiagnosticoDetalleresult(event:ResultEvent):void {
+<<<<<<< HEAD
 
 		}
 
@@ -107,6 +118,23 @@
 
 		}
 
+=======
+
+		}
+
+		private function deleteDiagnosticoDetalleresult(event:ResultEvent):void {
+
+		}
+
+		private function Estatus_ItemClickHandler(event:ItemClickEvent):void {
+
+		}
+
+		private function beforesave():void {
+
+		}
+
+>>>>>>> master
 		private var diagnosticoSelectedToDelete:DiagnosticoDTO;
 		private function deleteDiagnostico():void {
 			diagnosticoSelectedToDelete = dataGridListaDiagnostico.selectedItem as DiagnosticoDTO;
@@ -140,8 +168,13 @@
 			<s:method name="deleteDiagnostico" result="deleteDiagnosticoEquiporesult(event)"/>
 		</s:RemoteObject>
 		<!-- End RO Alta Diagnostico -->
+<<<<<<< HEAD
 
 
+=======
+
+
+>>>>>>> master
 		<!-- RO Diagnostico Detalle-->
 		<s:RemoteObject id="roDiagnosticoDetalle" destination="equipoBusiness" endpoint="{NOKConstants.SERVICE_URL}"
 						fault="diagnosticoDetalleFault(event)">
@@ -159,8 +192,13 @@
 			<s:method name="infoEquipo" result="infoEquipoResult(event)"/>
 		</s:RemoteObject>
 		<!-- End RO Equipo -->
+<<<<<<< HEAD
 
 
+=======
+
+
+>>>>>>> master
 		<!-- RO para la Falla-->
 		<s:RemoteObject id="roFalla" destination="fallabusiness" endpoint ="{NOKConstants.SERVICE_URL}"
 						fault="diagnosticoFault(event)">
