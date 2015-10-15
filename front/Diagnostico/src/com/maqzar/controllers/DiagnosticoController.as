@@ -23,8 +23,8 @@ public class DiagnosticoController extends AbstractController {
     public function DiagnosticoController() {
         super();
     }
-    [EventHandler(event = "DiagnosticoEvent.DIAGNOSTICO_GET_FALLAS", properties="subfalla")]
 
+    [EventHandler(event = "DiagnosticoEvent.DIAGNOSTICO_GET_FALLAS", properties="subfalla")]
     public function valores_iniciales(subfalla:SubFallaDTO):void{
 
         executeServiceCall(diagnosticoService.infoFalla(subfalla),infoFallaResult,diagnosticoFault);

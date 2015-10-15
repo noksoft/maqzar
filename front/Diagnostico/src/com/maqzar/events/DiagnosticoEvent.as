@@ -7,8 +7,8 @@ import flash.events.Event;
 
 public class DiagnosticoEvent extends Event{
     public static const DIAGNOSTICO_GET_FALLAS:String = "diagnosticoGetFallas";
-    public function DiagnosticoEvent(type:String, bubbles:Boolean = true, cancelable:Boolean = false) {
-        super(type, bubbles, cancelable);
+    public function DiagnosticoEvent(type:String) {
+        super(type, true, true);
 
     }
 }

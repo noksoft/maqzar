@@ -326,7 +326,7 @@ package com.maqzar.controllers {
 			} 
 			catch(error:Error) 
 			{
-				trace(error.message);	
+				trace(error.message);
 			}
 		}
 

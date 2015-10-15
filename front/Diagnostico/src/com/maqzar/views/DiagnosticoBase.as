@@ -21,8 +21,8 @@ import spark.components.Group;
 		public function init():void{
 			var fallasEvent:DiagnosticoEvent = new DiagnosticoEvent(DiagnosticoEvent.DIAGNOSTICO_GET_FALLAS);
 			var falla:SubFallaDTO = new SubFallaDTO();
-			fallasEvent.subfalla = falla;
-			dispatchEvent(fallasEvent);
+			//fallasEvent.subfalla = falla;
+			//dispatchEvent(fallasEvent);
 
 
 		}

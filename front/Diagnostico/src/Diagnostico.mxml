@@ -84,11 +84,6 @@
 			arrayValidationResult = Validator.validateAll([val_Equipo,val_Fecha,val_SubFalla,val_txtComentario]);
 		}
 
-		private function validateAllInputs():void{
-			arrayValidationResult = new Array();
-			arrayValidationResult = Validator.validateAll([val_Equipo,val_Fecha,val_SubFalla,val_txtComentario]);
-		}
-
 		protected function infoEquipoResult(event:ResultEvent):void {
 			acEquipo = event.result as ArrayCollection;
 		}
@@ -102,7 +97,6 @@
 		}
 
 		private function updateDiagnosticoDetalleresult(event:ResultEvent):void {
-<<<<<<< HEAD
 
 		}
 
@@ -118,23 +112,6 @@
 
 		}
 
-=======
-
-		}
-
-		private function deleteDiagnosticoDetalleresult(event:ResultEvent):void {
-
-		}
-
-		private function Estatus_ItemClickHandler(event:ItemClickEvent):void {
-
-		}
-
-		private function beforesave():void {
-
-		}
-
->>>>>>> master
 		private var diagnosticoSelectedToDelete:DiagnosticoDTO;
 		private function deleteDiagnostico():void {
 			diagnosticoSelectedToDelete = dataGridListaDiagnostico.selectedItem as DiagnosticoDTO;
@@ -168,13 +145,8 @@
 			<s:method name="deleteDiagnostico" result="deleteDiagnosticoEquiporesult(event)"/>
 		</s:RemoteObject>
 		<!-- End RO Alta Diagnostico -->
-<<<<<<< HEAD
 
 
-=======
-
-
->>>>>>> master
 		<!-- RO Diagnostico Detalle-->
 		<s:RemoteObject id="roDiagnosticoDetalle" destination="equipoBusiness" endpoint="{NOKConstants.SERVICE_URL}"
 						fault="diagnosticoDetalleFault(event)">
@@ -192,13 +164,8 @@
 			<s:method name="infoEquipo" result="infoEquipoResult(event)"/>
 		</s:RemoteObject>
 		<!-- End RO Equipo -->
-<<<<<<< HEAD
 
 
-=======
-
-
->>>>>>> master
 		<!-- RO para la Falla-->
 		<s:RemoteObject id="roFalla" destination="fallabusiness" endpoint ="{NOKConstants.SERVICE_URL}"
 						fault="diagnosticoFault(event)">

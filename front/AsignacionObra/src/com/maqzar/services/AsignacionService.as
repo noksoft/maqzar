@@ -109,7 +109,8 @@ package com.maqzar.services {
 		}
 
 		public function insertAsignacionObraService(asignacionDTO:AsignacionDTO):AsyncToken {
-			return asignacionRemote.insertAsignacion(asignacionDTO);
+			trace("Entra a enviar el insertAisgnacion");
+			return asignacionRemote.insertAsignacionObra(asignacionDTO);
 		}
 	}
 }

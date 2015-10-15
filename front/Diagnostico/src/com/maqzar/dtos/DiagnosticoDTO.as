@@ -2,11 +2,8 @@
  * Created by jess on 08/08/15.
  */
 package com.maqzar.dtos {
-<<<<<<< HEAD
 import spark.skins.spark.StackedFormHeadingSkin;
 
-=======
->>>>>>> master
 [Bindable]
 [RemoteClass(alias="mx.com.nok.equipo.model.dto.DiagnosticoDTO")]
 

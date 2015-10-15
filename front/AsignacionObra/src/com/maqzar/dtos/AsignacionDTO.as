@@ -7,6 +7,7 @@ package com.maqzar.dtos
 		public var idAsignacionObra:String;
 		public var tipoAsignacion:String;
 		public var idObra:String;
+		public var fechaAsignacion:String;
 		public var nombreObra:String;
 		public var descripcionObra:String;
 		public var idEmpleado:String;
