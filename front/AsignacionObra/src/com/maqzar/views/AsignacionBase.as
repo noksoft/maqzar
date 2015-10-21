@@ -127,7 +127,6 @@ package com.maqzar.views {
 			empleado.idObra =  Number(asignacionModel.obraSelected.idObra)
 			empleadosAsignadosBusqueda.empleadosAsignados = empleado;
 			dispatchEvent(empleadosAsignadosBusqueda);
-			
 		}
 		
 		public function cambiaEstatusEquipo(data:*):void

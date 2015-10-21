@@ -66,7 +66,10 @@ package com.maqzar.services {
 		{
 			var asignacion:AsignacionDTO = new AsignacionDTO();
 			asignacion.idObra = equiposAsignadosObraVO.idObra.toString();
-			asignacion.typeQuery = "ALL";
+			asignacion.idEmpleado = '';
+			asignacion.idEquipo = '';
+			asignacion.idAsignacionObra = '';
+			asignacion.typeQuery = "EQUIPOS-ASIGNADOS";
 			return asignacionRemote.infoAsignacionesDisponiblesObra(asignacion);
 		}
 		

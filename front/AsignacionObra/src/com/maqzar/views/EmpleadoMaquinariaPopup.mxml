@@ -105,14 +105,16 @@
             var asignacionObjeto:AsignacionDTO = new AsignacionDTO();
             if (transferir) {
                 asignacionObjeto.transferencia = true;
-                asignacionObjeto.typeInsert = 'EMPLEADO-EQUIPO';
+                asignacionObjeto.typeInsert = 'EMPLEADO_EQUIPO';
             } else {
                 asignacionObjeto.transferencia = false;
                 asignacionObjeto.typeInsert = 'EQUIPO';
             }
 
             asignacionObjeto.idEmpleado = empleado.idEmpleado.toString();
-
+            if(asignacionObjeto.idEmpleado.length>0){
+                asignacionObjeto.typeInsert = 'EMPLEADO_EQUIPO';
+            }
             asignacionObjeto.idObra = asignacionModel.obraSelected.idObra;
             asignacionObjeto.idEquipo = asignacionModel.maquinariaSelected.id_equipo.toString();
             if (autoCompleteEmpleados.selectedItem) {

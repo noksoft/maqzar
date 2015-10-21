@@ -341,7 +341,7 @@ package com.maqzar.controllers {
 		{
 			try
 			{
-				if(e.result == true){
+				if(e.result != null){
 					dispatcher.dispatchEvent(new AsignacionEvent(AsignacionEvent.ASIGNACION_REFRESCA_GRID_DESDE_COMBO));
 					dispatcher.dispatchEvent(new AsignacionEvent(AsignacionEvent.CIERRA_POPUP));
 				}
