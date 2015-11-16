@@ -5,7 +5,7 @@
       <configuration name="Diagnostico" main-class="Diagnostico" output-file="Diagnostico.swf" output-folder="$MODULE_DIR$/bin-debug" use-html-wrapper="true" wrapper-template-path="$MODULE_DIR$/html-template">
         <dependencies target-player="11.1">
           <entries>
-            <entry library-id="b8f04240-b906-4d6e-a72c-8414c9addde3">
+            <entry library-id="8236522f-75f1-48f1-a7e2-b474cc9b4cea">
               <dependency linkage="Merged" />
             </entry>
           </entries>
@@ -32,7 +32,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library" exported="">
       <library type="flex">
-        <properties id="b8f04240-b906-4d6e-a72c-8414c9addde3" />
+        <properties id="8236522f-75f1-48f1-a7e2-b474cc9b4cea" />
         <CLASSES>
           <root url="file://$MODULE_DIR$/libs" />
         </CLASSES>

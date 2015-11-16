@@ -8,3 +8,6 @@ bin-debug
 back/RemoteSystemsTempFiles/.project
 **bin-debug/
 *.iml
+front/AsignacionObra/AsignacionObra.iml
+
+*.iml
