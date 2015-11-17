@@ -78,7 +78,7 @@ package com.maqzar.services {
 			return asignacionRemote.infoEmpleadosAsignadosObra(empleadosAsignados);
 		}
 		
-		public function cambiaEstatusEquipo(equipo:EquiposAsignadosObraVO):AsyncToken
+		public function cambiaEstatusEquipo2(equipo:EquiposAsignadosObraVO):AsyncToken
 		{
 			return asignacionRemote.cambiaEstatusEquipo(equipo);
 		}

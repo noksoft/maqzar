@@ -2,7 +2,8 @@
  * @author Carlos Zaragoza Ortiz
  */
 package com.maqzar.views {
-	import com.maqzar.dtos.EmpleadoAsignadoVO;
+import com.maqzar.dtos.AsignacionDTO;
+import com.maqzar.dtos.EmpleadoAsignadoVO;
 	import com.maqzar.dtos.EmpleadoDisponibleVO;
 	import com.maqzar.dtos.EquipoVO;
 	import com.maqzar.dtos.EquiposAsignadosObraVO;
@@ -131,7 +132,11 @@ package com.maqzar.views {
 		
 		public function cambiaEstatusEquipo(data:*):void
 		{
-			var vo:EquiposAsignadosObraVO = data as EquiposAsignadosObraVO;
+			var equipos:AsignacionDTO = data as AsignacionDTO;
+			var vo:EquiposAsignadosObraVO = new EquiposAsignadosObraVO();
+			vo.idEquipo = int(equipos.idEquipo);
+			vo.idObra = int(equipos.idObra);
+			vo.estatus = equipos.estatusEquipo == 'A'?'I':'A';
 			var cambiaEstatusEvent:AsignacionEvent = new AsignacionEvent(AsignacionEvent.ASIGNACION_CAMBIA_ESTATUS_EQUIPO);
 			cambiaEstatusEvent.equiposAsignadosObraVO = vo;
 			dispatchEvent(cambiaEstatusEvent);

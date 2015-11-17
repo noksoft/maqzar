@@ -369,13 +369,13 @@ public class ObraBusiness implements Serializable, ObraService{
 	public boolean cambiaEstatusEquipo(EquiposAsignadosObraDTO dto){
 		boolean estatus;
 		try {
-			String estado = dto.getEstatus();
+			/*String estado = dto.getEstatus();
 			if(estado.equalsIgnoreCase("ASIGNADO")){
 				estado = "INACTIVO";
 			}else{
 				estado = "ASIGNADO";
 			}
-			dto.setEstatus(estado);
+			dto.setEstatus(estado);*/
 			estatus = obraDAO.cambiaEstatusEquipo(dto);
 		} catch (Exception e) {
 			// TODO: handle exception
