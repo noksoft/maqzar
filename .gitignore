@@ -8,3 +8,4 @@ bin-debug
 back/RemoteSystemsTempFiles/.project
 **bin-debug/
 *.iml
+back/nok/WebContent/META-INF/context.xml
