@@ -5,10 +5,13 @@
       <configuration name="AsignacionObra" main-class="AsignacionObra" output-file="AsignacionObra.swf" output-folder="$MODULE_DIR$/bin-debug" use-html-wrapper="true" wrapper-template-path="$MODULE_DIR$/html-template">
         <dependencies target-player="11.1">
           <entries>
-            <entry library-id="8c0507c9-8ae6-4a19-a9c7-387cde58ab6b">
+            <entry library-id="820aefb1-895b-4217-8ecf-fb2db18c86b4">
               <dependency linkage="Merged" />
             </entry>
             <entry library-name="AutoComplete-1.2-Fx4" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-name="swiz-framework-v1.4.0" library-level="project">
               <dependency linkage="Merged" />
             </entry>
           </entries>
@@ -35,7 +38,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library" exported="">
       <library type="flex">
-        <properties id="8c0507c9-8ae6-4a19-a9c7-387cde58ab6b" />
+        <properties id="820aefb1-895b-4217-8ecf-fb2db18c86b4" />
         <CLASSES>
           <root url="file://$MODULE_DIR$/libs" />
         </CLASSES>
@@ -45,5 +48,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" exported="" name="AutoComplete-1.2-Fx4" level="project" />
+    <orderEntry type="library" exported="" name="swiz-framework-v1.4.0" level="project" />
   </component>
 </module>
