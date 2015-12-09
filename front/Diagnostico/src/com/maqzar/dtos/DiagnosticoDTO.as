@@ -24,6 +24,21 @@ public class DiagnosticoDTO {
         private var _celular:String;
 
     public function DiagnosticoDTO() {
+        id_t_diagnostico="";
+        id_equipo="";
+        descripcion="";
+        fecha_diagnostico="";
+        fecha_alta="";
+        id_empleado="";
+        numeroeconomico="";
+        rfc_empleado="";
+        nombre_empleado="";
+        paterno="";
+        materno="";
+        tipo_empleado="";
+        telefono="";
+        telefono="";
+        celular="";
     }
 
     public function get id_t_diagnostico():String {

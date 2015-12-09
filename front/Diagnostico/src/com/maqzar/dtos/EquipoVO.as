@@ -26,7 +26,7 @@ package com.maqzar.dtos
 		public var  categoria:String = "";
 		public var  id_tipocategoria:String = "";
 		public var  tipocategoria:String = "";
-		public var  numeroeconomico:String = "";
+		private var  _numeroeconomico:String = "";
 		public var  factura:String = "";
 		public var  pedimiento:String = "";
 		public var  cambioaceite:String = "";
@@ -57,5 +57,13 @@ package com.maqzar.dtos
 		
 		//Propiedades de la imagen de la foto
 		public var contentFoto:ByteArray = new ByteArray();
+
+		public function get numeroeconomico():String {
+			return _numeroeconomico;
+		}
+
+		public function set numeroeconomico(value:String):void {
+			_numeroeconomico = value;
+		}
 	}
 }

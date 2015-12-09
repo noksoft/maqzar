@@ -3,8 +3,6 @@
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
 			   xmlns:mx="library://ns.adobe.com/flex/mx"
 			   height="536" minWidth="955" minHeight="600"
-			   xmlns:swiz="http://swiz.swizframework.org"
-			   xmlns:bean="com.maqzar.bean.*"
 			   creationComplete="initcreationCompleteHandler(event)" xmlns:components="com.hillelcoren.components.*">
 
 
@@ -17,12 +15,15 @@
 		<![CDATA[
 		import com.maqzar.constant.NOKConstants;
 		import com.maqzar.dtos.DiagnosticoDTO;
+		import com.maqzar.dtos.DiagnosticoDetalleDTO;
 		import com.maqzar.dtos.EquipoVO;
 		import com.maqzar.dtos.ObraVO;
+		import com.maqzar.dtos.SubCategoriaDTO;
 		import com.maqzar.dtos.SubFallaDTO;
 		import com.maqzar.events.DiagnosticoEvent;
 
 		import mx.collections.ArrayCollection;
+		import mx.controls.Alert;
 		import mx.events.FlexEvent;
 		import mx.events.ItemClickEvent;
 		import mx.rpc.events.FaultEvent;
@@ -34,27 +35,31 @@
 		[Bindable]
 		public var acEquipo:ArrayCollection;
 		[Bindable]
-		public var acSubFallas:ArrayCollection;
+		public var acSubCategoria:ArrayCollection;
+		[Bindable]
+		public var acDiagnosticoDetalle:ArrayCollection;
+
+
 		protected var itemSelected:DiagnosticoDTO = new DiagnosticoDTO();
 		private var arrayValidationResult:Array;
 
 
-		protected function selectedDiagnostico(event:MouseEvent):void{
+		protected function selectedDiagnostico(event:MouseEvent):void {
 			itemSelected = event.currentTarget.selectedItem as DiagnosticoDTO;
 
 		}
 
-		public function getDiagnosticoEquiporesult(event:ResultEvent):void{
+		public function getDiagnosticoEquiporesult(event:ResultEvent):void {
 
 		}
 
 		private function diagnosticoFault(event:FaultEvent):void {
-			trace (event.message);
+			trace(event.message);
 
 		}
 
 		private function diagnosticoDetalleFault(event:FaultEvent):void {
-			trace (event.message);
+			trace(event.message);
 
 		}
 
@@ -73,15 +78,26 @@
 		//inicializacion
 		protected function initcreationCompleteHandler(event:FlexEvent):void {
 			var diagnosticoEquipo:DiagnosticoDTO = new DiagnosticoDTO();
+			var diagnosticoDetalle:DiagnosticoDetalleDTO = new DiagnosticoDetalleDTO();
 			var infoEquipo:EquipoVO = new EquipoVO();
-			var infoObra:ObraVO = new ObraVO();
-			var subFalla:SubFallaDTO = new SubFallaDTO();
+			//var infoObra:ObraVO = new ObraVO();
+			//var subFalla:SubFallaDTO = new SubFallaDTO();
+			var subCategoria:SubCategoriaDTO = new SubCategoriaDTO();
+			trace(subCategoria);
+			trace(infoEquipo);
+			roEquipo.infoEquipo(infoEquipo);
+			roCategoria.catSubcategoria(subCategoria);
+			roDiagnostico.getDiagnostico(diagnosticoEquipo);
+			trace(diagnosticoDetalle);
+			roDiagnosticoDetalle.getDiagnosticoDetalle(diagnosticoDetalle);
+
+
 
 		}
 
-		private function validateAllInputs():void{
+		private function validateAllInputs():void {
 			arrayValidationResult = new Array();
-			arrayValidationResult = Validator.validateAll([val_Equipo,val_Fecha,val_SubFalla,val_txtComentario]);
+			arrayValidationResult = Validator.validateAll([val_Equipo, val_Fecha, val_SubFalla, val_txtComentario]);
 		}
 
 		protected function infoEquipoResult(event:ResultEvent):void {
@@ -112,26 +128,68 @@
 
 		}
 
+		public function saveDiagnostico():void{
+			if(itemSelected == null){
+				Alert.show("No hay un elemento seleccionado")
+			}
+			else{
+				updateItemSelected();
+				trace(itemSelected.id_equipo);
+				roDiagnostico.insertDiagnostico(itemSelected);
+
+			}
+		}
+
+		//private function clean
+
+		private function updateItemSelected():void
+		{
+			if(autoEquipo.selectedItem != null){
+				itemSelected.id_equipo =  EquipoVO(autoEquipo.selectedItem).id_equipo;
+			}
+			if(fechaDiagnostico.selectedDate != null){
+				var tempDate:Date = fechaDiagnostico.selectedDate;
+				if(tempDate != null){
+					fechaDiagnostico.errorString = "";
+					itemSelected.fecha_diagnostico = tempDate.getFullYear().toString() + "/" + (tempDate.getMonth() + 1).toString() + "/" + tempDate.getDate();
+				}
+				else{
+					fechaDiagnostico.errorString = "Debes ingresar una fecha";
+				}
+
+			}
+
+			var dateAlta:Date = new Date();
+			itemSelected.fecha_alta = dateAlta.getFullYear().toString() + "/" + (dateAlta.getMonth() + 1).toString() + "/" + dateAlta.getDate();
+
+
+		}
+		public function	saveDiagnosticoDetalle():void{
+			if(itemSelected == null){
+				Alert.show("No hay un elemento seleccionado")
+			}
+			else{
+				roDiagnosticoDetalle.insertDiagnosticoDetalle(itemSelected);
+			}
+		}
+
 		private var diagnosticoSelectedToDelete:DiagnosticoDTO;
+
 		private function deleteDiagnostico():void {
 			diagnosticoSelectedToDelete = dataGridListaDiagnostico.selectedItem as DiagnosticoDTO;
 			roDiagnostico.deleteDiagnostico(diagnosticoSelectedToDelete);
+
+		}
+
+		private function infoCategoriaResult(event:ResultEvent):void {
+			acSubCategoria = event.result as ArrayCollection;
 
 		}
 		]]>
 	</fx:Script>
 
 	<fx:Declarations>
-		<swiz:Swiz>
-			<swiz:beanProviders>
-				<bean:Beans/>
-			</swiz:beanProviders>
-			<swiz:config>
-				<swiz:SwizConfig
-					eventPackages="com.maqzar.events.*"
-					viewPackages="com.maqzar.views.*"/>
-			</swiz:config>
-		</swiz:Swiz>
+
 
 
 		<!-- REMOTE OBJECTS-->
@@ -166,9 +224,10 @@
 		<!-- End RO Equipo -->
 
 
-		<!-- RO para la Falla-->
-		<s:RemoteObject id="roFalla" destination="fallabusiness" endpoint ="{NOKConstants.SERVICE_URL}"
+		<!-- RO para la Categoria-->
+		<s:RemoteObject id="roCategoria" destination="categoriaBusiness" endpoint ="{NOKConstants.SERVICE_URL}"
 						fault="diagnosticoFault(event)">
+			<s:method name="catSubcategoria" result="infoCategoriaResult(event)"/>
 
 		</s:RemoteObject>
 		<!-- End RO Falla-->
@@ -198,7 +257,7 @@
 							source = "{autoSubCategoria}"
 							property="text"
 							required="true"
-							requiredFieldError="Debes de elejir una SubFalla de la lista."/>
+							requiredFieldError="Debes de elejir una SubCategoría de la lista."/>
 		<mx:StringValidator id="val_txtComentario"
 							source="{txtComentario}"
 							property="text"
@@ -240,11 +299,11 @@
 						doubleClickEnabled="true" doubleClick="selectedDiagnostico(event)" dataProvider="{acDiagnostico}">
 					<s:columns>
 						<s:ArrayList>
-							<s:GridColumn dataField="dataField1" headerText="FOLIO" width="50"></s:GridColumn>
-							<s:GridColumn dataField="dataField1" headerText="Maquinaria"></s:GridColumn>
-							<s:GridColumn dataField="dataField2" headerText="Fecha de diagnostico"></s:GridColumn>
+							<s:GridColumn dataField="id_t_diagnostico" headerText="FOLIO" width="50"></s:GridColumn>
+							<s:GridColumn dataField="numeroeconomico" headerText="Maquinaria"></s:GridColumn>
+							<s:GridColumn dataField="fecha_diagnostico" headerText="Fecha de diagnostico"></s:GridColumn>
 							<s:GridColumn dataField="dataField3" headerText="Estatus"></s:GridColumn>
-							<s:GridColumn dataField="dataField3" headerText="Reporta"></s:GridColumn>
+							<s:GridColumn dataField="nombre_empleado" headerText="Reporta"></s:GridColumn>
 						</s:ArrayList>
 					</s:columns>
 				</s:DataGrid>
@@ -279,7 +338,7 @@
 					<s:Button label="Nuevo Diagnostico"/>
 					<s:Button label="Ingresar"
 							  styleName="primaryButton"
-							  click="beforesave()"
+							  click="saveDiagnostico()"
 								/>
 				</s:HGroup>
 				<!-- End Grupo Diagnostico-->
@@ -288,8 +347,8 @@
 				<mx:HRule width="100%"/>
 				<s:HGroup width="100%" verticalAlign="middle">
 					<s:Label text="Subcategoria" width="120" textAlign="right"/>
-					<components:AutoComplete id="autoSubCategoria" width="100%" dataProvider="{acSubFallas}"
-											 labelField="subfalla"/>
+					<components:AutoComplete id="autoSubCategoria" width="100%" dataProvider="{acSubCategoria}"
+											 labelField="subcategoria"/>
 				</s:HGroup>
 				<s:HGroup width="100%" verticalAlign="middle">
 					<s:Label text="Estatus" width="120" textAlign="right"/>
@@ -302,7 +361,8 @@
 					<s:TextArea id="txtComentario" width="100%"  height="100" />
 				</s:HGroup>
 				<s:HGroup width="100%" verticalAlign="middle" horizontalAlign="right">
-					<s:Button label="Agregar al diagnóstico" styleName="primaryButton"/>
+					<s:Button label="Agregar al diagnóstico" styleName="primaryButton"
+							click="saveDiagnosticoDetalle()"/>
 				</s:HGroup>
 				<!-- End Grupo Subcategoria -->
 				<!-- End Registro de Diagnostico-->
@@ -311,7 +371,7 @@
 				<s:DataGrid width="100%" height="100%" requestedRowCount="4" id="dataGridDiagnosticoDetalle" dataProvider="{acDiagnostico}">
 					<s:columns>
 						<s:ArrayList>
-							<s:GridColumn dataField="dataField1" headerText="Tipo" width="50"></s:GridColumn>
+							<s:GridColumn dataField="id_t_diagnostico_detalle" headerText="Tipo" width="50"></s:GridColumn>
 							<s:GridColumn dataField="dataField1" headerText="Categoria"></s:GridColumn>
 							<s:GridColumn dataField="dataField2" headerText="Subcategoria"></s:GridColumn>
 							<s:GridColumn dataField="dataField3" headerText="Estatus"></s:GridColumn>

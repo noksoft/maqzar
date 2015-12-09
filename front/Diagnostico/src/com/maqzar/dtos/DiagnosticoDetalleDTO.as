@@ -24,8 +24,26 @@ public class DiagnosticoDetalleDTO {
         private var _tipo_empleado:String;
         private var _telefono:String;
         private var _celular:String;
-        private var _estatus:String;
+        private var _estatus:Boolean;
     public function DiagnosticoDetalleDTO() {
+        id_t_diagnostico_detalle="";
+        id_t_diagnostico="";
+        id_subcategoria="";
+        comentario="";
+        id_empleado="";
+        id_equipo="";
+        descripcion="";
+        fecha_diagnostico="";
+        fecha_alta="";
+        numeroeconomico="";
+        rfc_empleado="";
+        nombre_empleado="";
+        paterno="";
+        materno="";
+        tipo_empleado="";
+        telefono="";
+        celular="";
+        estatus = true;
     }
 
     public function get id_t_diagnostico_detalle():String {
@@ -164,11 +182,11 @@ public class DiagnosticoDetalleDTO {
         _celular = value;
     }
 
-    public function get estatus():String {
+    public function get estatus():Boolean {
         return _estatus;
     }
 
-    public function set estatus(value:String):void {
+    public function set estatus(value:Boolean):void {
         _estatus = value;
     }
 }
